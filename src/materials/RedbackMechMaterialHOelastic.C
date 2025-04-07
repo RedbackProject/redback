@@ -17,6 +17,8 @@
 #include "RedbackMechMaterialHOelastic.h"
 #include "PermutationTensor.h"
 
+
+registerMooseObject("RedbackApp", RedbackMechMaterialHOelastic);
 /**
  * RedbackMechMaterialHOelastic handles a high order material.
  */

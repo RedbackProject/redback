@@ -11,6 +11,8 @@
 #include "ElasticityTensorTools.h"
 #include "RankTwoTensor.h"
 
+registerMooseObject("RedbackApp", RedbackMomentBalancing);
+
 InputParameters 
 RedbackMomentBalancing::validParams()
 {

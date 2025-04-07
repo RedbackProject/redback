@@ -20,6 +20,8 @@
 #include "FEProblem.h"
 #include "PermutationTensor.h"
 
+registerMooseObject("RedbackApp", RedbackMechMaterialHOexp);
+
 /**
  * RedbackMechMaterialHOexp handles a high order material.
  */

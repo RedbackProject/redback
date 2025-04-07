@@ -15,6 +15,7 @@
 #include "RedbackRotationBC.h"
 #include "MooseMesh.h"
 
+registerMooseObject("RedbackApp", RedbackRotationBC);
 
 InputParameters 
 RedbackRotationBC::validParams()

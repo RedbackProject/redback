@@ -13,6 +13,8 @@
 #include "RedbackPoroMechHO.h"
 #include "MooseMesh.h"
 
+registerMooseObject("RedbackApp", RedbackPoroMechHO);
+
 InputParameters
 RedbackPoroMechHO::validParams()
 {

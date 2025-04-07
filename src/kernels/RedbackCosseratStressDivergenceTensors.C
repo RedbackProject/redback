@@ -11,6 +11,7 @@
 #include "ElasticityTensorTools.h"
 #include "RankTwoTensor.h"
 #include "MooseMesh.h"
+registerMooseObject("RedbackApp", RedbackCosseratStressDivergenceTensors);
 
 InputParameters 
 RedbackCosseratStressDivergenceTensors::validParams()

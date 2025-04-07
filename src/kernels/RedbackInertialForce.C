@@ -7,6 +7,8 @@
 #include "RedbackInertialForce.h"
 #include "SubProblem.h"
 
+registerMooseObject("RedbackApp", RedbackInertialForce);
+
 InputParameters 
 RedbackInertialForce::validParams()
 {
