@@ -1,17 +1,23 @@
 /****************************************************************/
-/* MOOSE - Multiphysics Object Oriented Simulation Environment  */
+/*               DO NOT MODIFY THIS HEADER                      */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
 /*                                                              */
-/*          All contents are licensed under LGPL V2.1           */
-/*             See LICENSE for full restrictions                */
+/*              (c) 2014 CSIRO and UNSW Australia               */
+/*                   ALL RIGHTS RESERVED                        */
+/*                                                              */
+/*            Prepared by CSIRO and UNSW Australia              */
+/*                                                              */
+/*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
 #include "ComputePlasticStrainRate.h"
 
-template <>
+registerMooseObject("RedbackApp", ComputePlasticStrainRate);
+
 InputParameters
-validParams<ComputePlasticStrainRate>()
+ComputePlasticStrainRate::validParams()
 {
-  InputParameters params = validParams<Material>();
+  InputParameters params = Material::validParams();
   params.addParam<std::string>("base_name",
                                "Optional parameter that allows the user to define "
                                "multiple mechanics material systems on the same "

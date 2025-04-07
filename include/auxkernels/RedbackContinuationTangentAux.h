@@ -1,13 +1,11 @@
 /****************************************************************/
 /*               DO NOT MODIFY THIS HEADER                      */
-/* MOOSE - Multiphysics Object Oriented Simulation Environment  */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
 /*                                                              */
-/*           (c) 2010 Battelle Energy Alliance, LLC             */
+/*              (c) 2014 CSIRO and UNSW Australia               */
 /*                   ALL RIGHTS RESERVED                        */
 /*                                                              */
-/*          Prepared by Battelle Energy Alliance, LLC           */
-/*            Under Contract No. DE-AC07-05ID14517              */
-/*            With the U. S. Department of Energy               */
+/*            Prepared by CSIRO and UNSW Australia              */
 /*                                                              */
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
@@ -17,11 +15,6 @@
 
 #include "AuxNodalScalarKernel.h"
 
-class RedbackContinuationTangentAux;
-
-template <>
-InputParameters validParams<RedbackContinuationTangentAux>();
-
 /**
  *
  */
@@ -29,6 +22,8 @@ class RedbackContinuationTangentAux : public AuxNodalScalarKernel
 {
 public:
   RedbackContinuationTangentAux(const InputParameters & parameters);
+  static InputParameters validParams();
+
   virtual ~RedbackContinuationTangentAux();
 
   virtual void compute();
@@ -36,26 +31,11 @@ public:
 protected:
   virtual Real computeValue();
   Real _ds_old_param;
-  const VariableValue & _sum_var_1;
-  const VariableValue & _sum_var_2;
-  const VariableValue & _sum_var_3;
-  const VariableValue & _sum_var_4;
-  const VariableValue & _sum_var_5;
-  const VariableValue & _sum_var_6;
-  const VariableValue & _sum_var_old_1;
-  const VariableValue & _sum_var_old_2;
-  const VariableValue & _sum_var_old_3;
-  const VariableValue & _sum_var_old_4;
-  const VariableValue & _sum_var_old_5;
-  const VariableValue & _sum_var_old_6;
-  const VariableValue & _sum_var_older_1;
-  const VariableValue & _sum_var_older_2;
-  const VariableValue & _sum_var_older_3;
-  const VariableValue & _sum_var_older_4;
-  const VariableValue & _sum_var_older_5;
-  const VariableValue & _sum_var_older_6;
-  bool _is_var1_coupled, _is_var2_coupled, _is_var3_coupled, _is_var4_coupled, _is_var5_coupled,
-      _is_var6_coupled;
+  unsigned int _nb_sum_vars, _nb_sum_vars_old, _nb_sum_vars_older; // number of variables to sum
+  std::vector<const VariableValue *> _sum_vars;                    // coupled variables to sum
+  std::vector<const VariableValue *> _sum_vars_old;                // old coupled variables to sum
+  std::vector<const VariableValue *> _sum_vars_older;              // older coupled variables to sum
+  bool _are_nodal_vars_involved, _are_elemental_vars_involved;
 };
 
 #endif /* REDBACKCONTINUATIONTANGENTAUX_H */

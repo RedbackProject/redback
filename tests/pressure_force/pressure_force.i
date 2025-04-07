@@ -1,23 +1,23 @@
 [Mesh]
-  type = GeneratedMesh
-  dim = 2
-  ny = 2
-  nx = 3
-  xmax = 3
-  ymax = 2
-  elem_type = QUAD9
-[]
-
-[MeshModifiers]
+  [./generate]
+    type = GeneratedMeshGenerator
+    dim = 2
+    ny = 2
+    nx = 3
+    xmax = 3
+    ymax = 2
+    elem_type = QUAD9
+  [../]
   [./fluid]
-    type = SubdomainBoundingBox
+    type = SubdomainBoundingBoxGenerator
+    input = generate
     bottom_left = '0 0 0'
     top_right = '3 1 0'
     block_id = 1
   [../]
   [./sideset]
-    type = SideSetsBetweenSubdomains
-    depends_on = fluid
+    type = SideSetsBetweenSubdomainsGenerator
+    input = fluid
     master_block = 1
     new_boundary = 10
     paired_block = 0
@@ -113,13 +113,13 @@
     value = 0
   [../]
   [./fixed_x]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_x
     boundary = 'left right'
     value = 0.0
   [../]
   [./fixed_y]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_y
     boundary = bottom
     value = 0.0
@@ -175,9 +175,9 @@
     type = SMP
     full = true
     solve_type = PJFNK
-    petsc_options = '-ksp_converged_reason -snes_converged_reason' #-snes_monitor -snes_linesearch_monitor -ksp_monitor'
-    petsc_options_iname = '-ksp_type -pc_type  -snes_atol -snes_rtol -snes_max_it -ksp_max_it -ksp_atol -sub_pc_type -sub_pc_factor_shift_type'
-    petsc_options_value = 'gmres        asm        1E-8      1E-15        200        100         1e-3        lu                   NONZERO'
+    #petsc_options = '-ksp_converged_reason -snes_converged_reason' #-snes_monitor -snes_linesearch_monitor -ksp_monitor'
+    #petsc_options_iname = '-ksp_type -pc_type  -snes_atol -snes_rtol -snes_max_it -ksp_max_it -ksp_atol -sub_pc_type -sub_pc_factor_shift_type'
+    #petsc_options_value = 'gmres        asm        1E-8      1E-15        200        100         1e-3        lu                   NONZERO'
   [../]
 []
 

@@ -1,13 +1,11 @@
 /****************************************************************/
 /*               DO NOT MODIFY THIS HEADER                      */
-/* MOOSE - Multiphysics Object Oriented Simulation Environment  */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
 /*                                                              */
-/*           (c) 2010 Battelle Energy Alliance, LLC             */
+/*              (c) 2014 CSIRO and UNSW Australia               */
 /*                   ALL RIGHTS RESERVED                        */
 /*                                                              */
-/*          Prepared by Battelle Energy Alliance, LLC           */
-/*            Under Contract No. DE-AC07-05ID14517              */
-/*            With the U. S. Department of Energy               */
+/*            Prepared by CSIRO and UNSW Australia              */
 /*                                                              */
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
@@ -20,13 +18,12 @@
 class RankTwoScalarAction : public Action
 {
 public:
-  RankTwoScalarAction(InputParameters params);
+  RankTwoScalarAction(const InputParameters & params);
+
+  static InputParameters validParams();
 
   MultiMooseEnum scalarOptions();
   virtual void act() override;
 };
-
-template <>
-InputParameters validParams<RankTwoScalarAction>();
 
 #endif // RANKTWOSCALARACTION_H

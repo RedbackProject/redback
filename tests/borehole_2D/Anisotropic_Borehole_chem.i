@@ -1,30 +1,33 @@
 # Hole problem
 
 [Mesh]
-  type = FileMesh
-  file = meshes/Plate_Hole_coarse.msh
-  boundary_name = 'circle top left right bottom'
-  boundary_id = '0 1 2 3 4'
-[]
-
-[MeshModifiers]
+  [./file]
+    type = FileMeshGenerator
+    file = meshes/Plate_Hole_coarse.msh
+    boundary_name = 'circle top left right bottom'
+    boundary_id = '0 1 2 3 4'
+  [../]
   [./middle_edge_bottom]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = file
     new_boundary = 101
     coord = '0 -10'
   [../]
   [./middle_edge_top]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = middle_edge_bottom
     new_boundary = 102
     coord = '0 10'
   [../]
   [./middle_edge_left]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = middle_edge_top
     new_boundary = 103
     coord = '-10 0'
   [../]
   [./middle_edge_right]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = middle_edge_left
     new_boundary = 104
     coord = '10 0'
   [../]
@@ -91,13 +94,13 @@
 [BCs]
   active = 'Pressure confine_x confine_y'
   [./confine_x]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_x
     boundary = '101 102'
     value = 0
   [../]
   [./confine_y]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_y
     value = 0
     boundary = '103 104'
@@ -388,4 +391,3 @@
     use_displaced_mesh = true
   [../]
 []
-

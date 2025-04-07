@@ -71,19 +71,19 @@
 [BCs]
   active = 'Pressure confine_x confine_y'
   [./confine_x]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_x
     boundary = 'left right bottom'
     value = 0
   [../]
   [./confine_y]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_y
     value = 0
     boundary = bottom
   [../]
   [./pore_pressure_top]
-    type = PresetBC
+    type = DirichletBC
     variable = pore_pressure
     value = 0
     boundary = 'top_pressure top_no_pressure'

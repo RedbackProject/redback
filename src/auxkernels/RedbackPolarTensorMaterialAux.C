@@ -12,11 +12,12 @@
 
 #include "RedbackPolarTensorMaterialAux.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackPolarTensorMaterialAux);
+
 InputParameters
-validParams<RedbackPolarTensorMaterialAux>()
+RedbackPolarTensorMaterialAux::validParams()
 {
-  InputParameters params = validParams<AuxKernel>();
+  InputParameters params = AuxKernel::validParams();
   params.addRequiredParam<MaterialPropertyName>("rank_two_tensor",
                                                 "The rank two material tensor name");
   params.addRequiredRangeCheckedParam<unsigned int>(

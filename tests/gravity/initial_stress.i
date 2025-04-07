@@ -78,25 +78,25 @@
 [BCs]
   active = 'confinex confiney basefixed_z'
   [./confinex]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_x
     boundary = 'left right'
     value = 0
   [../]
   [./confiney]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_y
     value = 0
     boundary = 'bottom top'
   [../]
   [./top_velocity]
-    type = FunctionPresetBC
+    type = FunctionDirichletBC
     variable = disp_z
     function = 0
     boundary = front
   [../]
   [./basefixed_z]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_z
     boundary = back
     value = 0

@@ -3,25 +3,25 @@
 # This generates the file containing the mesh with 2blocks (and possibly the level of refinement/adaptivity that we want).
 
 [Mesh]
-  #type = FileMesh
-  #file = image_mesh_canvas.e
-  type = GeneratedMesh
-  dim = 3
-  nx = 20
-  ny = 20
-  nz = 20
-  elem_type = HEX
   block_name = 'pores grains'
   block_id = '0 1'
   boundary_name = grains_edges
   boundary_id = 10
-[]
-
-[MeshModifiers]
+  [./generate]
+    #type = FileMesh
+    #file = image_mesh_canvas.e
+    type = GeneratedMeshGenerator
+    dim = 3
+    nx = 20
+    ny = 20
+    nz = 20
+    elem_type = HEX
+  [../]
   [./image]
-    type = ImageSubdomain
+    type = ImageSubdomainGenerator
+    input = generate
     file_suffix = png
-    threshold = 90
+    threshold = 6e4
     #the image folder and the images selected
     file_base = stack/test_0
     #file_range = '32'
@@ -29,11 +29,11 @@
   #tags the interface pore-grain
   #the interface's normal points outward from pore to grains
   [./interface]
-    type = SideSetsBetweenSubdomains
-    master_block = 0
+    type = SideSetsBetweenSubdomainsGenerator
+    input = image
+    primary_block = 0
     paired_block = 1
     new_boundary = 10
-    depends_on = image
   [../]
   #deletes one of the blocks
   #[./delete]

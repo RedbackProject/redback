@@ -176,8 +176,12 @@ peacock_*.e
 *.template
 tests/*/*.trace
 
+!/tests/meshmodifiers/*.msh
 !/tests/interface_mech/*.msh
+!/tests/interface_flow/*.msh
 !/tests/transverseBC/*.msh
+!/tests/BreakMeshBySidesetGenerator/*.msh
+!/tests/InterfaceFromSidesetGenerator/*.msh
 !/meshes/2d_footing_pb_coarse.msh
 theory.synctex.gz
 
@@ -235,3 +239,11 @@ temp_print_trace.*
 *.sav
 .failed_tests
 *.ps
+src/materials/RedbackMechMaterial.C.DEBUG_FIX_STRESS
+src/materials/RedbackMechMaterial.C.TEST
+src/materials/RedbackMechMaterial.C_DEBUG
+src/materials/RedbackMechMaterial_19.C.hidden
+src/materials/RedbackMechMaterial_MCCtest.C.hidden
+src/materials/RedbackMechMaterialCC.C_DEBUG
+.previous_test_results.json
+redback.yaml

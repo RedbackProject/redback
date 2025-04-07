@@ -19,16 +19,11 @@
 // System includes
 #include <string>
 
-// Forward Declarations
-class FunctionNormalDistributionIC;
 class Function;
 namespace libMesh
 {
 class Point;
 }
-
-template <>
-InputParameters validParams<FunctionNormalDistributionIC>();
 
 /**
  * FunctionNormalDistributionIC just returns a Random value.
@@ -43,6 +38,8 @@ public:
    * @param parameters The parameters object holding data for the class to use.
    */
   FunctionNormalDistributionIC(const InputParameters & parameters);
+
+  static InputParameters validParams();
 
 protected:
   /**

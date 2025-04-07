@@ -12,11 +12,12 @@
 
 #include "RedbackTotalPorosityAux.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackTotalPorosityAux);
+
 InputParameters
-validParams<RedbackTotalPorosityAux>()
+RedbackTotalPorosityAux::validParams()
 {
-  InputParameters params = validParams<AuxKernel>();
+  InputParameters params = AuxKernel::validParams();
   params.addParam<bool>("is_mechanics_on", false, "is mechanics on?");
   // params.addParam<bool>("is_chemistry_on", false, "is chemistry on?");
   params.addCoupledVar("mechanical_porosity", 0.0, "Mechanical porosity (as AuxKernel)");

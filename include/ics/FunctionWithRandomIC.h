@@ -1,13 +1,11 @@
 /****************************************************************/
 /*               DO NOT MODIFY THIS HEADER                      */
-/* MOOSE - Multiphysics Object Oriented Simulation Environment  */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
 /*                                                              */
-/*           (c) 2010 Battelle Energy Alliance, LLC             */
+/*              (c) 2014 CSIRO and UNSW Australia               */
 /*                   ALL RIGHTS RESERVED                        */
 /*                                                              */
-/*          Prepared by Battelle Energy Alliance, LLC           */
-/*            Under Contract No. DE-AC07-05ID14517              */
-/*            With the U. S. Department of Energy               */
+/*            Prepared by CSIRO and UNSW Australia              */
 /*                                                              */
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
@@ -21,16 +19,11 @@
 // System includes
 #include <string>
 
-// Forward Declarations
-class FunctionWithRandomIC;
 class Function;
 namespace libMesh
 {
 class Point;
 }
-
-template <>
-InputParameters validParams<FunctionWithRandomIC>();
 
 /**
  * FunctionWithRandomIC just returns a Random value.
@@ -45,6 +38,8 @@ public:
    * @param parameters The parameters object holding data for the class to use.
    */
   FunctionWithRandomIC(const InputParameters & parameters);
+
+  static InputParameters validParams();
 
 protected:
   /**
@@ -61,7 +56,7 @@ protected:
   Real _min;
   Real _max;
   Real _range;
-  Function & _func;
+  const Function & _func;
 };
 
 #endif // FUNCTIONWITHRANDOMIC_H

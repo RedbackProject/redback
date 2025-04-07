@@ -1,13 +1,11 @@
 /****************************************************************/
 /*               DO NOT MODIFY THIS HEADER                      */
-/* MOOSE - Multiphysics Object Oriented Simulation Environment  */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
 /*                                                              */
-/*           (c) 2010 Battelle Energy Alliance, LLC             */
+/*              (c) 2014 CSIRO and UNSW Australia               */
 /*                   ALL RIGHTS RESERVED                        */
 /*                                                              */
-/*          Prepared by Battelle Energy Alliance, LLC           */
-/*            Under Contract No. DE-AC07-05ID14517              */
-/*            With the U. S. Department of Energy               */
+/*            Prepared by CSIRO and UNSW Australia              */
 /*                                                              */
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
@@ -21,12 +19,6 @@
 #include "RotationTensor.h"
 //#include "FiniteStrainPlasticMaterial.h"
 
-// Forward Declarations
-class RedbackMechMaterial;
-
-template <>
-InputParameters validParams<RedbackMechMaterial>();
-
 /**
  * This class copy-pastes the stack from tensorMechanics module
  * TODO: add required features to moose and use proper tensorMechanics module
@@ -35,6 +27,8 @@ class RedbackMechMaterial : public Material
 {
 public:
   RedbackMechMaterial(const InputParameters & parameters);
+
+  static InputParameters validParams();
 
   static MooseEnum damageMethodEnum();
   enum DamageMethod
@@ -205,9 +199,7 @@ protected:
   Real _damage_dissipation;
   
   /// initial stress components
-  std::vector<Function *> _initial_stress;
-  MaterialProperty<RankTwoTensor> & _dplastic_heat_dstrain;
-  MaterialProperty<RankTwoTensor> & _dplastic_heat_dcurvature;
+  std::vector<const Function *> _initial_stress;
 };
 
 #endif // REDBACKMECHMATERIAL_H

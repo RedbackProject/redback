@@ -1,16 +1,16 @@
 [Mesh]
-  type = GeneratedMesh
-  dim = 2
-  nx = 5
-  ny = 4
-  xmin = -1.5
-  xmax = 1.5
-  ymin = -1
-[]
-
-[MeshModifiers]
+  [./generate]
+    type = GeneratedMeshGenerator
+    dim = 2
+    nx = 5
+    ny = 4
+    xmin = -1.5
+    xmax = 1.5
+    ymin = -1
+  [../]
   [./middle_left]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = generate
     new_boundary = 4
     coord = '-1.5 0'
   [../]

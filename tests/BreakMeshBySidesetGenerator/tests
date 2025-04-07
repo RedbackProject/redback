@@ -1,0 +1,144 @@
+[Tests]
+ # [./test_interfaceFromSideset]
+ #   # Should produce the same mesh as BreakMeshByBlock meshmodifier
+ #   type = 'Exodiff'
+ #   input = 'testinterfaceFromSideset.i'
+ #   exodiff = 'goldBreakMeshByBlock_in.e'
+ #   cli_args = '--mesh-only=goldBreakMeshByBlock_in.e'
+ # [../]
+  [./test_BreakMeshBySideset_diff1]
+    # Testing diffusion on X reaching sides from left to right
+    type = 'Exodiff'
+    input = 'testBreakMeshBySidesetDiffusion1.i'
+    exodiff = 'testBreakMeshBySidesetDiffusion1.e'
+  [../]
+  [./test_BreakMeshBySideset_diff2]
+    # Testing diffusion on X reaching sides from right to left
+    type = 'Exodiff'
+    input = 'testBreakMeshBySidesetDiffusion2.i'
+    exodiff = 'testBreakMeshBySidesetDiffusion2.e'
+  [../]
+  [./test_BreakMeshBySideset_diff3]
+    # Testing diffusion on X not reaching sides
+    type = 'Exodiff'
+    input = 'testBreakMeshBySidesetDiffusion3.i'
+    exodiff = 'testBreakMeshBySidesetDiffusion3.e'
+  [../]
+  [./test_BreakMeshBySideset_diff4]
+    # Testing diffusion on Y reaching sides from left to right
+    type = 'Exodiff'
+    input = 'testBreakMeshBySidesetDiffusion4.i'
+    exodiff = 'testBreakMeshBySidesetDiffusion4.e'
+  [../]
+  [./test_BreakMeshBySideset_diff5]
+    # Testing diffusion on Y reaching sides from right to left
+    type = 'Exodiff'
+    input = 'testBreakMeshBySidesetDiffusion5.i'
+    exodiff = 'testBreakMeshBySidesetDiffusion5.e'
+  [../]
+  [./test_BreakMeshBySideset_Tjunction]
+    # Testing diffusion on X reaching sides from left to right
+    # with 2 non-connecting T-junctions for one of the faults
+    # (broken in 2 halves) around the connection with the other one
+    type = 'Exodiff'
+    input = 'testBreakMeshBySidesetDiffusion6.i'
+    exodiff = 'testBreakMeshBySidesetDiffusion6.e'
+  [../]
+  [./test_BreakMeshBySideset_diff_spline1]
+    # Testing diffusion on Y reaching sides from right to left
+    type = 'Exodiff'
+    input = 'testBreakMeshBySidesetDiffusionSpline1.i'
+    exodiff = 'testBreakMeshBySidesetDiffusionSpline1.e'
+  [../]
+  [./test_BreakMeshBySideset_lowerD_1]
+    # Testing diffusion on X with lower D blocks, left & right blocks
+    # Note: can't use exodiff since we have 2 lowerD blocks superposed!
+    type = 'CSVDiff'
+    input = 'testLowerDInterface1.i'
+    csvdiff = 'testLowerDInterface1.csv'
+  [../]
+  [./test_BreakMeshBySideset_lowerD_2]
+    # Testing diffusion on X with lower D blocks, bottom & top blocks
+    # Note: can't use exodiff since we have 2 lowerD blocks superposed!
+    type = 'CSVDiff'
+    input = 'testLowerDInterface2.i'
+    csvdiff = 'testLowerDInterface2.csv'
+  [../]
+  [./test_BreakMeshBySideset_lowerD_3]
+    # Testing diffusion on X with lower D blocks, no matrix diffusion
+    # Note: can't use exodiff since we have 2 lowerD blocks superposed!
+    type = 'CSVDiff'
+    input = 'testLowerDInterface3.i'
+    csvdiff = 'testLowerDInterface3.csv'
+  [../]
+  [./test_BreakMeshBySideset_3D_0a]
+    # Testing in 3D, single fault (rectangle), not intersecting boundaries
+    # (note: can't use exodiff because of split nodes having same coords)
+    type = 'CSVDiff'
+    input = 'test3D_0a.i'
+    csvdiff = 'test3D_0a_sampler_0001.csv'
+  [../]
+  [./test_BreakMeshBySideset_3D_0b]
+    # Testing in 3D, single fault (rectangle), intersecting boundaries
+    # (note: can't use exodiff because of split nodes having same coords)
+    type = 'CSVDiff'
+    input = 'test3D_0b.i'
+    csvdiff = 'test3D_0b_sampler_0001.csv'
+  [../]
+  [./test_BreakMeshBySideset_3D_1a]
+    # Testing in 3D, 2 faults (rectangle and oval), intersecting each
+    # other but not the boundary
+    # (note: can't use exodiff because of split nodes having same coords)
+    type = 'CSVDiff'
+    input = 'test3D_1a.i'
+    csvdiff = 'test3D_1a_sampler_0001.csv'
+  [../]
+  [./test_BreakMeshBySideset_3D_1b]
+    # Testing in 3D, 2 faults (rectangle and oval), intersecting each
+    # other, as well as the boundary
+    # (note: can't use exodiff because of split nodes having same coords)
+    type = 'CSVDiff'
+    input = 'test3D_1b.i'
+    csvdiff = 'test3D_1b_sampler_0001.csv'
+  [../]
+  [./test_BreakMeshBySideset_3D_1c1]
+    # Testing in 3D, 2 intersecting faults (not all connecting to boundaries) with
+    #  * connect-T-junctions = false
+    #  * create_lower_D_blocks = true
+    # (note: can't use exodiff because of split nodes having same coords)
+    type = 'CSVDiff'
+    input = 'test3D_1c.i'
+    cli_args = 'Outputs/file_base=test3D_1c1 Mesh/breakmesh/connect_T_junctions=false'
+    csvdiff = 'test3D_1c1_sampler_0001.csv'
+  [../]
+  [./test_BreakMeshBySideset_3D_1c2]
+    # Testing in 3D, 2 intersecting faults (not all connecting to boundaries) with
+    #  * connect-T-junctions = false
+    #  * create_lower_D_blocks = true
+    # (note: can't use exodiff because of split nodes having same coords)
+    type = 'CSVDiff'
+    input = 'test3D_1c.i'
+    cli_args = 'Outputs/file_base=test3D_1c2 Mesh/breakmesh/connect_T_junctions=false'
+    csvdiff = 'test3D_1c2_sampler_0001.csv'
+  [../]
+  [./test_BreakMeshBySideset_3D_1d1]
+    # Testing in 3D, 2 intersecting faults (connecting to boundaries) with
+    #  * connect-T-junctions = false
+    #  * create_lower_D_blocks = false
+    # (note: can't use exodiff because of split nodes having same coords)
+    type = 'CSVDiff'
+    input = 'test3D_1d.i'
+    cli_args = 'Outputs/file_base=test3D_1d1 Mesh/breakmesh/connect_T_junctions=false'
+    csvdiff = 'test3D_1d1_sampler_0001.csv'
+  [../]
+  [./test_BreakMeshBySideset_3D_1d2]
+    # Testing in 3D, 2 intersecting faults (connecting to boundaries) with
+    #  * create_lower_D_blocks = false
+    #  * connect-T-junctions = true
+    # (note: can't use exodiff because of split nodes having same coords)
+    type = 'CSVDiff'
+    input = 'test3D_1d.i'
+    cli_args = 'Outputs/file_base=test3D_1d2 Mesh/breakmesh/connect_T_junctions=true'
+    csvdiff = 'test3D_1d2_sampler_0001.csv'
+  [../]
+[]

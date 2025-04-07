@@ -1,13 +1,11 @@
 /****************************************************************/
 /*               DO NOT MODIFY THIS HEADER                      */
-/* MOOSE - Multiphysics Object Oriented Simulation Environment  */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
 /*                                                              */
-/*           (c) 2010 Battelle Energy Alliance, LLC             */
+/*              (c) 2014 CSIRO and UNSW Australia               */
 /*                   ALL RIGHTS RESERVED                        */
 /*                                                              */
-/*          Prepared by Battelle Energy Alliance, LLC           */
-/*            Under Contract No. DE-AC07-05ID14517              */
-/*            With the U. S. Department of Energy               */
+/*            Prepared by CSIRO and UNSW Australia              */
 /*                                                              */
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
@@ -16,18 +14,12 @@
 #define ELEMENTFILESUBDOMAIN_H
 
 // MOOSE includes
-#include "MeshModifier.h"
-
-// Forward declerations
-class ElementFileSubdomain;
-
-template <>
-InputParameters validParams<ElementFileSubdomain>();
+#include "MeshGenerator.h"
 
 /**
  * MeshModifier for assigning subdomain IDs of all elements
  */
-class ElementFileSubdomain : public MeshModifier
+class ElementFileSubdomain : public MeshGenerator
 {
 public:
   /**
@@ -35,6 +27,8 @@ public:
    * @param parameters The input parameters
    */
   ElementFileSubdomain(const InputParameters & parameters);
+
+  static InputParameters validParams();
 
   /**
    * Class destructor
@@ -44,7 +38,11 @@ public:
   /**
    * Perform the actual element subdomain ID assignment
    */
-  virtual void modify();
+  std::unique_ptr<MeshBase> generate() override;
+
+protected:
+  std::unique_ptr<MeshBase> & _input;
+
 };
 
 #endif // ELEMENTFILESUBDOMAIN_H

@@ -14,11 +14,12 @@
 #include "RedbackMechMaterialCCanisotropic.h"
 #include <cmath> //used for fabs
 
-template <>
+registerMooseObject("RedbackApp", RedbackMechMaterialCCanisotropic);
+
 InputParameters
-validParams<RedbackMechMaterialCCanisotropic>()
+RedbackMechMaterialCCanisotropic::validParams()
 {
-  InputParameters params = validParams<RedbackMechMaterialCC>();
+  InputParameters params = RedbackMechMaterialCC::validParams();
   params.addParam<Real>(
       "initial_anisotropy_param", 0, "Initial anisotropy coefficient (from Dafalias 2013)");
 

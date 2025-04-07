@@ -1,24 +1,24 @@
 /****************************************************************/
 /*               DO NOT MODIFY THIS HEADER                      */
-/* MOOSE - Multiphysics Object Oriented Simulation Environment  */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
 /*                                                              */
-/*           (c) 2010 Battelle Energy Alliance, LLC             */
+/*              (c) 2014 CSIRO and UNSW Australia               */
 /*                   ALL RIGHTS RESERVED                        */
 /*                                                              */
-/*          Prepared by Battelle Energy Alliance, LLC           */
-/*            Under Contract No. DE-AC07-05ID14517              */
-/*            With the U. S. Department of Energy               */
+/*            Prepared by CSIRO and UNSW Australia              */
 /*                                                              */
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
+
 #include "RankTwoScalarPostprocessor.h"
 #include "RankTwoScalarTools.h"
 
-template <>
+registerMooseObject("RedbackApp", RankTwoScalarPostprocessor);
+
 InputParameters
-validParams<RankTwoScalarPostprocessor>()
+RankTwoScalarPostprocessor::validParams()
 {
-  InputParameters params = validParams<GeneralPostprocessor>();
+  InputParameters params = GeneralPostprocessor::validParams();
   params.addRequiredParam<PostprocessorName>("index00", "Tensor's element");
   params.addRequiredParam<PostprocessorName>("index01", "Tensor's element");
   params.addRequiredParam<PostprocessorName>("index02", "Tensor's element");
@@ -60,7 +60,7 @@ RankTwoScalarPostprocessor::execute()
 }
 
 PostprocessorValue
-RankTwoScalarPostprocessor::getValue()
+RankTwoScalarPostprocessor::getValue() const
 {
   RankTwoTensor tensor = RankTwoTensor(
       _index00, _index01, _index02, _index10, _index11, _index12, _index20, _index21, _index22);

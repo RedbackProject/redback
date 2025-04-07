@@ -49,19 +49,19 @@
 [BCs]
   active = 'Pressure Temp_borehole Temp_outside plane_strain fixed_outer_x fixed_outer_y'
   [./fixed_outer_x]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_x
     value = 0
     boundary = outside
   [../]
   [./fixed_outer_y]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_y
     value = 0
     boundary = outside
   [../]
   [./plane_strain]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_z
     value = 0
     boundary = 'top bottom'

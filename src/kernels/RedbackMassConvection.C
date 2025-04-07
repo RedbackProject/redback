@@ -12,11 +12,12 @@
 
 #include "RedbackMassConvection.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackMassConvection);
+
 InputParameters
-validParams<RedbackMassConvection>()
+RedbackMassConvection::validParams()
 {
-  InputParameters params = validParams<Kernel>();
+  InputParameters params = Kernel::validParams();
   params.addCoupledVar("temperature", 0.0, "Temperature variable.");
   params.addParam<Real>("time_factor", 1.0, "Time rescaling factor (global parameter!)");
 

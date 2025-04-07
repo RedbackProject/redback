@@ -1,14 +1,25 @@
+/****************************************************************/
+/*               DO NOT MODIFY THIS HEADER                      */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
+/*                                                              */
+/*              (c) 2014 CSIRO and UNSW Australia               */
+/*                   ALL RIGHTS RESERVED                        */
+/*                                                              */
+/*            Prepared by CSIRO and UNSW Australia              */
+/*                                                              */
+/*            See COPYRIGHT for full restrictions               */
+/****************************************************************/
+
 #include "RedbackAction.h"
 
 #include "FEProblem.h"
 #include "Factory.h"
 #include "Parser.h"
 
-template <>
 InputParameters
-validParams<RedbackAction>()
+RedbackAction::validParams()
 {
-  InputParameters params = validParams<Action>();
+  InputParameters params = Action::validParams();
   params.addParam<NonlinearVariableName>("disp_x", "", "The x displacement");
   params.addParam<NonlinearVariableName>("disp_y", "", "The y displacement");
   params.addParam<NonlinearVariableName>("disp_z", "", "The z displacement");
@@ -36,7 +47,7 @@ RedbackAction::RedbackAction(InputParameters params)
 void
 RedbackAction::act()
 {
-  unsigned int dim = 1;
+  // unsigned int dim = 1;
   std::vector<std::string> keys;
   std::vector<VariableName> vars;
   std::string type("RedbackStressDivergenceTensors");
@@ -48,27 +59,27 @@ RedbackAction::act()
   vars.push_back(_disp_x);
   if (_disp_y != "")
   {
-    ++dim;
+    // ++dim;
     keys.push_back("disp_y");
     vars.push_back(_disp_y);
     if (_disp_z != "")
     {
-      ++dim;
+      // ++dim;
       keys.push_back("disp_z");
       vars.push_back(_disp_z);
     }
   }
 
-  unsigned int num_coupled(dim);
+  //unsigned int num_coupled(dim);
   if (_temp != "")
   {
-    ++num_coupled;
+    //++num_coupled;
     keys.push_back("temp");
     vars.push_back(_temp);
   }
   if (_pore_pres != "")
   {
-    ++num_coupled;
+    //++num_coupled;
     keys.push_back("pore_pres");
     vars.push_back(_pore_pres);
   }

@@ -1,24 +1,23 @@
 /****************************************************************/
 /*               DO NOT MODIFY THIS HEADER                      */
-/* MOOSE - Multiphysics Object Oriented Simulation Environment  */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
 /*                                                              */
-/*           (c) 2010 Battelle Energy Alliance, LLC             */
+/*              (c) 2014 CSIRO and UNSW Australia               */
 /*                   ALL RIGHTS RESERVED                        */
 /*                                                              */
-/*          Prepared by Battelle Energy Alliance, LLC           */
-/*            Under Contract No. DE-AC07-05ID14517              */
-/*            With the U. S. Department of Energy               */
+/*            Prepared by CSIRO and UNSW Australia              */
 /*                                                              */
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
 #include "RedbackFluidMaterial.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackFluidMaterial);
+
 InputParameters
-validParams<RedbackFluidMaterial>()
+RedbackFluidMaterial::validParams()
 {
-  InputParameters params = validParams<Material>();
+  InputParameters params = Material::validParams();
 
   params.addCoupledVar("temperature", 0.0, "Dimensionless temperature");
   params.addCoupledVar("pore_pres", 0.0, "Dimensionless pore pressure");
@@ -134,9 +133,9 @@ RedbackFluidMaterial::computeRedbackTerms()
   _froude_number[_qp] = _froude_number_param;
   _viscosity_ratio[_qp] = _viscosity_ratio_param;
 
-  Real fluid_density;
-  fluid_density = (1 + _fluid_compressibility_param * _pore_pres[_qp] -
-                   _fluid_thermal_expansion_param * _T[_qp]);
+  // Real fluid_density;
+  // fluid_density = (1 + _fluid_compressibility_param * _pore_pres[_qp] -
+  //                  _fluid_thermal_expansion_param * _T[_qp]);
 
   // Gravity term in the momentum kernel
   _gravity_term[_qp] = _gravity_param / pow(_froude_number[_qp], 2);

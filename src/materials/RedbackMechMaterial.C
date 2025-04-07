@@ -35,11 +35,10 @@ function of equivalent
 plastic strain has to be specified by the user.
 */
 
-template <>
 InputParameters
-validParams<RedbackMechMaterial>()
+RedbackMechMaterial::validParams()
 {
-  InputParameters params = validParams<Material>();
+  InputParameters params = Material::validParams();
 
   // Copy-paste from TensorMechanicsMaterial.C
   params.addRequiredCoupledVar("disp_x", "The x displacement");
@@ -57,7 +56,7 @@ validParams<RedbackMechMaterial>()
   // params.addRequiredParam< std::vector<Real> >("yield_stress", "Input data as
   // pairs of equivalent plastic strain and yield stress: Should start with
   // equivalent plastic strain 0");
-  params.addParam<std::vector<Real>>("yield_stress",
+  params.addParam<std::vector<Real>>("yield_stress",{},
                                      "Input data as pairs of equivalent "
                                      "plastic strain and yield stress: Should "
                                      "start with equivalent plastic strain 0");
@@ -99,7 +98,7 @@ validParams<RedbackMechMaterial>()
       "temperature_reference", 0.0, "Reference temperature used for thermal expansion");
   params.addParam<Real>("pressure_reference", 0.0, "Reference pressure used for compressibility");
   params.addParam<std::vector<FunctionName>>(
-      "initial_stress",
+      "initial_stress",{},
       "A list of functions describing the initial stress. If provided, there "
       "must be 9 of these, corresponding to the xx, yx, zx, xy, yy, zy, xz, yz, "
       "zz components respectively.  If not provided, all components of the "
@@ -323,9 +322,10 @@ RedbackMechMaterial::computeStrain()
   for (_qp = 0; _qp < _qrule->n_points(); ++_qp)
   {
     // Deformation gradient
-    RankTwoTensor A(
+    auto A = RankTwoTensor ::initializeFromRows(
         _grad_disp_x[_qp], _grad_disp_y[_qp], _grad_disp_z[_qp]); // Deformation gradient
-    RankTwoTensor Fbar(_grad_disp_x_old[_qp],
+    auto Fbar = RankTwoTensor ::initializeFromRows(
+                       _grad_disp_x_old[_qp],
                        _grad_disp_y_old[_qp],
                        _grad_disp_z_old[_qp]); // Old Deformation gradient
 

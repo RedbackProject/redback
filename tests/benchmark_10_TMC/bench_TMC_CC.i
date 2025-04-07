@@ -1,16 +1,16 @@
 [Mesh]
-  type = GeneratedMesh
-  dim = 2
-  nx = 10
-  ny = 6
-  xmin = -1.5
-  xmax = 1.5
-  ymin = -1
-[]
-
-[MeshModifiers]
+  [./generate]
+    type = GeneratedMeshGenerator
+    dim = 2
+    nx = 10
+    ny = 6
+    xmin = -1.5
+    xmax = 1.5
+    ymin = -1
+  [../]
   [./middle_left]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = generate
     new_boundary = 4
     coord = '-1.5 0'
   [../]
@@ -93,7 +93,7 @@
     value = 0
   [../]
   [./right_disp]
-    type = FunctionPresetBC
+    type = FunctionDirichletBC
     variable = disp_x
     boundary = 1
     function = downfunc

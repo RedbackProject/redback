@@ -19,16 +19,11 @@
 // System includes
 #include <string>
 
-// Forward Declarations
-class FunctionTimesRandomIC;
 class Function;
 namespace libMesh
 {
 class Point;
 }
-
-template <>
-InputParameters validParams<FunctionTimesRandomIC>();
 
 /**
  * FunctionTimesRandomIC just returns a Random value.
@@ -43,6 +38,8 @@ public:
    * @param parameters The parameters object holding data for the class to use.
    */
   FunctionTimesRandomIC(const InputParameters & parameters);
+
+  static InputParameters validParams();
 
 protected:
   /**
@@ -59,7 +56,7 @@ protected:
   Real _min;
   Real _max;
   Real _range;
-  Function & _func;
+  const Function & _func;
 };
 
 #endif // FUNCTIONTIMESRANDOMIC_H

@@ -12,11 +12,12 @@
 
 #include "RedbackMechMaterialElastic.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackMechMaterialElastic);
+
 InputParameters
-validParams<RedbackMechMaterialElastic>()
+RedbackMechMaterialElastic::validParams()
 {
-  InputParameters params = validParams<RedbackMechMaterial>();
+  InputParameters params = RedbackMechMaterial::validParams();
   return params;
 }
 

@@ -1,14 +1,25 @@
 [Tests]
+  #still need _doing_dg = true line 475 of NonlinearSystemBase
   [./test_interface_mech]
     type = 'Exodiff'
     input = 'compression_interface.i'
     exodiff = 'compression_interface.e'
-    skip = "Waiting to reconcile with PR#11587"
+  [../]
+  [./test_interface_poromech]
+    type = 'Exodiff'
+    input = 'compression_interface_pressure.i'
+    exodiff = 'compression_interface_pressure.e'
+    #skip = "Waiting to reconcile with PR#11587"
   [../]
   [./test_angled_interface_mech]
     type = 'Exodiff'
     input = 'compression_angled_interface.i'
     exodiff = 'compression_angled_interface.e'
-    skip = "Waiting to reconcile with PR#11587"
+    #skip = "Waiting to reconcile with PR#11587"
+  [../]
+  [./test_traction_auxkernel]
+    type = 'Exodiff'
+    input = 'testTractionProjectionAux.i'
+    exodiff = 'testTractionProjectionAux.e'
   [../]
 []

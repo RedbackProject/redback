@@ -16,11 +16,12 @@
 
 #include "libmesh/point.h"
 
-template <>
+registerMooseObject("RedbackApp", FunctionNormalDistributionIC);
+
 InputParameters
-validParams<FunctionNormalDistributionIC>()
+FunctionNormalDistributionIC::validParams()
 {
-  InputParameters params = validParams<InitialCondition>();
+  InputParameters params = InitialCondition::validParams();
   params.addRequiredParam<Real>("mean", "Mean value of normal distribution function");
   params.addRequiredParam<Real>("standard_deviation",
                                 "Standard deviation of normal distribution function");

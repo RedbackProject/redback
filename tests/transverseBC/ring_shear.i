@@ -103,7 +103,7 @@
     value = 0
   [../]
   [./right_disp]
-    type = FunctionPresetBC
+    type = FunctionDirichletBC
     variable = disp_x
     boundary = 1
     function = downfunc

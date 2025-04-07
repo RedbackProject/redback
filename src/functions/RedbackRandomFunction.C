@@ -13,11 +13,12 @@
 #include "MooseRandom.h"
 #include "RedbackRandomFunction.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackRandomFunction);
+
 InputParameters
-validParams<RedbackRandomFunction>()
+RedbackRandomFunction::validParams()
 {
-  InputParameters params = validParams<Function>();
+  InputParameters params = Function::validParams();
   params.addParam<Real>("min", 0.0, "Lower bound of the randomly generated values");
   params.addParam<Real>("max", 1.0, "Upper bound of the randomly generated values");
   params.addParam<unsigned int>("seed", 0, "Seed value for the random number generator");
@@ -36,7 +37,7 @@ RedbackRandomFunction::RedbackRandomFunction(const InputParameters & parameters)
 }
 
 Real
-RedbackRandomFunction::value(Real /*t*/, const Point & /*p*/)
+RedbackRandomFunction::value(Real /*t*/, const Point & /*p*/) const
 {
   // Random number between 0 and 1
   Real rand_num = MooseRandom::rand();

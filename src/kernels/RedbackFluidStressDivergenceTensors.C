@@ -1,13 +1,26 @@
+/****************************************************************/
+/*               DO NOT MODIFY THIS HEADER                      */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
+/*                                                              */
+/*              (c) 2014 CSIRO and UNSW Australia               */
+/*                   ALL RIGHTS RESERVED                        */
+/*                                                              */
+/*            Prepared by CSIRO and UNSW Australia              */
+/*                                                              */
+/*            See COPYRIGHT for full restrictions               */
+/****************************************************************/
+
 #include "RedbackFluidStressDivergenceTensors.h"
 
 #include "ElasticityTensorTools.h"
 #include "Material.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackFluidStressDivergenceTensors);
+
 InputParameters
-validParams<RedbackFluidStressDivergenceTensors>()
+RedbackFluidStressDivergenceTensors::validParams()
 {
-  InputParameters params = validParams<Kernel>();
+  InputParameters params = Kernel::validParams();
   params.addRequiredParam<unsigned int>("component",
                                         "An integer corresponding to the direction the variable "
                                         "this kernel acts in. (0 for x, 1 for y, 2 for z)");

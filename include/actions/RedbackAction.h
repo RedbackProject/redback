@@ -1,17 +1,26 @@
+/****************************************************************/
+/*               DO NOT MODIFY THIS HEADER                      */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
+/*                                                              */
+/*              (c) 2014 CSIRO and UNSW Australia               */
+/*                   ALL RIGHTS RESERVED                        */
+/*                                                              */
+/*            Prepared by CSIRO and UNSW Australia              */
+/*                                                              */
+/*            See COPYRIGHT for full restrictions               */
+/****************************************************************/
+
 #ifndef REDBACKACTION_H
 #define REDBACKACTION_H
 
 #include "Action.h"
 
-class RedbackAction;
-
-template <>
-InputParameters validParams<RedbackAction>();
-
 class RedbackAction : public Action
 {
 public:
   RedbackAction(InputParameters params);
+
+  static InputParameters validParams();
 
   virtual void act();
 

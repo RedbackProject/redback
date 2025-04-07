@@ -1,10 +1,19 @@
 [Mesh]
-  type = GeneratedMesh
-  dim = 2
-  nx = 10
-  ny = 5
-  nz = 5
-  xmin = -1
+  [./generate]
+    type = GeneratedMeshGenerator
+    dim = 2
+    nx = 10
+    ny = 5
+    nz = 5
+    xmin = -1
+  [../]
+  [./subdomain]
+    type = SubdomainBoundingBoxGenerator
+    input = generate
+    block_id = 1
+    top_right = '1 0.5 1'
+    bottom_left = '-1 0 0'
+  [../]
 []
 
 [Variables]
@@ -165,13 +174,3 @@
     block = '0'
   [../]
 []
-
-[MeshModifiers]
-  [./subdomain]
-    type = SubdomainBoundingBox
-    block_id = 1
-    top_right = '1 0.5 1'
-    bottom_left = '-1 0 0'
-  [../]
-[]
-

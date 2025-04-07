@@ -14,13 +14,15 @@
 #include "MooseMesh.h"
 #include "PermutationTensor.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackMechDissip);
+
 InputParameters
-validParams<RedbackMechDissip>()
+RedbackMechDissip::validParams()
 {
   InputParameters params = validParams<Kernel>();
   params.addCoupledVar("displacements", "The string of displacements suitable for the problem statement");
   params.addCoupledVar("rotations", "The string of rotations suitable for the problem statement");
+  InputParameters params = Kernel::validParams();
   params.addParam<Real>("time_factor", 1.0, "Time rescaling factor (global parameter!)");
   return params;
 }

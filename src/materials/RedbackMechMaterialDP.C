@@ -12,11 +12,12 @@
 
 #include "RedbackMechMaterialDP.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackMechMaterialDP);
+
 InputParameters
-validParams<RedbackMechMaterialDP>()
+RedbackMechMaterialDP::validParams()
 {
-  InputParameters params = validParams<RedbackMechMaterial>();
+  InputParameters params = RedbackMechMaterial::validParams();
   // TODO: deal with sign of _slope_yield_surface properly in DP case
   params.addParam<Real>("slope_yield_surface", 0, "Slope of yield surface (usually negative)");
 

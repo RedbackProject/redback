@@ -114,10 +114,9 @@
     # It is the starting point of splitting
     type = FSP
     petsc_options = '-ksp_converged_reason -snes_converged_reason'
-    petsc_options_iname = '-snes_type -ksp_type -ksp_rtol ksp_atol -ksp_max_it -snes_atol -snes_rtol -snes_max_it -snes_max_funcs'
+    petsc_options_iname = '-snes_type -ksp_type -ksp_rtol -ksp_atol -ksp_max_it -snes_atol -snes_rtol -snes_max_it -snes_max_funcs'
     petsc_options_value = 'newtonls     fgmres     1e-2     1e-15       200       1e-8        1e-15       200           100000'
     topsplit = uv
-    line_search = cp
     [./uv]
       petsc_options_iname = '-pc_fieldsplit_schur_fact_type -pc_fieldsplit_schur_precondition'
       petsc_options_value = 'full selfp'
@@ -153,4 +152,3 @@
   exodus = true
   csv = true
 []
-

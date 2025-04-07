@@ -1,50 +1,49 @@
 /****************************************************************/
 /*               DO NOT MODIFY THIS HEADER                      */
-/* MOOSE - Multiphysics Object Oriented Simulation Environment  */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
 /*                                                              */
-/*           (c) 2010 Battelle Energy Alliance, LLC             */
+/*              (c) 2014 CSIRO and UNSW Australia               */
 /*                   ALL RIGHTS RESERVED                        */
 /*                                                              */
-/*          Prepared by Battelle Energy Alliance, LLC           */
-/*            Under Contract No. DE-AC07-05ID14517              */
-/*            With the U. S. Department of Energy               */
+/*            Prepared by CSIRO and UNSW Australia              */
 /*                                                              */
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
 #include "ElementFileSubdomain.h"
 #include "MooseMesh.h"
+#include "CastUniquePointer.h"
+#include "libmesh/elem.h"
 #include <fstream>
 
-template <>
+registerMooseObject("RedbackApp", ElementFileSubdomain);
+
 InputParameters
-validParams<ElementFileSubdomain>()
+ElementFileSubdomain::validParams()
 {
-  InputParameters params = validParams<MeshModifier>();
+  InputParameters params = MeshGenerator::validParams();
   params.addRequiredParam<std::vector<SubdomainID>>("subdomain_ids",
                                                     "New subdomain IDs of all elements");
   params.addParam<std::vector<dof_id_type>>("element_ids", "New subdomain IDs of all elements");
   params.addParam<FileName>("file", "Name of the txt file with the elements");
+  params.addRequiredParam<MeshGeneratorName>("input", "The mesh to modify");
   return params;
 }
 
 ElementFileSubdomain::ElementFileSubdomain(const InputParameters & parameters)
-  : MeshModifier(parameters)
+    : MeshGenerator(parameters),
+      _input(getMesh("input"))
+
 {
 }
 
 ElementFileSubdomain::~ElementFileSubdomain() {}
 
-void
-ElementFileSubdomain::modify()
+std::unique_ptr<MeshBase>
+ElementFileSubdomain::generate()
 {
-  // Check that we have access to the mesh
-  if (!_mesh_ptr)
-    mooseError("_mesh_ptr must be initialized before calling "
-               "SubdomainBoundingBox::modify()");
-
   // Reference the the libMesh::MeshBase
-  MeshBase & mesh = _mesh_ptr->getMesh();
+  std::unique_ptr<MeshBase> mesh = std::move(_input);
 
   std::vector<SubdomainID> bids = getParam<std::vector<SubdomainID>>("subdomain_ids");
 
@@ -82,7 +81,7 @@ ElementFileSubdomain::modify()
     // >("element_ids");
     for (dof_id_type i = 0; i < elemids.size(); ++i)
     {
-      Elem * elem = mesh.query_elem(elemids[i]);
+      Elem * elem = mesh->query_elem_ptr(elemids[i]);
       if (!elem)
         mooseError("invalid element ID is in element_ids");
       else
@@ -92,8 +91,8 @@ ElementFileSubdomain::modify()
   else
   {
     bool has_warned_remapping = false;
-    MeshBase::const_element_iterator el = mesh.elements_begin();
-    const MeshBase::const_element_iterator end_el = mesh.elements_end();
+    MeshBase::const_element_iterator el = mesh->elements_begin();
+    const MeshBase::const_element_iterator end_el = mesh->elements_end();
     for (dof_id_type e = 0; el != end_el; ++el, ++e)
     {
       Elem * elem = *el;
@@ -145,4 +144,5 @@ ElementFileSubdomain::modify()
 
     elem->subdomain_id() = newid;
   }
+  return dynamic_pointer_cast<MeshBase>(mesh);
 }

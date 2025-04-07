@@ -1,13 +1,11 @@
 /****************************************************************/
 /*               DO NOT MODIFY THIS HEADER                      */
-/* MOOSE - Multiphysics Object Oriented Simulation Environment  */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
 /*                                                              */
-/*           (c) 2010 Battelle Energy Alliance, LLC             */
+/*              (c) 2014 CSIRO and UNSW Australia               */
 /*                   ALL RIGHTS RESERVED                        */
 /*                                                              */
-/*          Prepared by Battelle Energy Alliance, LLC           */
-/*            Under Contract No. DE-AC07-05ID14517              */
-/*            With the U. S. Department of Energy               */
+/*            Prepared by CSIRO and UNSW Australia              */
 /*                                                              */
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
@@ -16,12 +14,6 @@
 #define IMAGEPROCESSING_H
 
 #include "Material.h"
-
-// Forward Declarations
-class ImageProcessing;
-
-template <>
-InputParameters validParams<ImageProcessing>();
 
 /**
  * This material automatically declares as material properties whatever is
@@ -39,12 +31,14 @@ class ImageProcessing : public Material
 public:
   ImageProcessing(const InputParameters & parameters);
 
+  static InputParameters validParams();
+
 protected:
   virtual void initQpStatefulProperties() override;
   virtual void computeQpProperties() override;
 
   FunctionName _func;
-  std::vector<Function *> _function;
+  std::vector<const Function *> _function;
   FILE * idFile;
 
 private:

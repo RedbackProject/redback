@@ -109,7 +109,8 @@ public:
    * @param y: coordinates of point to project
    * @param x: coordinates of projection point on the ellipse
    * @return d: distance to ellipse
-   */ static void
+   */
+  static void
   getYieldPointCC(Real const m, Real const p_c, Real const y0, Real const y1, Real & x0, Real & x1);
 
   /**

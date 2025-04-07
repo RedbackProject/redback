@@ -1,41 +1,46 @@
 [Mesh]
-  type = FileMesh
-  file = Crack_in_cylinder_half_2D.msh
-  dim = 2
-  boundary_name = 'inside outside crack_lip sym_axis'
-  boundary_id = '0 1 2 3'
-  displacements = 'disp_x disp_y'
-[]
-
-[MeshModifiers]
-  active = 'up_point_outside'
+  active = 'file up_point_outside'
+  [./file]
+    type = FileMeshGenerator
+    file = Crack_in_cylinder_half_2D.msh
+    dim = 2
+    boundary_name = 'inside outside crack_lip sym_axis'
+    boundary_id = '0 1 2 3'
+    displacements = 'disp_x disp_y'
+  [../]
   [./up_point_outside]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = file
     new_boundary = 102
     coord = '0 1'
   [../]
   [./down_point_outside]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = file
     new_boundary = 103
     coord = '0 -1 0'
   [../]
   [./left_point_outside]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = file
     new_boundary = 101
     coord = '-1 0 0'
   [../]
   [./left_point_inside]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = file
     new_boundary = 111
     coord = '-0.05 0 0'
   [../]
   [./up_point_inside]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = file
     new_boundary = 112
     coord = '0 0.05 0'
   [../]
   [./down_point_inside]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = file
     new_boundary = 113
     coord = '0 -0.05 0'
   [../]
@@ -124,7 +129,7 @@
     value = 0
   [../]
   [./right_disp]
-    type = FunctionPresetBC
+    type = FunctionDirichletBC
     variable = disp_x
     boundary = 1
     function = downfunc
@@ -620,4 +625,3 @@
     block = 0
   [../]
 []
-

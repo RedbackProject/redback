@@ -12,11 +12,12 @@
 
 #include "RedbackPoromechanics.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackPoromechanics);
+
 InputParameters
-validParams<RedbackPoromechanics>()
+RedbackPoromechanics::validParams()
 {
-  InputParameters params = validParams<Kernel>();
+  InputParameters params = Kernel::validParams();
   params.addCoupledVar("temperature", 0.0, "Temperature variable.");
   params.addParam<Real>("time_factor", 1.0, "Time rescaling factor (global parameter!)");
 

@@ -12,11 +12,12 @@
 
 #include "RedbackMassDiffusion.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackMassDiffusion);
+
 InputParameters
-validParams<RedbackMassDiffusion>()
+RedbackMassDiffusion::validParams()
 {
-  InputParameters params = validParams<Kernel>();
+  InputParameters params = Kernel::validParams();
   params.addParam<Real>("time_factor", 1.0, "Time rescaling factor (global parameter!)");
 
   params.set<bool>("use_displaced_mesh") = true;

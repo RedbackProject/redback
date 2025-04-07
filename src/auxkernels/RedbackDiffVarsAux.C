@@ -13,11 +13,12 @@
 // AuxKernel to compute difference of 2 (aux)variables
 #include "RedbackDiffVarsAux.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackDiffVarsAux);
+
 InputParameters
-validParams<RedbackDiffVarsAux>()
+RedbackDiffVarsAux::validParams()
 {
-  InputParameters params = validParams<AuxKernel>();
+  InputParameters params = AuxKernel::validParams();
   params.addCoupledVar("variable_1", 0.0, "First variable");
   params.addCoupledVar("variable_2", 0.0, "Second variable");
   return params;

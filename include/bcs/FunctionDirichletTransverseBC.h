@@ -1,4 +1,15 @@
 /****************************************************************/
+/*               DO NOT MODIFY THIS HEADER                      */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
+/*                                                              */
+/*              (c) 2014 CSIRO and UNSW Australia               */
+/*                   ALL RIGHTS RESERVED                        */
+/*                                                              */
+/*            Prepared by CSIRO and UNSW Australia              */
+/*                                                              */
+/*            See COPYRIGHT for full restrictions               */
+/****************************************************************/
+/****************************************************************/
 /* Dirichlet boundary condition to impose displacement in a     */
 /* direction transversal to element normal vector, by taking a  */
 /* vectorial product of the normal with a given vector          */
@@ -7,23 +18,20 @@
 #ifndef FUNCTIONDIRICHLETTRANSVERSEBC
 #define FUNCTIONDIRICHLETTRANSVERSEBC
 
-#include "PresetNodalBC.h"
+#include "DirichletBCBase.h"
 
-// Forward Declarations
-class FunctionDirichletTransverseBC;
 class Function;
-
-template <>
-InputParameters validParams<FunctionDirichletTransverseBC>();
 
 /**
  * Defines a boundary condition that forces the value to be a user specified
  * function at the boundary.
  */
-class FunctionDirichletTransverseBC : public PresetNodalBC
+class FunctionDirichletTransverseBC : public DirichletBCBase
 {
 public:
   FunctionDirichletTransverseBC(const InputParameters & parameters);
+
+  static InputParameters validParams();
 
 protected:
   /**
@@ -34,7 +42,7 @@ protected:
   const VariableValue & _u_old;
 
   /// Function being used for evaluation of this BC
-  Function & _func;
+  const Function & _func;
 
   /// Center point to calculate transversal direction for boundary point.
   const RealVectorValue & _center;

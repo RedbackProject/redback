@@ -1,0 +1,14 @@
+[Tests]
+  [./test_interface_flow_analytical] # can't put a dot in that name!
+    type = 'CSVDiff'
+    rel_err = 1e-8
+    input = 'interface_darcy_test.i'
+    csvdiff = 'interface_darcy_test.csv'
+  [../]
+    [./test_interface_flow_gravity] # can't put a dot in that name!
+      type = 'CSVDiff'
+      rel_err = 6e-2
+      input = 'interface_darcy_grav_test.i'
+      csvdiff = 'interface_darcy_grav_test.csv'
+    [../]
+[]

@@ -1,30 +1,33 @@
 # Hole problem
 
 [Mesh]
-  type = FileMesh
-  file = Plate_Hole_rectang2D.msh
-  boundary_name = 'circle top bottom left right'
-  boundary_id = '0 1 2 3 4'
-[]
-
-[MeshModifiers]
+  [./file]
+    type = FileMeshGenerator
+    file = Plate_Hole_rectang2D.msh
+    boundary_name = 'circle top bottom left right'
+    boundary_id = '0 1 2 3 4'
+  [../]
   [./middle_edge_bottom]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = file
     new_boundary = 101
     coord = '0 -1.5'
   [../]
   [./middle_edge_top]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = middle_edge_bottom
     new_boundary = 102
     coord = '0 1.5'
   [../]
   [./middle_edge_left]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = middle_edge_top
     new_boundary = 103
     coord = '-2 0 '
   [../]
   [./middle_edge_right]
-    type = AddExtraNodeset
+    type = ExtraNodesetGenerator
+    input = middle_edge_left
     new_boundary = 104
     coord = '2 0'
   [../]
@@ -86,13 +89,13 @@
 [BCs]
   active = 'Pressure confine_x confine_y'
   [./confine_x]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_x
     boundary = '101 102'
     value = 0
   [../]
   [./confine_y]
-    type = PresetBC
+    type = DirichletBC
     variable = disp_y
     value = 0
     boundary = '103 104'
@@ -356,4 +359,3 @@
     value = 0
   [../]
 []
-

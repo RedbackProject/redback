@@ -1,4 +1,15 @@
 /****************************************************************/
+/*               DO NOT MODIFY THIS HEADER                      */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
+/*                                                              */
+/*              (c) 2014 CSIRO and UNSW Australia               */
+/*                   ALL RIGHTS RESERVED                        */
+/*                                                              */
+/*            Prepared by CSIRO and UNSW Australia              */
+/*                                                              */
+/*            See COPYRIGHT for full restrictions               */
+/****************************************************************/
+/****************************************************************/
 /* Dirichlet boundary condition to impose displacement in a     */
 /* direction transversal to element normal vector, by taking a  */
 /* vectorial product of the normal with a given vector          */
@@ -7,11 +18,12 @@
 #include "Function.h"
 #include "FunctionDirichletTransverseBC.h"
 
-template <>
+registerMooseObject("RedbackApp", FunctionDirichletTransverseBC);
+
 InputParameters
-validParams<FunctionDirichletTransverseBC>()
+FunctionDirichletTransverseBC::validParams()
 {
-  InputParameters params = validParams<PresetNodalBC>();
+  InputParameters params = DirichletBCBase::validParams();
   params.addRequiredParam<FunctionName>("function", "The forcing function.");
   params.addRequiredParam<RealVectorValue>(
       "center", "Center point to calculate transversal direction for boundary point.");
@@ -25,7 +37,7 @@ validParams<FunctionDirichletTransverseBC>()
 }
 
 FunctionDirichletTransverseBC::FunctionDirichletTransverseBC(const InputParameters & parameters)
-  : PresetNodalBC(parameters),
+  : DirichletBCBase(parameters),
     _u_old(valueOld()),
     _func(getFunction("function")),
     _center(getParam<RealVectorValue>("center")),

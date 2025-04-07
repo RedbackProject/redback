@@ -13,11 +13,12 @@
 #include "Function.h"
 #include "FunctionPointSource.h"
 
-template <>
+registerMooseObject("RedbackApp", FunctionPointSource);
+
 InputParameters
-validParams<FunctionPointSource>()
+FunctionPointSource::validParams()
 {
-  InputParameters params = validParams<DiracKernel>();
+  InputParameters params = DiracKernel::validParams();
   params.addRequiredParam<FunctionName>("function", "The input function (in time).");
   params.addRequiredParam<std::vector<Real>>("point", "The x,y,z coordinates of the point");
   return params;

@@ -32,7 +32,7 @@ include $(FRAMEWORK_DIR)/moose.mk
 
 ################################## MODULES ####################################
 ALL_MODULES := no
-TENSOR_MECHANICS := yes
+SOLID_MECHANICS  := yes
 include $(MOOSE_DIR)/modules/modules.mk
 ###############################################################################
 

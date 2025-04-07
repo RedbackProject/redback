@@ -16,11 +16,12 @@
 
 #include "libmesh/point.h"
 
-template <>
+registerMooseObject("RedbackApp", FunctionTimesRandomIC);
+
 InputParameters
-validParams<FunctionTimesRandomIC>()
+FunctionTimesRandomIC::validParams()
 {
-  InputParameters params = validParams<InitialCondition>();
+  InputParameters params = InitialCondition::validParams();
   params.addParam<Real>("min", 0.0, "Lower bound of the randomly generated values");
   params.addParam<Real>("max", 1.0, "Upper bound of the randomly generated values");
   params.addParam<unsigned int>("seed", 0, "Seed value for the random number generator");

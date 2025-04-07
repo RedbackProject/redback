@@ -2,10 +2,9 @@
 #include "Moose.h"
 #include "AppFactory.h"
 
-template<>
-InputParameters validParams<RedbackApp>()
+InputParameters RedbackApp::validParams()
 {
-  InputParameters params = validParams<MooseApp>();
+  InputParameters params = MooseApp::validParams();
   return params;
 }
 

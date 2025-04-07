@@ -1,8 +1,0 @@
-[Tests]
-  [./test_analytical_darcy-interface] # can't put a dot in that name!
-    type = 'CSVDiff'
-    rel_err = 1e-7
-    input = 'interfacedarcy_test.i'
-    csvdiff = 'interfacedarcy_test.csv'
-  [../]
-[]

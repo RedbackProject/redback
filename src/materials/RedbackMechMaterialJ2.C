@@ -12,11 +12,12 @@
 
 #include "RedbackMechMaterialJ2.h"
 
-template <>
+registerMooseObject("RedbackApp", RedbackMechMaterialJ2);
+
 InputParameters
-validParams<RedbackMechMaterialJ2>()
+RedbackMechMaterialJ2::validParams()
 {
-  InputParameters params = validParams<RedbackMechMaterial>();
+  InputParameters params = RedbackMechMaterial::validParams();
   return params;
 }
 

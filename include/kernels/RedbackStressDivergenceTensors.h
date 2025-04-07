@@ -1,3 +1,15 @@
+/****************************************************************/
+/*               DO NOT MODIFY THIS HEADER                      */
+/*     REDBACK - Rock mEchanics with Dissipative feedBACKs      */
+/*                                                              */
+/*              (c) 2014 CSIRO and UNSW Australia               */
+/*                   ALL RIGHTS RESERVED                        */
+/*                                                              */
+/*            Prepared by CSIRO and UNSW Australia              */
+/*                                                              */
+/*            See COPYRIGHT for full restrictions               */
+/****************************************************************/
+
 #ifndef REDBACKSTRESSDIVERGENCETENSORS_H
 #define REDBACKSTRESSDIVERGENCETENSORS_H
 
@@ -6,14 +18,6 @@
 #include "RankTwoTensor.h"
 #include "RankFourTensor.h"
 
-
-// Forward Declarations
-class RedbackStressDivergenceTensors;
-//class RankFourTensor;
-//class RankTwoTensor;
-
-template <>
-InputParameters validParams<RedbackStressDivergenceTensors>();
 
 /**
  * RedbackStressDivergenceTensors mostly copies from StressDivergence.  There are small changes to use
@@ -24,6 +28,8 @@ class RedbackStressDivergenceTensors : public Kernel
 {
 public:
   RedbackStressDivergenceTensors(const InputParameters & parameters);
+
+  static InputParameters validParams();
 
 protected:
   virtual Real computeQpResidual();
