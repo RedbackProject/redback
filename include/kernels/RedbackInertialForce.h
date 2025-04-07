@@ -10,17 +10,12 @@
 #include "Kernel.h"
 #include "Material.h"
 
-//Forward Declarations
-class RedbackInertialForce;
-
-template<>
-InputParameters validParams<RedbackInertialForce>();
-
 class RedbackInertialForce : public Kernel
 {
 public:
 
   RedbackInertialForce(const InputParameters & parameters);
+  static InputParameters validParams();
 
 protected:
   virtual Real computeQpResidual();

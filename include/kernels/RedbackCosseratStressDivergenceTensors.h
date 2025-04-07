@@ -10,17 +10,13 @@
 //#include "StressDivergenceTensors.h"
 #include "RedbackStressDivergenceTensorsNew.h"
 
-//Forward Declarations
-class RedbackCosseratStressDivergenceTensors;
-
-template<>
-InputParameters validParams<RedbackCosseratStressDivergenceTensors>();
 
 //class RedbackCosseratStressDivergenceTensors : public StressDivergenceTensors
 class RedbackCosseratStressDivergenceTensors : public RedbackStressDivergenceTensorsNew
 {
 public:
   RedbackCosseratStressDivergenceTensors(const InputParameters & parameters);
+  static InputParameters validParams();
 
 protected:
   virtual Real computeQpOffDiagJacobian(unsigned int jvar);

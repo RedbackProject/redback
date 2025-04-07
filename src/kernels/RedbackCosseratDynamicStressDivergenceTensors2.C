@@ -11,10 +11,10 @@
 #include "RankTwoTensor.h"
 #include "MooseMesh.h"
 
-template<>
-InputParameters validParams<RedbackCosseratDynamicStressDivergenceTensors2>()
+InputParameters 
+RedbackCosseratDynamicStressDivergenceTensors2::validParams()
 {
-  InputParameters params = validParams<DynamicStressDivergenceTensors>();
+  InputParameters params = DynamicStressDivergenceTensors::validParams();
   params.addCoupledVar("wc_x", "The Cosserat rotation about x");
   params.addCoupledVar("wc_y", "The Cosserat rotation about y");
   params.addCoupledVar("wc_z", "The Cosserat rotation about z");

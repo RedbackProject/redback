@@ -17,18 +17,12 @@
 
 #include "Kernel.h"
 
-class RedbackPoroMechHO;
-
-template <>
-InputParameters validParams<RedbackPoroMechHO>();
-
-/**
- * Kernel that is calling coupledDot
- */
 class RedbackPoroMechHO : public Kernel
 {
 public:
   RedbackPoroMechHO(const InputParameters & parameters);
+  static InputParameters validParams();
+
   virtual ~RedbackPoroMechHO();
 
 protected:

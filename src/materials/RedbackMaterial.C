@@ -449,8 +449,6 @@ RedbackMaterial::stepInitQpProperties()
       (1 - _phi0_param) * _solid_density_param + _phi0_param * _fluid_density_param;
   _mixture_gravity_term[_qp] = _mixture_density[_qp] * _gravity_param;
   _fluid_gravity_term[_qp] = _fluid_density_param * _gravity_param;
-  _dplastic_heat_dstrain_no_mech[_qp].zero();
-  _dplastic_heat_dcurvature_no_mech[_qp].zero();
 }
 
 void

@@ -7,7 +7,7 @@
 #ifndef TENSORMECHANICSHARDENINGLINEAR_H
 #define TENSORMECHANICSHARDENINGLINEAR_H
 
-#include "TensorMechanicsHardeningModel.h"
+#include "SolidMechanicsHardeningModel.h"
 
 class TensorMechanicsHardeningLinear;
 
@@ -19,9 +19,11 @@ InputParameters validParams<TensorMechanicsHardeningLinear>();
  * Linear hardening
  * The value = _val_0*(1 +_rate*intnl)
  */
-class TensorMechanicsHardeningLinear : public TensorMechanicsHardeningModel
+class TensorMechanicsHardeningLinear : public SolidMechanicsHardeningModel
 {
  public:
+  static InputParameters validParams();
+
   TensorMechanicsHardeningLinear(const InputParameters & parameters);
 
   virtual Real value(Real intnl) const;

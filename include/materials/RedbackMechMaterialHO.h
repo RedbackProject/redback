@@ -21,16 +21,12 @@
 
 #include "RedbackMechMaterial.h"
 
-// Forward Declarations
-class RedbackMechMaterialHO;
-
-template <>
-InputParameters validParams<RedbackMechMaterialHO>();
 
 class RedbackMechMaterialHO : public RedbackMechMaterial
 {
 public:
   RedbackMechMaterialHO(const InputParameters & parameters);
+  static InputParameters validParams();
 
 protected:
   virtual void initQpStatefulProperties() override;
@@ -68,16 +64,16 @@ protected:
 
   MaterialProperty<RankTwoTensor> & _curvature;
   MaterialProperty<RankTwoTensor> & _elastic_curvature;
-  MaterialProperty<RankTwoTensor> & _elastic_curvature_old;
+  const MaterialProperty<RankTwoTensor> & _elastic_curvature_old;
   MaterialProperty<RankTwoTensor> & _total_curvature;
-  MaterialProperty<RankTwoTensor> & _total_curvature_old;
+  const MaterialProperty<RankTwoTensor> & _total_curvature_old;
 
   MaterialProperty<RankTwoTensor> & _symmetric_stress;
-  MaterialProperty<RankTwoTensor> & _symmetric_stress_old;
+  const MaterialProperty<RankTwoTensor> & _symmetric_stress_old;
   MaterialProperty<RankTwoTensor> & _antisymmetric_stress;
-  MaterialProperty<RankTwoTensor> & _antisymmetric_stress_old;
+  const MaterialProperty<RankTwoTensor> & _antisymmetric_stress_old;
   MaterialProperty<RankTwoTensor> & _stress_couple;
-  MaterialProperty<RankTwoTensor> & _stress_couple_old;
+  const MaterialProperty<RankTwoTensor> & _stress_couple_old;
 
 
   MaterialProperty<Real> & _stress_trace;
@@ -95,21 +91,21 @@ protected:
 
   MaterialProperty<RankTwoTensor> & _curvature_increment;
   MaterialProperty<RankTwoTensor> & _plastic_curvature;
-  MaterialProperty<RankTwoTensor> & _plastic_curvature_old;
+  const MaterialProperty<RankTwoTensor> & _plastic_curvature_old;
   MaterialProperty<RankTwoTensor> & _deviatoric_plastic_strain;
 
   MaterialProperty<RankTwoTensor> & _deviatoric_stress;
   MaterialProperty<Real> & _volumetric_stress;
   MaterialProperty<Real> & _stress_invariant;
   MaterialProperty<Real> & _hardening_variable;
-  MaterialProperty<Real> & _hardening_variable_old;
+  const MaterialProperty<Real> & _hardening_variable_old;
   MaterialProperty<Real> & _active_surfaces;
   MaterialProperty<Real> & _lagrange_multiplier;
   MaterialProperty<Real> & _failure_surface;
-  MaterialProperty<RankTwoTensor> & _stress_older;
-  MaterialProperty<RankTwoTensor> & _stress_couple_older;
+  const MaterialProperty<RankTwoTensor> & _stress_older;
+  const MaterialProperty<RankTwoTensor> & _stress_couple_older;
   MaterialProperty<Real> & _mechanical_dissipation_tot;
-  MaterialProperty<Real> & _mechanical_dissipation_tot_old;
+  const MaterialProperty<Real> & _mechanical_dissipation_tot_old;
   std::string _plasticity_type;
 
   /// Minimum fraction of applied strain that may be applied during adaptive stepsizing
@@ -123,8 +119,8 @@ protected:
 
   MaterialProperty<Real> & _poromech_kernel;
   MaterialProperty<Real> & _poromech_jac;
-  //MaterialProperty<RankTwoTensor> & _dplastic_heat_dstrain;
-  //MaterialProperty<RankTwoTensor> & _dplastic_heat_dcurvature;
+  MaterialProperty<RankTwoTensor> & _dplastic_heat_dstrain;
+  MaterialProperty<RankTwoTensor> & _dplastic_heat_dcurvature;
 
 private:
   const VariableValue & _wc_x;

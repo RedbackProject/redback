@@ -9,16 +9,11 @@
 
 #include "DynamicStressDivergenceTensors.h"
 
-//Forward Declarations
-class RedbackCosseratDynamicStressDivergenceTensors2;
-
-template<>
-InputParameters validParams<RedbackCosseratDynamicStressDivergenceTensors2>();
-
 class RedbackCosseratDynamicStressDivergenceTensors2 : public DynamicStressDivergenceTensors
 {
 public:
   RedbackCosseratDynamicStressDivergenceTensors2(const InputParameters & parameters);
+  static InputParameters validParams();
 
 protected:
   virtual Real computeQpOffDiagJacobian(unsigned int jvar);

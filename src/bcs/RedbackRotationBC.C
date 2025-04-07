@@ -16,11 +16,11 @@
 #include "MooseMesh.h"
 
 
-template<>
-InputParameters validParams<RedbackRotationBC>()
+InputParameters 
+RedbackRotationBC::validParams()
 {
-  InputParameters params = validParams<IntegratedBC>();
-  params += validParams<MaterialPropertyInterface>();
+  InputParameters params = IntegratedBC::validParams();
+  params += MaterialPropertyInterface::validParams();
 //  params.addCoupledVar("disp_y", "the disp in y");
 //  params.addCoupledVar("disp_z", "the disp in z");
 //  params.addCoupledVar("wc_x", "The Cosserat rotation about x");

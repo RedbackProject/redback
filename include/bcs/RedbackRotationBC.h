@@ -17,17 +17,13 @@
 
 #include "IntegratedBC.h"
 
-//Forward Declarations
-class RedbackRotationBC;
-
-template<>
-InputParameters validParams<RedbackRotationBC>();
 
 class RedbackRotationBC : public IntegratedBC
 
 {
 public:
   RedbackRotationBC(const InputParameters & parameters);
+  static InputParameters validParams();
 
 protected:
   virtual Real computeQpResidual();

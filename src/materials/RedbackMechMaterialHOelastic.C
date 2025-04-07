@@ -20,11 +20,10 @@
 /**
  * RedbackMechMaterialHOelastic handles a high order material.
  */
-template <>
 InputParameters
-validParams<RedbackMechMaterialHOelastic>()
+RedbackMechMaterialHOelastic::validParams()
 {
-  InputParameters params = validParams<RedbackMechMaterial>();
+  InputParameters params = RedbackMechMaterial::validParams();
   params.addCoupledVar("wc_x", 0, "Cosserat rotation around x axis");
   params.addCoupledVar("wc_y", 0, "Cosserat rotation around y axis");
   params.addCoupledVar("wc_z", 0, "Cosserat rotation around z axis");
@@ -45,9 +44,9 @@ RedbackMechMaterialHOelastic::RedbackMechMaterialHOelastic(const InputParameters
     _antisymmetric_plastic_strain(declareProperty<RankTwoTensor>("antisymmetric_strain")),
     _curvature(declareProperty<RankTwoTensor>("curvature")),
     _elastic_curvature(declareProperty<RankTwoTensor>("elastic_curvature")),
-    //_elastic_curvature_old(declarePropertyOld<RankTwoTensor>("_elastic_curvature")),
+    //_elastic_curvature_old(getMaterialPropertyOld<RankTwoTensor>("_elastic_curvature")),
     _total_curvature(declareProperty<RankTwoTensor>("total_curvature")),
-    //_total_curvature_old(declarePropertyOld<RankTwoTensor>("total_curvature")),
+    //_total_curvature_old(getMaterialPropertyOld<RankTwoTensor>("total_curvature")),
     _symmetric_stress(declareProperty<RankTwoTensor>("symmetric_stress")),
     _antisymmetric_stress(declareProperty<RankTwoTensor>("antisymmetric_stress")),
     _stress_couple(declareProperty<RankTwoTensor>("coupled_stress")),
@@ -61,10 +60,10 @@ RedbackMechMaterialHOelastic::RedbackMechMaterialHOelastic(const InputParameters
     _Bijkl(),
     _curvature_increment(declareProperty<RankTwoTensor>("curvature_increment")),
     _plastic_curvature(declareProperty<RankTwoTensor>("plastic_curvature")),
-    _stress_old(declarePropertyOld<RankTwoTensor>("stress")),
-    _stress_older(declarePropertyOlder<RankTwoTensor>("stress")),
-    _stress_couple_old(declarePropertyOld<RankTwoTensor>("coupled_stress")),
-    _stress_couple_older(declarePropertyOlder<RankTwoTensor>("coupled_stress")),
+    _stress_old(getMaterialPropertyOld<RankTwoTensor>("stress")),
+    _stress_older(getMaterialPropertyOlder<RankTwoTensor>("stress")),
+    _stress_couple_old(getMaterialPropertyOld<RankTwoTensor>("coupled_stress")),
+    _stress_couple_older(getMaterialPropertyOlder<RankTwoTensor>("coupled_stress")),
     _wc_x(coupledValue("wc_x")),
     _wc_y(coupledValue("wc_y")),
     _wc_z(coupledValue("wc_z")),

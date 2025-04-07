@@ -11,10 +11,10 @@
 #include "ElasticityTensorTools.h"
 #include "RankTwoTensor.h"
 
-template<>
-InputParameters validParams<RedbackMomentBalancing>()
+InputParameters 
+RedbackMomentBalancing::validParams()
 {
-  InputParameters params = validParams<Kernel>();
+  InputParameters params = Kernel::validParams();
   params.addRequiredParam<unsigned int>("component", "An integer corresponding to the direction the variable this kernel acts in. (0 for x, 1 for y, 2 for z)");
   params.addParam<std::string>("appended_property_name", "", "Name appended to material properties to make them unique");
   params.addCoupledVar("wc_x", "The Cosserat rotation about x");

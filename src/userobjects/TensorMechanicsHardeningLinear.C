@@ -6,10 +6,13 @@
 /****************************************************************/
 #include "TensorMechanicsHardeningLinear.h"
 
-template<>
-InputParameters validParams<TensorMechanicsHardeningLinear>()
+registerMooseObject("RedBackApp",TensorMechanicsHardeningLinear);
+
+
+InputParameters
+TensorMechanicsHardeningLinear::validParams()
 {
-  InputParameters params = validParams<TensorMechanicsHardeningModel>();
+  InputParameters params = SolidMechanicsHardeningModel::validParams();
   params.addRequiredParam<Real>("value_0", "The value of the parameter at internal_parameter = 0");
   params.addParam<Real>("rate", 0, "Let p = internal_parameter.  Then value = _val_0(1 +_rate*intnl)");
   params.addClassDescription("Hardening is Linear");
@@ -17,7 +20,7 @@ InputParameters validParams<TensorMechanicsHardeningLinear>()
 }
 
 TensorMechanicsHardeningLinear::TensorMechanicsHardeningLinear(const InputParameters & parameters) :
-  TensorMechanicsHardeningModel(parameters),
+  SolidMechanicsHardeningModel(parameters),
   _val_0(getParam<Real>("value_0")),
   _rate(getParam<Real>("rate"))
 {

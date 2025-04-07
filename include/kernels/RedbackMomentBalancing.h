@@ -9,18 +9,12 @@
 
 #include "Kernel.h"
 
-//Forward Declarations
-class RedbackMomentBalancing;
-//class RankFourTensor;
-//class RankTwoTensor;
-
-template<>
-InputParameters validParams<RedbackMomentBalancing>();
 
 class RedbackMomentBalancing : public Kernel
 {
 public:
   RedbackMomentBalancing(const InputParameters & parameters);
+  static InputParameters validParams();
 
 protected:
   virtual Real computeQpResidual();

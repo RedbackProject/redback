@@ -6,23 +6,12 @@
 #include "RankTwoTensor.h"
 #include "RankFourTensor.h"
 
-// Forward Declarations
-class RedbackStressDivergenceTensorsNew;
-class ElasticityTensorR4;
-//class RankTwoTensor;
 
-template <>
-InputParameters validParams<RedbackStressDivergenceTensorsNew>();
-
-/**
- * RedbackStressDivergenceTensorsNew mostly copies from StressDivergence.  There are small changes to use
- * RankFourTensor and RankTwoTensors instead of SymmElasticityTensors and SymmTensors.  This is done
- * to allow for more mathematical transparency.
- */
 class RedbackStressDivergenceTensorsNew : public Kernel
 {
 public:
   RedbackStressDivergenceTensorsNew(const InputParameters & parameters);
+  static InputParameters validParams();
 
 protected:
   virtual Real computeQpResidual();

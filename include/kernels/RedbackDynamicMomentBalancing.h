@@ -8,16 +8,12 @@
 #define RedbackDynamicMomentBalancing_H
 #include "RedbackMomentBalancing.h"
 
-//Forward Declarations
-class RedbackDynamicMomentBalancing;
-
-template<>
-InputParameters validParams<RedbackDynamicMomentBalancing>();
 
 class RedbackDynamicMomentBalancing : public RedbackMomentBalancing
 {
 public:
   RedbackDynamicMomentBalancing(const InputParameters & parameters);
+  static InputParameters validParams();
 
 protected:
   virtual Real computeQpResidual();

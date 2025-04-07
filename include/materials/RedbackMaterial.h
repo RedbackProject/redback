@@ -162,9 +162,7 @@ protected:
   MaterialProperty<RealVectorValue> & _solid_velocity;
 
   Real _T0_param, _P0_param;
-
-  MaterialProperty<RankTwoTensor> & _dplastic_heat_dstrain_no_mech;
-  MaterialProperty<RankTwoTensor> & _dplastic_heat_dcurvature_no_mech;
+  
 };
 
 #endif // REDBACKMATERIAL_H

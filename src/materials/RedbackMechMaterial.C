@@ -203,9 +203,7 @@ RedbackMechMaterial::RedbackMechMaterial(const InputParameters & parameters)
     _peclet_number(getMaterialProperty<Real>("Peclet_number")),
     _returnmap_iter(declareProperty<Real>("returnmap_iter")),
     _T0_param(getParam<Real>("temperature_reference")),
-    _P0_param(getParam<Real>("pressure_reference")),
-    _dplastic_heat_dstrain(declareProperty<RankTwoTensor>("dplastic_heat_dstrain")),
-    _dplastic_heat_dcurvature(declareProperty<RankTwoTensor>("dplastic_heat_dcurvature"))
+    _P0_param(getParam<Real>("pressure_reference"))
 {
   /*Real E = _youngs_modulus;
   Real nu = _poisson_ratio;
@@ -281,8 +279,6 @@ RedbackMechMaterial::initQpStatefulProperties()
   _damage_kernel[_qp] = 0;
   _damage_kernel_jac[_qp] = 0;
   _mass_removal_rate[_qp] = 0;
-  _dplastic_heat_dstrain[_qp].zero();
-  _dplastic_heat_dcurvature[_qp].zero();
 }
 
 void

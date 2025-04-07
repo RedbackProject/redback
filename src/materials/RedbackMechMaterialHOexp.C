@@ -16,18 +16,17 @@
 #include "RedbackMechMaterialHOexp.h"
 #include "MooseException.h"
 #include "multisurfaceplasticityhard.h"
-#include "NonlinearSystem.h"
+// #include "NonlinearSystem.h"
 #include "FEProblem.h"
 #include "PermutationTensor.h"
 
 /**
  * RedbackMechMaterialHOexp handles a high order material.
  */
-template <>
 InputParameters
-validParams<RedbackMechMaterialHOexp>()
+RedbackMechMaterialHOexp::validParams()
 {
-  InputParameters params = validParams<RedbackMechMaterial>();
+  InputParameters params = RedbackMechMaterial::validParams();
   params.addCoupledVar("wc_x", 0, "Cosserat rotation around x axis");
   params.addCoupledVar("wc_y", 0, "Cosserat rotation around y axis");
   params.addCoupledVar("wc_z", 0, "Cosserat rotation around z axis");
@@ -59,15 +58,15 @@ RedbackMechMaterialHOexp::RedbackMechMaterialHOexp(const InputParameters & param
     _antisymmetric_plastic_strain(declareProperty<RankTwoTensor>("antisymmetric_strain")),
     _curvature(declareProperty<RankTwoTensor>("curvature")),
     _elastic_curvature(declareProperty<RankTwoTensor>("elastic_curvature")),
-    _elastic_curvature_old(declarePropertyOld<RankTwoTensor>("elastic_curvature")),
+    _elastic_curvature_old(getMaterialPropertyOld<RankTwoTensor>("elastic_curvature")),
     _total_curvature(declareProperty<RankTwoTensor>("total_curvature")),
-    _total_curvature_old(declarePropertyOld<RankTwoTensor>("total_curvature")),
+    _total_curvature_old(getMaterialPropertyOld<RankTwoTensor>("total_curvature")),
     _symmetric_stress(declareProperty<RankTwoTensor>("symmetric_stress")),
-    _symmetric_stress_old(declarePropertyOld<RankTwoTensor>("symmetric_stress")),
+    _symmetric_stress_old(getMaterialPropertyOld<RankTwoTensor>("symmetric_stress")),
     _antisymmetric_stress(declareProperty<RankTwoTensor>("antisymmetric_stress")),
-    _antisymmetric_stress_old(declarePropertyOld<RankTwoTensor>("antisymmetric_stress")),
+    _antisymmetric_stress_old(getMaterialPropertyOld<RankTwoTensor>("antisymmetric_stress")),
     _stress_couple(declareProperty<RankTwoTensor>("coupled_stress")),
-    _stress_couple_old(declarePropertyOld<RankTwoTensor>("coupled_stress")),
+    _stress_couple_old(getMaterialPropertyOld<RankTwoTensor>("coupled_stress")),
     _stress_trace(declareProperty<Real>("stress_trace")),
     _macro_rotation(declareProperty<RankTwoTensor>("macro_rotation")),
     _elastic_flexural_rigidity_tensor(declareProperty<RankFourTensor>("elastic_flexural_rigidity_tensor")),
@@ -79,20 +78,20 @@ RedbackMechMaterialHOexp::RedbackMechMaterialHOexp(const InputParameters & param
     _Bijkl(),
     _curvature_increment(declareProperty<RankTwoTensor>("curvature_increment")),
     _plastic_curvature(declareProperty<RankTwoTensor>("plastic_curvature")),
-    _plastic_curvature_old(declarePropertyOld<RankTwoTensor>("plastic_curvature")),
+    _plastic_curvature_old(getMaterialPropertyOld<RankTwoTensor>("plastic_curvature")),
     _deviatoric_plastic_strain(declareProperty<RankTwoTensor>("deviatoric_plastic_strain")),
     _deviatoric_stress(declareProperty<RankTwoTensor>("deviatoric_stress")),
     _volumetric_stress(declareProperty<Real>("volumetric_stress")),
     _stress_invariant(declareProperty<Real>("stress_invariant")),
     _hardening_variable(declareProperty<Real>("hardening_variable")),
-    _hardening_variable_old(declarePropertyOld<Real>("hardening_variable")),
+    _hardening_variable_old(getMaterialPropertyOld<Real>("hardening_variable")),
     _active_surfaces(declareProperty<Real>("active_surfaces")),
     _lagrange_multiplier(declareProperty<Real>("lagrange_multiplier")),
     _failure_surface(declareProperty<Real>("failure_surface")),
-    _stress_older(declarePropertyOlder<RankTwoTensor>("stress")),
-    _stress_couple_older(declarePropertyOlder<RankTwoTensor>("coupled_stress")),
+    _stress_older(getMaterialPropertyOlder<RankTwoTensor>("stress")),
+    _stress_couple_older(getMaterialPropertyOlder<RankTwoTensor>("coupled_stress")),
     _mechanical_dissipation_tot(declareProperty<Real>("mechanical_dissipation_tot")),
-    _mechanical_dissipation_tot_old(declarePropertyOld<Real>("mechanical_dissipation_tot")),
+    _mechanical_dissipation_tot_old(getMaterialPropertyOld<Real>("mechanical_dissipation_tot")),
     _plasticity_type(isParamValid("plasticity_type") ? getParam<std::string>("plasticity_type") + "_" : ""),
     _min_stepsize(getParam<Real>("min_stepsize")),
     _plast_factor(getParam<Real>("plast_factor")),
@@ -428,13 +427,13 @@ Real time_simulated = 0.0;
 unsigned int num_consecutive_successes = 0;
 _iter[_qp] = 0;
 
-NonlinearSystem & system = _fe_problem.getNonlinearSystem();
-int nl_it = system._current_nl_its;
+// NonlinearSystem & system = _fe_problem.getNonlinearSystem();
+// int nl_it = system._current_nl_its;
 
-std::vector<unsigned int> l_it_vector = system._current_l_its;
-int l_it = system._current_l_its.size();
+// std::vector<unsigned int> l_it_vector = system._current_l_its;
+// int l_it = system._current_l_its.size();
 
-int element_id = _current_elem->id();
+// int element_id = _current_elem->id();
 //if ((_t_step == 4) && (_dt > 0.03)&& (nl_it > 1))
 //if ((_t_step > 4) && (_t_step < 6))
 //std::cout <<"hardening variable is"<< SVARSGP2[2*NSTR] << std::endl;

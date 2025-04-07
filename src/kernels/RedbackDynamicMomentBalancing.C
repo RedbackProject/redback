@@ -11,10 +11,10 @@
 #include "ElasticityTensorTools.h"
 #include "RankTwoTensor.h"
 
-template<>
-InputParameters validParams<RedbackDynamicMomentBalancing>()
+InputParameters 
+RedbackDynamicMomentBalancing::validParams()
 {
-  InputParameters params = validParams<RedbackMomentBalancing>();
+  InputParameters params = RedbackMomentBalancing::validParams();
   params.addClassDescription("Residual due to stress related Rayleigh damping and HHT time integration terms ");
   params.addParam<Real>("zeta", 0, "zeta parameter for the Rayleigh damping");
   params.addParam<Real>("alpha", 0, "alpha parameter for HHT time integration");

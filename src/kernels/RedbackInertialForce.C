@@ -7,10 +7,10 @@
 #include "RedbackInertialForce.h"
 #include "SubProblem.h"
 
-template<>
-InputParameters validParams<RedbackInertialForce>()
+InputParameters 
+RedbackInertialForce::validParams()
 {
-  InputParameters params = validParams<Kernel>();
+  InputParameters params = Kernel::validParams();
   params.addClassDescription("Calculates the residual for the interial force (M*accel) and the contribution of mass dependent Rayleigh damping and HHT time integration scheme [eta*M*((1+alpha)vel-alpha*vel_old)]");
   params.set<bool>("use_displaced_mesh") = true;
   params.addRequiredCoupledVar("velocity","velocity variable");
