@@ -171,7 +171,7 @@ void
 RedbackMechMaterialHO::computeQpStrain(const RankTwoTensor & Fhat)
 {
   //strain = (grad_disp + grad_disp^T)/2
-  RankTwoTensor grad_tensor(_grad_disp_x[_qp], _grad_disp_y[_qp], _grad_disp_z[_qp]);
+  RankTwoTensor grad_tensor =  RankTwoTensor::initializeFromRows(_grad_disp_x[_qp], _grad_disp_y[_qp], _grad_disp_z[_qp]);
   RealVectorValue wc_vector(_wc_x[_qp], _wc_y[_qp], _wc_z[_qp]);
 
   for (unsigned i = 0; i < LIBMESH_DIM; ++i){
@@ -184,9 +184,7 @@ RedbackMechMaterialHO::computeQpStrain(const RankTwoTensor & Fhat)
   _antisymmetric_strain[_qp] = (grad_tensor - grad_tensor.transpose()) / 2.0;
   _total_strain[_qp] = grad_tensor;
 
-  RankTwoTensor old_deformation(_grad_disp_x_old[_qp],
-                     _grad_disp_y_old[_qp],
-                     _grad_disp_z_old[_qp]); // Old Deformation gradient
+  RankTwoTensor old_deformation = RankTwoTensor::initializeFromRows(_grad_disp_x_old[_qp],_grad_disp_y_old[_qp],_grad_disp_z_old[_qp]); // Old Deformation gradient
   RealVectorValue wc_vector_old(_wc_x_old[_qp], _wc_y_old[_qp], _wc_z_old[_qp]);
 
    for (unsigned i = 0; i < LIBMESH_DIM; ++i){
@@ -199,20 +197,17 @@ RedbackMechMaterialHO::computeQpStrain(const RankTwoTensor & Fhat)
   _strain_increment[_qp].addIa(-_solid_thermal_expansion[_qp] * (_T[_qp] - _T_old[_qp]));
 
   /* Setting up a macro-rotation (antisymmetric part of the strain) tensor to be used in Cosserat BCs*/
-  RankTwoTensor mgrad_tensor(_grad_disp_x[_qp], _grad_disp_y[_qp], _grad_disp_z[_qp]);
+  RankTwoTensor mgrad_tensor = RankTwoTensor::initializeFromRows(_grad_disp_x[_qp], _grad_disp_y[_qp], _grad_disp_z[_qp]);
   _macro_rotation[_qp] = (mgrad_tensor - mgrad_tensor.transpose()) / 2.0;
 
   _rotation_increment[_qp].zero();
   _rotation_increment[_qp].addIa(1);
 
-  RankTwoTensor wc_grad_tensor(_grad_wc_x[_qp], _grad_wc_y[_qp], _grad_wc_z[_qp]);
+  RankTwoTensor wc_grad_tensor = RankTwoTensor::initializeFromRows(_grad_wc_x[_qp], _grad_wc_y[_qp], _grad_wc_z[_qp]);
   _curvature[_qp] = wc_grad_tensor;
 
-  RankTwoTensor old_curvature(_grad_wc_x_old[_qp],
-                     _grad_wc_y_old[_qp],
-                     _grad_wc_z_old[_qp]); // Old Deformation gradient
-
-_curvature_increment[_qp] = wc_grad_tensor - old_curvature;
+  RankTwoTensor old_curvature = RankTwoTensor::initializeFromRows(_grad_wc_x_old[_qp],_grad_wc_y_old[_qp],_grad_wc_z_old[_qp]); // Old Deformation gradient
+  _curvature_increment[_qp] = wc_grad_tensor - old_curvature;
 }
 
 void
@@ -546,6 +541,7 @@ while (time_simulated < 1.0 && step_size >= _min_stepsize)
     std::cout << " the plasticity type entered doesn't correspond to any of the ones registered " << std::endl;
   }
 */
+
   usermat5_(STRESSF,DEFORT,DSDE,&NSTR,PROPS,&NPROPS,SVARSGP,&NSVARSGP,&NILL);
   //Real verbose = 0;
   //Real y_coord = _current_elem->centroid()(1);

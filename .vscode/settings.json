@@ -100,6 +100,15 @@
         "unordered_map": "cpp",
         "variant": "cpp",
         "vector": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "RankTwoCstContractionAction.C": "cpp",
+        "RankTwoScalarVoidAction.C": "cpp",
+        "RedbackMechAction.C": "cpp",
+        "RedbackAction.C": "cpp",
+        "RedbackApp.C": "cpp"
+    },
+    "[moose]": {
+        "outline.showProperties": false,
+        "outline.showStrings": false
     }
 }

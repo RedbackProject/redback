@@ -709,7 +709,6 @@
     variable = disp_x
     boundary = bottom
     value = 0
-    function = 0.0
   [../]
   [./wc_z_rotationBC]
     type = RedbackRotationBC
@@ -809,8 +808,6 @@
     B_ijkl = '0 5.0E4 5.0E4'
     C_ijkl = '1.3333E3 4.0E3 2.0E3'
     fill_method = general_isotropic
-    poisson_ratio = -9999
-    youngs_modulus = -9999
     damage_method = BreakageMechanics
     cohesion = 100
     hardening_mech_modulus = 4
@@ -831,7 +828,7 @@
     full = true
     petsc_options_iname = '-ksp_type -pc_type    -snes_atol -snes_rtol -snes_max_it -ksp_atol -ksp_rtol'
     petsc_options_value = 'gmres          bjacobi     1E-6          1E-7          40                1E-12      1E-10 '
-    line_search = basic
+    # line_search = basic
   [../]
   [./debug_jacob]
     type = FDP

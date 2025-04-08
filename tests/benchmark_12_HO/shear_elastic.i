@@ -390,8 +390,8 @@
     B_ijkl = '-0.03333 0.05 0.05'
     C_ijkl = '10 10 20'
     fill_method = general_isotropic
-    poisson_ratio = -9999
-    youngs_modulus = -9999
+    # poisson_ratio = -9999
+    # youngs_modulus = -9999
     damage_method = BreakageMechanics
     cohesion = 10000
     plasticity_type = DruckerPrager_friction3D

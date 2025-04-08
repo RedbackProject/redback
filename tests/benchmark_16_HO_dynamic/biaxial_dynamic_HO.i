@@ -213,7 +213,7 @@
 [Functions]
   [./ramp]
     type = ParsedFunction
-    value = -0.001*t
+    expression = -0.001*t
   [../]
 []
 
@@ -607,9 +607,10 @@
     B_ijkl = '0.0 0.076923 0.076923'
     C_ijkl = '5.76923333 3.84615 1.9230769'
     fill_method = general_isotropic
-    poisson_ratio = -9999
-    youngs_modulus = -9999
+    # poisson_ratio = -9999
+    # youngs_modulus = -9999
     damage_method = BreakageMechanics
+    plasticity_type = DruckerPrager_cohesion3D
     cohesion = 0.01
     hardening_mech_modulus = -0.1
   [../]
@@ -625,34 +626,47 @@
   [../]
 []
 
-[Preconditioning]
-  active = 'andy'
-  [./andy]
-    type = SMP
-    full = true
-    petsc_options_iname = '-ksp_type -pc_type    -snes_atol -snes_rtol -snes_max_it -ksp_atol -ksp_rtol'
-    petsc_options_value = 'gmres          bjacobi     1E-6           1E-8          20                1E-8      1E-6 '
-    line_search = none
-  [../]
-  [./debug_jacob]
-    type = FDP
-    full = true
-  [../]
-  [./default]
-    type = SMP
-    solve_type = NEWTON
-    line_search = basic
-  [../]
-[]
+# [Preconditioning]
+#   active = 'andy'
+#   [./andy]
+#     type = SMP
+#     full = true
+#     petsc_options_iname = '-ksp_type -pc_type    -snes_atol -snes_rtol -snes_max_it -ksp_atol -ksp_rtol'
+#     petsc_options_value = 'gmres          bjacobi     1E-6           1E-8          20                1E-8      1E-6 '
+#     # line_search = none
+#   [../]
+#   [./debug_jacob]
+#     type = FDP
+#     full = true
+#   [../]
+#   [./default]
+#     type = SMP
+#     solve_type = NEWTON
+#     line_search = basic
+#   [../]
+# []
 
 [Executioner]
   type = Transient
   dt = 0.1
   solve_type = NEWTON
   num_steps = 2000
-  nl_abs_tol = 1e-8
-  l_tol = 1e-10
-  nl_rel_tol = 1e-04
+  
+  line_search = 'basic' #c est vraiment ce parametre qui fait la difference 
+  nl_abs_tol = 1e-9
+  automatic_scaling = true #combine avec celui ci 
+  # scaling_group_variables = 'disp_x disp_y'
+
+  l_max_its = 30
+  nl_max_its = 20
+  
+  petsc_options_iname = '-pc_type -pc_asm_overlap -sub_pc_type -ksp_type -ksp_gmres_restart'
+  petsc_options_value = ' lu      2              lu            gmres     200'
+[]
+
+[Debug]
+  show_actions = true
+  show_execution_order = TIMESTEP_BEGIN
 []
 
 [Outputs]
