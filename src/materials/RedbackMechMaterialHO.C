@@ -49,7 +49,23 @@ RedbackMechMaterialHO::validParams()
   params.addParam<bool>("ignore_failures", false, "The return-map algorithm will return with the best admissible stresses and internal parameters that it can, even if they don't fully correspond to the applied strain increment.  To speed computations, this flag can be set to true, the max_NR_iterations set small, and the min_stepsize large.");
   params.addRangeCheckedParam<Real>("min_stepsize", 0.01, "min_stepsize>0 & min_stepsize<=1", "If ordinary Newton-Raphson + line-search fails, then the applied strain increment is subdivided, and the return-map is tried again.  This parameter is the minimum fraction of applied strain increment that may be applied before the algorithm gives up entirely");
 //  params.addParam<Real>("plast_factor", 1, "factor in the exponential for hardening");
-  return params;
+  params.addParam<std::vector<FunctionName>>(
+    "initial_stress_couple",{},
+    "A list of functions describing the initial stress couples. If provided, there "
+    "must be 9 of these, corresponding to the xx, yx, zx, xy, yy, zy, xz, yz, "
+    "zz components respectively.  If not provided, all components of the "
+    "initial stress will be zero");  
+
+  params.addRequiredParam<std::vector<FunctionName>>(
+    "initial_plastic_curvature",{},
+    "A list of functions describing the initial plastic curvature.  There must be 9 of these, corresponding "
+    "to the xx, yx, zx, xy, yy, zy, xz, yz, zz components respectively.");
+
+  params.addRequiredParam<std::vector<FunctionName>>(
+    "initial_elastic_curvature",{},
+    "A list of functions describing the initial elastic curvature.  There must be 9 of these, corresponding "
+    "to the xx, yx, zx, xy, yy, zy, xz, yz, zz components respectively.");
+return params;
 }
 
 RedbackMechMaterialHO::RedbackMechMaterialHO(const InputParameters & parameters) :
@@ -128,7 +144,9 @@ RedbackMechMaterialHO::RedbackMechMaterialHO(const InputParameters & parameters)
   _bulk_modulus = _Cijkl_vector[ 0 ] + 2*_shear_modulus/3.0;
   _cosserat_shear_modulus = _Cijkl_vector[ 2 ];
   _cosserat_radius = std::sqrt(_Bijkl_vector[ 1 ]/(2 * _shear_modulus));
-
+  _initial_stress_couple = InitialTensorFunction("initial_stress_couple");
+  _initial_plastic_curvature = InitialTensorFunction("initial_plastic_curvature");
+  _initial_elastic_curvature = InitialTensorFunction("initial_elastic_curvature");
 }
 
 void
@@ -141,10 +159,20 @@ RedbackMechMaterialHO::initQpStatefulProperties()
   _antisymmetric_plastic_strain[ _qp ].zero();
   _curvature[ _qp ].zero();
   _elastic_curvature[ _qp ].zero();
+  if (_initial_elastic_curvature.size() == 3 * 3)
+    for (unsigned i = 0; i < 3; ++i)
+      for (unsigned j = 0; j < 3; ++j)
+        _elastic_curvature[_qp](i, j) = _initial_elastic_curvature[i * 3 + j]->value(_t, _q_point[_qp]);
+        
   _total_curvature[ _qp ].zero();
   _symmetric_stress[ _qp ].zero();
   _antisymmetric_stress[ _qp ].zero();
   _stress_couple[ _qp ].zero();
+  if (_initial_stress_couple.size() == 3 * 3)
+    for (unsigned i = 0; i < 3; ++i)
+      for (unsigned j = 0; j < 3; ++j)
+        _stress_couple[_qp](i, j) = _initial_stress_couple[i * 3 + j]->value(_t, _q_point[_qp]);
+
   _stress_trace[ _qp ] = 0.0;
   _macro_rotation[ _qp ].zero();
   _elastic_flexural_rigidity_tensor[ _qp ] = _Bijkl;
@@ -153,6 +181,11 @@ RedbackMechMaterialHO::initQpStatefulProperties()
   _Jacobian_offdiag_cb[ _qp ].zero();
   _curvature_increment[ _qp ].zero();
   _plastic_curvature[ _qp ].zero();
+  if (_initial_plastic_curvature.size() == 3 * 3)
+    for (unsigned i = 0; i < 3; ++i)
+      for (unsigned j = 0; j < 3; ++j)
+        _plastic_curvature[_qp](i, j) = _initial_plastic_curvature[i * 3 + j]->value(_t, _q_point[_qp]);
+
   _deviatoric_plastic_strain[ _qp ].zero();
   _deviatoric_stress[ _qp ].zero();
   _volumetric_stress[ _qp ] = 0.0;

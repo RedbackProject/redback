@@ -105,7 +105,8 @@
         "RankTwoScalarVoidAction.C": "cpp",
         "RedbackMechAction.C": "cpp",
         "RedbackAction.C": "cpp",
-        "RedbackApp.C": "cpp"
+        "RedbackApp.C": "cpp",
+        "InitialTensor.C": "cpp"
     },
     "[moose]": {
         "outline.showProperties": false,

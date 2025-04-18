@@ -147,6 +147,13 @@ private:
   Real _cohesion, _friction_coefficient, _dilatancy_coefficient, _hardening_mech_modulus, _beta_star, _tolerance_tau;
   Real _shear_modulus, _bulk_modulus, _cosserat_shear_modulus, _cosserat_radius;
   Real _plastic_potential_multiplier;
+
+  
+  /// initial stress components
+  std::vector<const Function *> _initial_stress_couple;
+  std::vector<const Function *> _initial_elastic_curvature;
+  std::vector<const Function *> _initial_plastic_curvature;
+
 };
 
 

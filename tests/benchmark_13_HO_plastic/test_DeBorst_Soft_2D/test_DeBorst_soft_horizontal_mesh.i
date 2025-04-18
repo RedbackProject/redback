@@ -1,30 +1,31 @@
 [Mesh]
   type = GeneratedMesh
-  dim = 3
-  ny = 100
+  dim = 2
+  ny = 80
+  nx= 1
   xmax = 60
   ymax = 60
-  zmax = 60
 []
+# [Mesh]
+#   type = FileMesh
+#   file = 'mesh.msh'
+# []
 
 [GlobalParams]
-  disp_z = disp_z
   disp_y = disp_y
   disp_x = disp_x
   wc_z = wc_z
-  wc_y = wc_y
-  wc_x = wc_x
 []
 
 [Postprocessors]
   [./disp_y_top]
     type = PointValue
-    point = '60 60 60'
+    point = '60 60 0'
     variable = disp_y
   [../]
   [./wc_z_top]
     type = PointValue
-    point = '60 60 60'
+    point = '60 60 0'
     variable = wc_z
   [../]
   [./antisymmetric_top]
@@ -52,7 +53,7 @@
   [./disp_x_bottom]
     type = PointValue
     variable = disp_x
-    point = '60 0 60'
+    point = '60 0 0'
   [../]
   [./dt]
     type = TimestepSize
@@ -69,16 +70,24 @@
   [../]
 []
 
+# [Postprocessors]
+#   [./u_y]
+#     type = PointValue
+#     point = '0.05 0.1747 0'
+#     variable = disp_y
+#   [../]
+#   [./react_y]
+#     type = SidesetReaction
+#     direction = '0 -1 0'
+#     stress_tensor = stress
+#     boundary = 'top'
+#   [../]
+# []
+
 [Variables]
   [./disp_x]
   [../]
   [./disp_y]
-  [../]
-  [./disp_z]
-  [../]
-  [./wc_x]
-  [../]
-  [./wc_y]
   [../]
   [./wc_z]
   [../]
@@ -113,10 +122,6 @@
     order = CONSTANT
     family = MONOMIAL
   [../]
-  [./stress_33]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
   [./stress_12]
     order = CONSTANT
     family = MONOMIAL
@@ -125,19 +130,7 @@
     order = CONSTANT
     family = MONOMIAL
   [../]
-  [./stress_23]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./stress_32]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./stress_13]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./stress_31]
+  [./stress_33]
     order = CONSTANT
     family = MONOMIAL
   [../]
@@ -184,31 +177,7 @@
     order = CONSTANT
     family = MONOMIAL
   [../]
-  [./plastic_cur_11]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./plastic_cur_22]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
   [./plastic_cur_33]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./plastic_cur_12]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./plastic_cur_21]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./plastic_cur_32]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./plastic_cur_23]
     order = CONSTANT
     family = MONOMIAL
   [../]
@@ -220,6 +189,14 @@
     order = CONSTANT
     family = MONOMIAL
   [../]
+  [./plastic_cur_32]
+    order = CONSTANT
+    family = MONOMIAL
+  [../]
+  [./plastic_cur_23]
+    order = CONSTANT
+    family = MONOMIAL
+  [../]
   [./elastic_strain_11]
     order = CONSTANT
     family = MONOMIAL
@@ -228,31 +205,11 @@
     order = CONSTANT
     family = MONOMIAL
   [../]
-  [./elastic_strain_33]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
   [./elastic_strain_12]
     order = CONSTANT
     family = MONOMIAL
   [../]
   [./elastic_strain_21]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./elastic_strain_32]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./elastic_strain_23]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./elastic_strain_31]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./elastic_strain_13]
     order = CONSTANT
     family = MONOMIAL
   [../]
@@ -266,90 +223,25 @@
   [../]
 []
 
-[Functions]
-  active = 'ramp_neg ramp'
-  [./ramp]
-    # -0.0005*t
-    type = ParsedFunction
-    value = 0.1*t
-  [../]
-  [./ramp_neg]
-    type = ParsedFunction
-    value = -0.0005*t
-  [../]
-  [./perturb]
-    type = ParsedFunction
-    value = 0.001*sin(pi*y/(60))
-  [../]
-[]
-
 [Kernels]
   [./cx_elastic]
     type = RedbackCosseratStressDivergenceTensors
     variable = disp_x
-    displacements = 'disp_x disp_y disp_z'
+    displacements = 'disp_x disp_y'
     component = 0
   [../]
   [./cy_elastic]
     type = RedbackCosseratStressDivergenceTensors
     variable = disp_y
-    displacements = 'disp_x disp_y disp_z'
+    displacements = 'disp_x disp_y'
     component = 1
-  [../]
-  [./cz_elastic]
-    type = RedbackCosseratStressDivergenceTensors
-    variable = disp_z
-    component = 2
-    displacements = 'disp_x disp_y disp_z'
-  [../]
-  [./x_couple]
-    type = RedbackCosseratStressDivergenceTensors
-    variable = wc_x
-    displacements = 'wc_x wc_y wc_z'
-    wc_x = disp_x
-    wc_y = disp_y
-    wc_z = disp_z
-    component = 0
-    base_name = coupled
-    disp_z = wc_y
-    disp_y = wc_y
-    disp_x = wc_x
-  [../]
-  [./y_couple]
-    type = RedbackCosseratStressDivergenceTensors
-    variable = wc_y
-    component = 1
-    displacements = 'wc_x wc_y wc_z'
-    wc_x = disp_x
-    wc_y = disp_y
-    wc_z = disp_z
-    base_name = coupled
-    disp_z = wc_z
-    disp_y = wc_y
-    disp_x = wc_x
   [../]
   [./z_couple]
     type = RedbackCosseratStressDivergenceTensors
     variable = wc_z
     component = 2
-    displacements = 'wc_x wc_y wc_z'
-    wc_x = disp_x
-    wc_y = disp_y
-    wc_z = disp_z
     base_name = coupled
     disp_z = wc_z
-    disp_y = wc_y
-    disp_x = wc_x
-  [../]
-  [./x_moment]
-    type = RedbackMomentBalancing
-    variable = wc_x
-    component = 0
-  [../]
-  [./y_moment]
-    type = RedbackMomentBalancing
-    variable = wc_y
-    component = 1
   [../]
   [./z_moment]
     type = RedbackMomentBalancing
@@ -419,34 +311,6 @@
     rank_two_tensor = stress
     index_j = 0
     index_i = 1
-  [../]
-  [./stress_23]
-    type = RankTwoAux
-    variable = stress_23
-    rank_two_tensor = stress
-    index_j = 2
-    index_i = 1
-  [../]
-  [./stress_32]
-    type = RankTwoAux
-    variable = stress_32
-    rank_two_tensor = stress
-    index_j = 1
-    index_i = 2
-  [../]
-  [./stress_31]
-    type = RankTwoAux
-    variable = stress_31
-    rank_two_tensor = stress
-    index_j = 0
-    index_i = 2
-  [../]
-  [./stress_13]
-    type = RankTwoAux
-    variable = stress_13
-    rank_two_tensor = stress
-    index_j = 2
-    index_i = 0
   [../]
   [./couple_stress_32]
     type = RankTwoAux
@@ -528,40 +392,12 @@
     index_j = 0
     index_i = 1
   [../]
-  [./plastic_curv_11]
-    type = RankTwoAux
-    variable = plastic_cur_11
-    rank_two_tensor = plastic_curvature
-    index_j = 0
-    index_i = 0
-  [../]
-  [./plastic_curv_22]
-    type = RankTwoAux
-    variable = plastic_cur_22
-    rank_two_tensor = plastic_curvature
-    index_j = 1
-    index_i = 1
-  [../]
   [./plastic_curv_33]
     type = RankTwoAux
     variable = plastic_cur_33
     rank_two_tensor = plastic_curvature
     index_j = 2
     index_i = 2
-  [../]
-  [./plastic_curv_12]
-    type = RankTwoAux
-    variable = plastic_cur_12
-    rank_two_tensor = plastic_curvature
-    index_j = 1
-    index_i = 0
-  [../]
-  [./plastic_curv_21]
-    type = RankTwoAux
-    variable = plastic_cur_21
-    rank_two_tensor = plastic_curvature
-    index_j = 0
-    index_i = 1
   [../]
   [./plastic_curv_32]
     type = RankTwoAux
@@ -605,13 +441,6 @@
     index_j = 1
     index_i = 1
   [../]
-  [./elastic_strain_33]
-    type = RankTwoAux
-    variable = elastic_strain_33
-    rank_two_tensor = elastic_strain
-    index_j = 2
-    index_i = 2
-  [../]
   [./elastic_strain_12]
     type = RankTwoAux
     variable = elastic_strain_12
@@ -626,34 +455,7 @@
     index_j = 0
     index_i = 1
   [../]
-  [./elastic_strain_32]
-    type = RankTwoAux
-    variable = elastic_strain_32
-    rank_two_tensor = elastic_strain
-    index_j = 1
-    index_i = 2
-  [../]
-  [./elastic_strain_23]
-    type = RankTwoAux
-    variable = elastic_strain_23
-    rank_two_tensor = elastic_strain
-    index_j = 2
-    index_i = 1
-  [../]
-  [./elastic_strain_31]
-    type = RankTwoAux
-    variable = elastic_strain_31
-    rank_two_tensor = elastic_strain
-    index_j = 0
-    index_i = 2
-  [../]
-  [./elastic_strain_13]
-    type = RankTwoAux
-    variable = elastic_strain_13
-    rank_two_tensor = elastic_strain
-    index_j = 2
-    index_i = 0
-  [../]
+ 
   [./elastic_curvature_32]
     type = RankTwoAux
     variable = elastic_curvature_32
@@ -671,43 +473,17 @@
 []
 
 [BCs]
-  # following is natural BC
-  active = 'Periodic uy_bottom ux_ramp_top wcx_equals_zero_on_top ux_zero_bottom wcy_equals_zero_on_top wc_x_bottom uz_bottom wc_y_bottom wc_z_bottom_zero wc_z_top_zero'
-  [./wcx_equals_zero_on_top]
-    type = DirichletBC
-    variable = wc_x
-    boundary = top
-    value = 0
-  [../]
-  [./wcy_equals_zero_on_top]
-    type = DirichletBC
-    variable = wc_y
-    boundary = top
-    value = 0
-  [../]
+  # [./uy_top]
+  #   type = DirichletBC
+  #   variable = disp_y
+  #   boundary = 'top'
+  #   value = '0'
+  # [../]
   [./uy_bottom]
     type = DirichletBC
     variable = disp_y
-    boundary = bottom
-    value = 0
-  [../]
-  [./uz_bottom]
-    type = DirichletBC
-    variable = disp_z
-    boundary = bottom
-    value = 0.0
-  [../]
-  [./wc_x_bottom]
-    type = DirichletBC
-    variable = wc_x
-    boundary = bottom
-    value = 0.0
-  [../]
-  [./wc_y_bottom]
-    type = DirichletBC
-    variable = wc_y
-    boundary = bottom
-    value = 0.0
+    boundary = 'bottom'
+    value = '0'
   [../]
   [./ux_zero_bottom]
     type = DirichletBC
@@ -715,106 +491,40 @@
     boundary = bottom
     value = 0
   [../]
-  [./wc_z_rotationBC]
-    type = RedbackRotationBC
-    variable = wc_z
-    boundary = bottom
-    dir1 = 1
-    antisymmetric_strain_ij = antisymmetric_strain_ij
-    some_var_1 = disp_x
-    some_var_2 = disp_y
-    grad_ux = _grad_ux
-  [../]
-  [./wc_z_top_zero]
-    type = DirichletBC
-    variable = wc_z
-    boundary = top
-    value = 0
-  [../]
-  [./wc_z_bottom_zero]
-    type = DirichletBC
-    variable = wc_z
-    boundary = bottom
-    value = 0
-  [../]
-  [./uy_ramp_top]
-    type = FunctionDirichletBC
-    variable = disp_y
-    boundary = top
-    function = ramp
-  [../]
-  [./u_z_face]
-    type = DirichletBC
-    variable = disp_z
-    boundary = front
-    value = 0
-  [../]
-  [./uz_back]
-    type = DirichletBC
-    variable = disp_z
-    boundary = back
-    value = 0
+  [footing_displacement]
+      type = FunctionDirichletBC
+      boundary = 'top'
+      variable = disp_x    
+      function  = '0.1*t'
   [../]
   [./Periodic]
     [./x_direction]
-      variable = 'disp_x disp_y disp_z wc_x wc_y wc_z'
+      variable = 'disp_x disp_y wc_z'
       auto_direction = x
     [../]
-    [./z_direction]
-      variable = 'disp_x disp_y disp_z wc_x wc_y wc_z'
-      auto_direction = z
-    [../]
-  [../]
-  [./u_x_right_left]
+  []
+  [./wc_z_bottom]
     type = DirichletBC
-    variable = disp_x
-    boundary = right
-    value = 0
-  [../]
-  [./Rotation_wcz_top]
-    type = PostprocessorDirichletBC
-    variable = wc_z
-    boundary = top
-    postprocessor = antisymmetric_pp
-  [../]
-  [./Rotation_wc_z_bottom]
-    type = PostprocessorDirichletBC
     variable = wc_z
     boundary = bottom
-    postprocessor = antisymmetric_bottom
+    value = 0.0
   [../]
-  [./rotation_wcz_top]
-    type = PostprocessorDirichletBC
+  [./wc_z_top]
+    type = DirichletBC
     variable = wc_z
     boundary = top
-    postprocessor = antisymmetric_top
-  [../]
-  [./ux_ramp_top]
-    type = FunctionDirichletBC
-    variable = disp_x
-    boundary = top
-    function = ramp
+    value = 0.0
   [../]
 []
 
 [Materials]
   active = 'Redbackcosserat redback_mat'
-  [./cosserat]
-    type = CosseratLinearElasticMaterial
-    block = 0
-    B_ijkl = 40
-    C_ijkl = '5 10 5'
-    fill_method = general_isotropic
-  [../]
   [./Redbackcosserat]
     # 0 2.6549E3 2.6549E3
     type = RedbackMechMaterialHO
-    block = 0
     B_ijkl = '0 5.0E4 5.0E4'
     C_ijkl = '1.3333E3 4.0E3 2.0E3'
     fill_method = general_isotropic
-    # poisson_ratio = -9999
-    # youngs_modulus = -9999
     damage_method = BreakageMechanics
     cohesion = 100
     hardening_mech_modulus = -4
@@ -824,7 +534,6 @@
   [../]
   [./redback_mat]
     type = RedbackMaterial
-    block = 0
   [../]
 []
 
@@ -836,6 +545,15 @@
     petsc_options_iname = '-ksp_type -pc_type    -snes_atol -snes_rtol -snes_max_it -ksp_atol -ksp_rtol'
     petsc_options_value = 'gmres          bjacobi     1E-6          1E-7          40                1E-12      1E-10 '
   [../]
+  # [./debug_jacob]
+  #   type = FDP
+  #   full = true
+  # [../]
+  # [./default]
+  #   type = SMP
+  #   solve_type = NEWTON
+  #   line_search = basic
+  # [../]
 []
 
 [Executioner]
@@ -853,12 +571,12 @@
 [Outputs]
   execute_on = 'timestep_end initial'
   exodus = true
-  file_base = test_DeBorst_soft_3D
-  
+  file_base = test_DeBorst_soft_horizontal-80-elements
+
   [./csv]
     type = CSV
     execute_on = timestep_end
   [../]
-  print_linear_residuals = false
+  # print_linear_residuals = f
 []
 

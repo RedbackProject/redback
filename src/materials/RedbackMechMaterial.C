@@ -103,7 +103,17 @@ RedbackMechMaterial::validParams()
       "must be 9 of these, corresponding to the xx, yx, zx, xy, yy, zy, xz, yz, "
       "zz components respectively.  If not provided, all components of the "
       "initial stress will be zero");
+  
+  params.addRequiredParam<std::vector<FunctionName>>(
+      "initial_plastic_strain",{},
+      "A list of functions describing the initial plastic strain.  There must be 9 of these, corresponding "
+      "to the xx, yx, zx, xy, yy, zy, xz, yz, zz components respectively.");
 
+  params.addRequiredParam<std::vector<FunctionName>>(
+    "initial_elastic_strain",{},
+    "A list of functions describing the initial elastic strain.  There must be 9 of these, corresponding "
+    "to the xx, yx, zx, xy, yy, zy, xz, yz, zz components respectively.");
+    
   return params;
 }
 
@@ -219,19 +229,9 @@ RedbackMechMaterial::RedbackMechMaterial(const InputParameters & parameters)
   _Cijkl.fillFromInputVector(input_vector, (RankFourTensor::FillMethod)(int)fill_method);*/
 
   // Initial stress
-  const std::vector<FunctionName> & fcn_names(
-      getParam<std::vector<FunctionName>>("initial_stress"));
-  const unsigned num = fcn_names.size();
-  if (!(num == 0 || num == 3 * 3))
-    mooseError(
-        "Either zero or ",
-        3 * 3,
-        " initial stress functions must be provided to TensorMechanicsMaterial.  You supplied ",
-        num,
-        "\n");
-  _initial_stress.resize(num);
-  for (unsigned i = 0; i < num; ++i)
-    _initial_stress[i] = &getFunctionByName(fcn_names[i]);
+  _initial_stress = InitialTensorFunction("initial_stress");
+  _initial_elastic_strain = InitialTensorFunction("initial_elastic_strain");
+  _initial_plastic_strain = InitialTensorFunction("initial_plastic_strain");
 
   // initialise damage dissipation
   _damage_dissipation = 0;
@@ -243,18 +243,48 @@ RedbackMechMaterial::damageMethodEnum()
   return MooseEnum("BrittleDamage CreepDamage BreakageMechanics DamageHealing FromMultiApp");
 }
 
+
+std::vector<const Function *> RedbackMechMaterial::InitialTensorFunction(std::string initial_param_name)
+{
+  const std::vector<FunctionName>& fcn_names(getParam<std::vector<FunctionName>>(initial_param_name));
+  const unsigned num = fcn_names.size();
+  if (!(num == 0 || num == 3 * 3))
+    mooseError(
+        "Either zero or ",
+        3 * 3,
+        " initial stress functions must be provided to TensorMechanicsMaterial.  You supplied ",
+        num,
+        "\n");
+  
+  std::vector<const Function *> function_vector(num);
+  for (unsigned i = 0; i < num; ++i)
+    function_vector[i] = &getFunctionByName(fcn_names[i]);
+  return function_vector;
+}
+
 void
 RedbackMechMaterial::initQpStatefulProperties()
 {
   // called only once at the very beginning of the simulation
   _total_strain[_qp].zero();
   _elastic_strain[_qp].zero();
+  if (_initial_elastic_strain.size() == 3 * 3)
+    for (unsigned i = 0; i < 3; ++i)
+      for (unsigned j = 0; j < 3; ++j)
+        _elastic_strain[_qp](i, j) = _initial_elastic_strain[i * 3 + j]->value(_t, _q_point[_qp]);
+      
   _stress[_qp].zero();
   if (_initial_stress.size() == 3 * 3)
     for (unsigned i = 0; i < 3; ++i)
       for (unsigned j = 0; j < 3; ++j)
         _stress[_qp](i, j) = _initial_stress[i * 3 + j]->value(_t, _q_point[_qp]);
+
   _plastic_strain[_qp].zero();
+  if (_initial_plastic_strain.size() == 3 * 3)
+    for (unsigned i = 0; i < 3; ++i)
+      for (unsigned j = 0; j < 3; ++j)
+        _plastic_strain[_qp](i, j) = _initial_plastic_strain[i * 3 + j]->value(_t, _q_point[_qp]);
+
   _eqv_plastic_strain[_qp] = 0.0;
   _elasticity_tensor[_qp].zero();
   _Jacobian_mult[_qp].zero();
