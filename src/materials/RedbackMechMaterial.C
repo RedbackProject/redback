@@ -104,12 +104,12 @@ RedbackMechMaterial::validParams()
       "zz components respectively.  If not provided, all components of the "
       "initial stress will be zero");
   
-  params.addRequiredParam<std::vector<FunctionName>>(
-      "initial_plastic_strain",{},
+  params.addParam<std::vector<FunctionName>>(
+        "initial_plastic_strain",{},
       "A list of functions describing the initial plastic strain.  There must be 9 of these, corresponding "
       "to the xx, yx, zx, xy, yy, zy, xz, yz, zz components respectively.");
 
-  params.addRequiredParam<std::vector<FunctionName>>(
+  params.addParam<std::vector<FunctionName>>(
     "initial_elastic_strain",{},
     "A list of functions describing the initial elastic strain.  There must be 9 of these, corresponding "
     "to the xx, yx, zx, xy, yy, zy, xz, yz, zz components respectively.");

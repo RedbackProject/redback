@@ -153,7 +153,7 @@ private:
   std::vector<const Function *> _initial_stress_couple;
   std::vector<const Function *> _initial_elastic_curvature;
   std::vector<const Function *> _initial_plastic_curvature;
-
+  const Function * _initial_hardening_variable;
 };
 
 

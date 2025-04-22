@@ -56,15 +56,19 @@ RedbackMechMaterialHO::validParams()
     "zz components respectively.  If not provided, all components of the "
     "initial stress will be zero");  
 
-  params.addRequiredParam<std::vector<FunctionName>>(
+  params.addParam<std::vector<FunctionName>>(
     "initial_plastic_curvature",{},
     "A list of functions describing the initial plastic curvature.  There must be 9 of these, corresponding "
     "to the xx, yx, zx, xy, yy, zy, xz, yz, zz components respectively.");
 
-  params.addRequiredParam<std::vector<FunctionName>>(
+  params.addParam<std::vector<FunctionName>>(
     "initial_elastic_curvature",{},
     "A list of functions describing the initial elastic curvature.  There must be 9 of these, corresponding "
     "to the xx, yx, zx, xy, yy, zy, xz, yz, zz components respectively.");
+  params.addParam<FunctionName>(
+    "initial_hardening_variable",{},
+    "A function describing the initial internal parameter distribution.");
+
 return params;
 }
 
@@ -147,6 +151,9 @@ RedbackMechMaterialHO::RedbackMechMaterialHO(const InputParameters & parameters)
   _initial_stress_couple = InitialTensorFunction("initial_stress_couple");
   _initial_plastic_curvature = InitialTensorFunction("initial_plastic_curvature");
   _initial_elastic_curvature = InitialTensorFunction("initial_elastic_curvature");
+  
+  const FunctionName & function_name_hardening_variable_initial(getParam<FunctionName>("initial_hardening_variable"));
+  _initial_hardening_variable = &getFunctionByName(function_name_hardening_variable_initial);
 }
 
 void
@@ -190,7 +197,9 @@ RedbackMechMaterialHO::initQpStatefulProperties()
   _deviatoric_stress[ _qp ].zero();
   _volumetric_stress[ _qp ] = 0.0;
   _stress_invariant[ _qp ] = 0.0;
-  _hardening_variable[ _qp ] = 0.0;
+  // _hardening_variable[ _qp ] = 0.0;
+  _hardening_variable[ _qp ] = _initial_hardening_variable->value(_t,_q_point[_qp]);
+    
   _active_surfaces[ _qp ] = 0.0;
   _lagrange_multiplier[ _qp ] = 0.0;
   _failure_surface[ _qp ] = 0.0;
