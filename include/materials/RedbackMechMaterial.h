@@ -50,7 +50,6 @@ protected:
   virtual void computeQpStrain(const RankTwoTensor & Fhat); // from FiniteStrainMaterial.h
   virtual void computeQpStress();
   virtual void initQpStatefulProperties() override;
-  std::vector<const Function *> InitialTensorFunction(std::string initial_param_name);
 
   const VariableGradient & _grad_disp_x;
   const VariableGradient & _grad_disp_y;
@@ -201,8 +200,6 @@ protected:
 
   /// initial stress components
   std::vector<const Function *> _initial_stress;
-  std::vector<const Function *> _initial_elastic_strain;
-  std::vector<const Function *> _initial_plastic_strain;
 };
 
 #endif // REDBACKMECHMATERIAL_H
