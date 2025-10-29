@@ -827,8 +827,9 @@ BreakMeshBySidesetGenerator::generate()
                 mesh->add_node(new_node);
 
                 // Add boundary info to the new node
-                mesh->boundary_info->boundary_ids(current_node, node_boundary_ids);
-                mesh->boundary_info->add_node(new_node, node_boundary_ids);
+
+                mesh->get_boundary_info().boundary_ids(current_node, node_boundary_ids);
+                mesh->get_boundary_info().add_node(new_node, node_boundary_ids);
 
                 multiplicity_counter--; // node created, update multiplicity counter
 
