@@ -1,0 +1,7 @@
+[Tests]
+ [./test_perzyna_1]
+   type = 'Exodiff'
+   input = 'test_1.i'
+   exodiff = 'test_1.e'
+ [../]
+[]
