@@ -13,7 +13,7 @@
 
 #include "ADPySimpleKernel.h"
 
-registerMooseObject("RedBackApp", ADPySimpleKernel);
+registerMooseObject("RedbackApp", ADPySimpleKernel);
 
 InputParameters
 ADPySimpleKernel::validParams()

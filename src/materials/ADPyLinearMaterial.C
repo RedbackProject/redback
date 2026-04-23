@@ -12,7 +12,7 @@
 
 #include "ADPyLinearMaterial.h"
 
-registerMooseObject("YourAppApp", ADPyLinearMaterial);
+registerMooseObject("RedbackApp", ADPyLinearMaterial);
 
 InputParameters
 ADPyLinearMaterial::validParams()
