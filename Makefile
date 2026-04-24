@@ -23,6 +23,8 @@ include $(FRAMEWORK_DIR)/moose.mk
 ################################## MODULES ####################################
 ALL_MODULES := no
 SOLID_MECHANICS  := yes
+PHASE_FIELD      := yes
+POROUS_FLOW      := yes
 include $(MOOSE_DIR)/modules/modules.mk
 ###############################################################################
 
