@@ -12,10 +12,10 @@
 
 #include "BreakMeshBySidesetGenerator.h"
 #include "CastUniquePointer.h"
+#include "MooseMeshUtils.h"
 
 #include "libmesh/distributed_mesh.h"
 #include "libmesh/elem.h"
-#include "MooseMeshUtils.h"
 
 #include <typeinfo>
 
@@ -26,6 +26,10 @@ BreakMeshBySidesetGenerator::validParams()
 {
   InputParameters params = BreakMeshByBlockGeneratorBase::validParams();
   params.addRequiredParam<MeshGeneratorName>("input", "The mesh we want to modify");
+  params.addClassDescription("Break sidesets as interfaces and create "
+                             "corresponding lower dimensionality block if asked. At the moment "
+                             "this only works on REPLICATED mesh. Assuming that all sidesets "
+                             "have the same dimensionality (mesh dim - 1)");
   params.addRequiredParam<std::vector<BoundaryName>>(
       "sidesets", "The names of sidesets from which to create the new interface(s).");
   params.addRequiredParam<std::vector<BoundaryName>>("boundaries",
@@ -37,10 +41,6 @@ BreakMeshBySidesetGenerator::validParams()
       "connect_T_junctions", true, "Boolean to connect T-junctions or not (i.e. split nodes");
   params.addParam<bool>(
       "verbose", false, "Boolean to print info to console (for debugging purposes)");
-  params.addClassDescription("Break sidesets as interfaces and create "
-                             "corresponding lower dimensionality block if asked. At the moment "
-                             "this only works on REPLICATED mesh. Assuming that all sidesets "
-                             "have the same dimensionality (mesh dim - 1)");
   return params;
 }
 
@@ -350,7 +350,7 @@ BreakMeshBySidesetGenerator::generate()
     auto bc_id = std::get<2>(t);
 
     std::unique_ptr<BndElement> bndElem =
-        libmesh_make_unique<BndElement>(mesh->elem_ptr(elem_id), side_id, bc_id);
+        std::make_unique<BndElement>(mesh->elem_ptr(elem_id), side_id, bc_id);
     bnd_elems.push_back(std::move(bndElem));
     bnd_elem_ids[bc_id].insert(elem_id);
   }
@@ -827,8 +827,8 @@ BreakMeshBySidesetGenerator::generate()
                 mesh->add_node(new_node);
 
                 // Add boundary info to the new node
-                mesh->boundary_info->boundary_ids(current_node, node_boundary_ids);
-                mesh->boundary_info->add_node(new_node, node_boundary_ids);
+                mesh->get_boundary_info().boundary_ids(current_node, node_boundary_ids);
+                mesh->get_boundary_info().add_node(new_node, node_boundary_ids);
 
                 multiplicity_counter--; // node created, update multiplicity counter
 

@@ -37,7 +37,6 @@
     disp_z = disp_z
     youngs_modulus = 1000
     poisson_ratio = 0.3
-    yield_criterion = Drucker_Prager
     yield_stress = '0. 1 1. 1'
     total_porosity = total_porosity
     damage = damage
@@ -386,7 +385,6 @@
 
 [Outputs]
   file_base = bench_J2_dmg_cycl_out
-  output_initial = true
   exodus = true
   [./console]
     type = Console
