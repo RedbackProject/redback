@@ -141,7 +141,10 @@ RedbackFluidMaterial::computeRedbackTerms()
   _gravity_term[_qp] = _gravity_param / pow(_froude_number[_qp], 2);
 
   // Constitutive law
-  RankTwoTensor grad_v(_grad_fluid_vel_x[_qp], _grad_fluid_vel_y[_qp], _grad_fluid_vel_z[_qp]);
+  RankTwoTensor grad_v = RankTwoTensor::initializeFromRows(
+    _grad_fluid_vel_x[_qp],
+    _grad_fluid_vel_y[_qp],
+    _grad_fluid_vel_z[_qp]);
   // Real second_viscosity = _bulk_viscosity_param + 2*_dynamic_viscosity_param/3.0; //zeta
   _div_fluid_vel[_qp] =
       _grad_fluid_vel_x[_qp](0) + _grad_fluid_vel_y[_qp](1) + _grad_fluid_vel_z[_qp](2);

@@ -10,37 +10,37 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#include "ElementFileSubdomain.h"
+#include "ElementFileSubdomainGenerator.h"
 #include "MooseMesh.h"
 #include "CastUniquePointer.h"
 #include "libmesh/elem.h"
-#include <fstream>
 
-registerMooseObject("RedbackApp", ElementFileSubdomain);
+registerMooseObject("RedbackApp", ElementFileSubdomainGenerator);
 
 InputParameters
-ElementFileSubdomain::validParams()
+ElementFileSubdomainGenerator::validParams()
 {
   InputParameters params = MeshGenerator::validParams();
+  params.addClassDescription("Sets all the elements from a list or a file of IDs of the input mesh to a selected subdomain ID.");
+
+  params.addRequiredParam<MeshGeneratorName>("input", "The mesh we want to modify");
+
   params.addRequiredParam<std::vector<SubdomainID>>("subdomain_ids",
                                                     "New subdomain IDs of all elements");
-  params.addParam<std::vector<dof_id_type>>("element_ids", "New subdomain IDs of all elements");
-  params.addParam<FileName>("file", "Name of the txt file with the elements");
-  params.addRequiredParam<MeshGeneratorName>("input", "The mesh to modify");
+  params.addParam<std::vector<dof_id_type>>("element_ids", "List of element IDs");
+  params.addParam<FileName>("file", "Name of the txt file with the element IDs");
   return params;
 }
 
-ElementFileSubdomain::ElementFileSubdomain(const InputParameters & parameters)
+ElementFileSubdomainGenerator::ElementFileSubdomainGenerator(const InputParameters & parameters)
     : MeshGenerator(parameters),
       _input(getMesh("input"))
 
 {
 }
 
-ElementFileSubdomain::~ElementFileSubdomain() {}
-
 std::unique_ptr<MeshBase>
-ElementFileSubdomain::generate()
+ElementFileSubdomainGenerator::generate()
 {
   // Reference the the libMesh::MeshBase
   std::unique_ptr<MeshBase> mesh = std::move(_input);
@@ -98,7 +98,7 @@ ElementFileSubdomain::generate()
       Elem * elem = *el;
       if (elem->id() != e && (!has_warned_remapping))
       {
-        mooseWarning("ElementFileSubdomain will ignore the element remapping");
+        mooseWarning("ElementFileSubdomainGenerator will ignore the element remapping");
         has_warned_remapping = true;
       }
       elements.push_back(elem);

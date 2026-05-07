@@ -1,0 +1,218 @@
+[Mesh]
+  type = FileMesh
+  file = ../fault_mesh.msh
+[]
+
+[Variables]
+  [./disp_x]
+  [../]
+  [./disp_y]
+  [../]
+  [./disp_z]
+  [../]
+  [./temp]
+  [../]
+[]
+
+[AuxVariables]
+[]
+
+[Kernels]
+  [./td_temp]
+    type = TimeDerivative
+    variable = temp
+  [../]
+  [./diff_temp]
+    type = Diffusion
+    variable = temp
+  [../]
+  [./mh_temp]
+    type = RedbackMechDissip
+    variable = temp
+    block = mid_block
+  [../]
+[]
+
+[AuxKernels]
+[]
+
+[Materials]
+  [./redback_nomech]
+    type = RedbackMaterial
+    disp_x = disp_x
+    disp_y = disp_y
+    disp_z = disp_z
+    gr = 0.5
+    ar = 11
+    da_endo = 2.05e-5
+    da_exo = 8.29e-2
+    phi0 = 0.03
+    Kc = 2e2
+    ref_lewis_nb = 10
+    ar_F = 20.2
+    ar_R = 10.1
+    eta1 = 2.27
+    eta2 = 0.26
+    mu = 3.4e-5
+    Aphi = 1
+    alpha_2 = 4
+    is_chemistry_on = true
+    temperature = temp
+  [../]
+  [./fault_mech]
+    type = RedbackMechMaterialJ2
+    block = mid_block
+    disp_x = disp_x
+    disp_y = disp_y
+    disp_z = disp_z
+    youngs_modulus = 10000
+    poisson_ratio = 0.3
+    yield_stress = '0. 1 1. 1'
+    temperature = temp
+    outputs = all
+  [../]
+  [./rock_bottom]
+    type = RedbackMechMaterialElastic
+    block = 'bot_block base_block'
+    disp_x = disp_x
+    disp_y = disp_y
+    disp_z = disp_z
+    youngs_modulus = 20000
+    poisson_ratio = 0.3
+    temperature = temp
+    outputs = all
+  [../]
+  [./rock_top]
+    type = RedbackMechMaterialElastic
+    block = top_block
+    disp_x = disp_x
+    disp_y = disp_y
+    disp_z = disp_z
+    youngs_modulus = 10000
+    poisson_ratio = 0.3
+    yield_stress = '0 1.1 1 1.1'
+    temperature = temp
+    outputs = all
+  [../]
+[]
+
+[Functions]
+  [./ramp_pos]
+    type = ParsedFunction
+    expression = 0.7*tanh(0.1*t)
+  [../]
+  [./timestep_function]
+    type = ParsedFunction
+    expression = if(t<19,0.5,0.01)
+  [../]
+[]
+
+[BCs]
+  [./Periodic]
+    [./xperiodic]
+      variable = 'disp_x disp_y disp_z temp'
+      translation = '1 0 0'
+      primary = left_base
+      secondary = right_base
+    [../]
+    [./xperiodic2]
+      variable = 'disp_x disp_y disp_z temp'
+      translation = '1 0 0'
+      primary = left
+      secondary = right
+    [../]
+  [../]
+  [./ux_equals_zero_on_top]
+    type = DirichletBC
+    variable = disp_x
+    boundary = top
+    value = 0
+  [../]
+  [./top_cauchy_zero]
+    type = NeumannBC
+    variable = disp_x
+    boundary = top
+  [../]
+  [./uy_bottom]
+    type = DirichletBC
+    variable = disp_y
+    boundary = bottom
+    value = 0.0
+  [../]
+  [./uz_bottom]
+    type = DirichletBC
+    variable = disp_z
+    boundary = bottom
+    value = 0.0
+  [../]
+  [./ux_force_bottom_base]
+    type = FunctionNeumannBC
+    variable = disp_x
+    boundary = left_base
+    function = ramp_pos
+  [../]
+  [./temperature_top]
+    type = DirichletBC
+    variable = temp
+    boundary = top
+    value = 0
+  [../]
+  [./temperature_bottom]
+    type = DirichletBC
+    variable = temp
+    boundary = bottom
+    value = 0.001 # 0.1
+  [../]
+[]
+
+[Postprocessors]
+  [./middle_temp]
+    type = PointValue
+    variable = temp
+    point = '0 0 0'
+  [../]
+  [./dt]
+    type = TimestepSize
+  [../]
+[]
+
+[Preconditioning]
+  [./SMP]
+    type = SMP
+    full = true
+    solve_type = PJFNK
+    petsc_options_iname = '-ksp_type -pc_type -sub_pc_type -ksp_gmres_restart'
+    petsc_options_value = 'gmres asm lu 201'
+  [../]
+[]
+
+[Executioner]
+  type = Transient
+  start_time = 0.0
+  end_time = 22
+  [./TimeStepper]
+    type = FunctionDT
+    function = timestep_function
+  [../]
+  nl_abs_tol = 1e-8
+  l_max_its = 100
+  nl_max_its = 10
+  line_search = bt
+[]
+
+[Outputs]
+  file_base = chemical_fault
+  exodus = true
+  csv = true
+  perf_graph = true
+[]
+
+[RedbackMechAction]
+  [./solid]
+    disp_x = disp_x
+    disp_y = disp_y
+    disp_z = disp_z
+    temp = temp
+  [../]
+[]
+

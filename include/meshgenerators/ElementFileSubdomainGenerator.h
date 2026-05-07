@@ -10,30 +10,24 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef ELEMENTFILESUBDOMAIN_H
-#define ELEMENTFILESUBDOMAIN_H
+#pragma once
 
 // MOOSE includes
 #include "MeshGenerator.h"
 
 /**
- * MeshModifier for assigning subdomain IDs of all elements
+ * MeshModifier for assigning new subdomain IDs of all elements in list of file
  */
-class ElementFileSubdomain : public MeshGenerator
+class ElementFileSubdomainGenerator : public MeshGenerator
 {
 public:
   /**
    * Class constructor
    * @param parameters The input parameters
    */
-  ElementFileSubdomain(const InputParameters & parameters);
+  ElementFileSubdomainGenerator(const InputParameters & parameters);
 
   static InputParameters validParams();
-
-  /**
-   * Class destructor
-   */
-  virtual ~ElementFileSubdomain();
 
   /**
    * Perform the actual element subdomain ID assignment
@@ -44,5 +38,3 @@ protected:
   std::unique_ptr<MeshBase> & _input;
 
 };
-
-#endif // ELEMENTFILESUBDOMAIN_H
