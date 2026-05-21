@@ -18,7 +18,7 @@
 [Functions]
   [./image_func]
     type = ImageFunction
-    threshold = 90
+    threshold = 6e4
     file_suffix = png
     #these 2 lines needs to be paste in the next step of the simulation
     #the image folder and the images selected

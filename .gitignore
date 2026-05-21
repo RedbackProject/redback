@@ -246,3 +246,4 @@ src/materials/RedbackMechMaterial_19.C.hidden
 src/materials/RedbackMechMaterial_MCCtest.C.hidden
 src/materials/RedbackMechMaterialCC.C_DEBUG
 .previous_test_results.json
+redback.yaml

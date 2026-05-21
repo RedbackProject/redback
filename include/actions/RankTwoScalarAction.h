@@ -18,7 +18,7 @@
 class RankTwoScalarAction : public Action
 {
 public:
-  RankTwoScalarAction(InputParameters params);
+  RankTwoScalarAction(const InputParameters & params);
 
   static InputParameters validParams();
 

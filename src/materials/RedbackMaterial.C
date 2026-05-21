@@ -22,9 +22,9 @@ RedbackMaterial::validParams()
   InputParameters params = Material::validParams();
 
   params.addParam<std::vector<std::string>>(
-      "init_from_functions__params", "The names of the parameters to be initialised as functions.");
+      "init_from_functions__params",{}, "The names of the parameters to be initialised as functions.");
   params.addParam<std::vector<FunctionName>>(
-      "init_from_functions__function_names",
+      "init_from_functions__function_names",{},
       "The corresponding names of the functions to be used for the parameters "
       "to be initialised as functions.");
   params.addRangeCheckedParam<Real>("phi0", 0.0, "phi0>=0 & phi0<1", "initial porosity value.");
@@ -634,7 +634,7 @@ _ar_F[_qp] * _delta[_qp] * (1 - _total_porosity[_qp]) * (1 - _solid_ratio[_qp])
   if (_are_convective_terms_on)
   {
     Real solid_density, fluid_density;
-    Real lambda_m_star, one_minus_phi_lambda_s, phi_lambda_f;
+    Real /*lambda_m_star,*/ one_minus_phi_lambda_s, phi_lambda_f;
     RealVectorValue mixture_velocity, normalized_gravity;
 
     // Forming the partial densities and gravity terms
@@ -669,8 +669,8 @@ _ar_F[_qp] * _delta[_qp] * (1 - _total_porosity[_qp]) * (1 - _solid_ratio[_qp])
     phi_lambda_f = _total_porosity[_qp] * _fluid_thermal_expansion[_qp]; // normalized thermal
                                                                          // expansion coefficient of
                                                                          // the fluid phase
-    lambda_m_star =
-        one_minus_phi_lambda_s + phi_lambda_f; // normalized compressibility of the mixture
+    // lambda_m_star =
+    //     one_minus_phi_lambda_s + phi_lambda_f; // normalized compressibility of the mixture
 
     // Forming the velocities through mechanics and Darcy's flow law
     if (_total_porosity[_qp] != 0)

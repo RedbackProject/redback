@@ -4,13 +4,13 @@
     input = 'adaptivity_loop.i'
     exodiff = 'image_mesh_canvas.e'
     # This test requires VTK because it uses the ImageFunction class
-    vtk = true
+    requirement = 'capability:vtk'
   [../]
   [./test_image_reader] # can't put a dot in that name!
     type = 'Exodiff'
     input = 'image_reader.i'
     exodiff = 'image_mesh.e'
     # This test requires VTK because it uses the ImageSubdomain class
-    vtk = true
+    requirement = 'capability:vtk'
   [../]
 []

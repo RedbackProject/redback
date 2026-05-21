@@ -40,7 +40,7 @@ RedbackMechMaterial::validParams()
 {
   InputParameters params = Material::validParams();
 
-  // Copy-paste from TensorMechanicsMaterial.C
+  // Copy-paste from SolidMechanicsMaterial.C
   params.addRequiredCoupledVar("disp_x", "The x displacement");
   params.addRequiredCoupledVar("disp_y", "The y displacement");
   params.addCoupledVar("disp_z", 0.0, "The z displacement");
@@ -54,7 +54,7 @@ RedbackMechMaterial::validParams()
   // params.addRequiredParam< std::vector<Real> >("yield_stress", "Input data as
   // pairs of equivalent plastic strain and yield stress: Should start with
   // equivalent plastic strain 0");
-  params.addParam<std::vector<Real>>("yield_stress",
+  params.addParam<std::vector<Real>>("yield_stress",{},
                                      "Input data as pairs of equivalent "
                                      "plastic strain and yield stress: Should "
                                      "start with equivalent plastic strain 0");
@@ -82,8 +82,9 @@ RedbackMechMaterial::validParams()
   params.addParam<Real>("damage_coefficient",
                         0.0,
                         "The fraction of energies used in damage flow law (e.g. E_D/E_D0)");
-  params.addParam<Real>(
-      "damage_exponent", 0.0, "The damage exponent in the incremental flow law of plasticity");
+  params.addParam<Real>("damage_exponent", 
+                        0.0, 
+                        "The damage exponent in the incremental flow law of plasticity");
   params.addParam<Real>("healing_coefficient",
                         0.0,
                         "The fraction of energies used in healing flow law (e.g. E_H/E_H0)");
@@ -91,17 +92,33 @@ RedbackMechMaterial::validParams()
                              RedbackMechMaterial::damageMethodEnum() = "CreepDamage",
                              "The method to describe damage evolution");
 
-  params.addCoupledVar("total_porosity", 0.0, "The total porosity (as AuxKernel)");
-  params.addParam<Real>(
-      "temperature_reference", 0.0, "Reference temperature used for thermal expansion");
-  params.addParam<Real>("pressure_reference", 0.0, "Reference pressure used for compressibility");
+  params.addCoupledVar("total_porosity", 
+                        0.0, 
+                        "The total porosity (as AuxKernel)");
+  params.addParam<Real>("temperature_reference", 
+                        0.0,
+                        "Reference temperature used for thermal expansion");
+  params.addParam<Real>("pressure_reference", 
+                        0.0, 
+                        "Reference pressure used for compressibility");
   params.addParam<std::vector<FunctionName>>(
-      "initial_stress",
-      "A list of functions describing the initial stress. If provided, there "
-      "must be 9 of these, corresponding to the xx, yx, zx, xy, yy, zy, xz, yz, "
-      "zz components respectively.  If not provided, all components of the "
-      "initial stress will be zero");
-
+                        "initial_stress", {},
+                        "A list of functions describing the initial stress. If provided, there "
+                        "must be 9 of these, corresponding to the xx, yx, zx, xy, yy, zy, xz, yz, "
+                        "zz components respectively.  If not provided, all components of the "
+                        "initial stress will be zero");
+  params.addParam<std::vector<FunctionName>>(
+                        "initial_plastic_strain", {},
+                        "A list of functions describing the initial plastic strain. If provided, there "
+                        "must be 9 of these, corresponding to the xx, yx, zx, xy, yy, zy, xz, yz, "
+                        "zz components respectively.  If not provided, all components of the "
+                        "initial plastic strain will be zero");
+  params.addParam<std::vector<FunctionName>>(
+                        "initial_elastic_strain", {},
+                        "A list of functions describing the initial elastic strain. If provided, there "
+                        "must be 9 of these, corresponding to the xx, yx, zx, xy, yy, zy, xz, yz, "
+                        "zz components respectively.  If not provided, all components of the "
+                        "initial elastic strain will be zero");
   return params;
 }
 
@@ -113,9 +130,7 @@ RedbackMechMaterial::RedbackMechMaterial(const InputParameters & parameters)
     _grad_disp_z(_mesh.dimension() == 3 ? coupledGradient("disp_z") : _grad_zero),
     _grad_disp_x_old(_fe_problem.isTransient() ? coupledGradientOld("disp_x") : _grad_zero),
     _grad_disp_y_old(_fe_problem.isTransient() ? coupledGradientOld("disp_y") : _grad_zero),
-    _grad_disp_z_old(_fe_problem.isTransient() && _mesh.dimension() == 3
-                         ? coupledGradientOld("disp_z")
-                         : _grad_zero),
+    _grad_disp_z_old(_fe_problem.isTransient() && _mesh.dimension() == 3 ? coupledGradientOld("disp_z") : _grad_zero),
     _stress(declareProperty<RankTwoTensor>("stress")),
     _total_strain(declareProperty<RankTwoTensor>("total_strain")),
     _elastic_strain(declareProperty<RankTwoTensor>("elastic_strain")),
@@ -217,19 +232,9 @@ RedbackMechMaterial::RedbackMechMaterial(const InputParameters & parameters)
   _Cijkl.fillFromInputVector(input_vector, (RankFourTensor::FillMethod)(int)fill_method);
 
   // Initial stress
-  const std::vector<FunctionName> & fcn_names(
-      getParam<std::vector<FunctionName>>("initial_stress"));
-  const unsigned num = fcn_names.size();
-  if (!(num == 0 || num == 3 * 3))
-    mooseError(
-        "Either zero or ",
-        3 * 3,
-        " initial stress functions must be provided to TensorMechanicsMaterial.  You supplied ",
-        num,
-        "\n");
-  _initial_stress.resize(num);
-  for (unsigned i = 0; i < num; ++i)
-    _initial_stress[i] = &getFunctionByName(fcn_names[i]);
+  _initial_stress = InitialTensorFunction("initial_stress");
+  _initial_elastic_strain = InitialTensorFunction("initial_elastic_strain");
+  _initial_plastic_strain = InitialTensorFunction("initial_plastic_strain");
 
   // initialise damage dissipation
   _damage_dissipation = 0;
@@ -241,6 +246,24 @@ RedbackMechMaterial::damageMethodEnum()
   return MooseEnum("BrittleDamage CreepDamage BreakageMechanics DamageHealing FromMultiApp");
 }
 
+std::vector<const Function *> RedbackMechMaterial::InitialTensorFunction(std::string initial_param_name)
+{
+  const std::vector<FunctionName>& fcn_names(getParam<std::vector<FunctionName>>(initial_param_name));
+  const unsigned num = fcn_names.size();
+  if (!(num == 0 || num == 3 * 3))
+    mooseError(
+        "Either zero or ",
+        3 * 3,
+        " initial stress functions must be provided to TensorMechanicsMaterial.  You supplied ",
+        num,
+        "\n");
+  
+  std::vector<const Function *> function_vector(num);
+  for (unsigned i = 0; i < num; ++i)
+    function_vector[i] = &getFunctionByName(fcn_names[i]);
+  return function_vector;
+}
+
 void
 RedbackMechMaterial::initQpStatefulProperties()
 {
@@ -248,12 +271,32 @@ RedbackMechMaterial::initQpStatefulProperties()
   _total_strain[_qp].zero();
   _elastic_strain[_qp].zero();
   _stress[_qp].zero();
+  _plastic_strain[_qp].zero();
+
+  // Add the initial stress, elastic_strain and plastic_strain
   if (_initial_stress.size() == 3 * 3)
     for (unsigned i = 0; i < 3; ++i)
       for (unsigned j = 0; j < 3; ++j)
         _stress[_qp](i, j) = _initial_stress[i * 3 + j]->value(_t, _q_point[_qp]);
-  _plastic_strain[_qp].zero();
+  if (_initial_elastic_strain.size() == 3 * 3)
+    for (unsigned i = 0; i < 3; ++i)
+      for (unsigned j = 0; j < 3; ++j)
+        _elastic_strain[_qp](i, j) = _initial_elastic_strain[i * 3 + j]->value(_t, _q_point[_qp]);
+  if (_initial_plastic_strain.size() == 3 * 3)
+    for (unsigned i = 0; i < 3; ++i)
+      for (unsigned j = 0; j < 3; ++j)
+        _plastic_strain[_qp](i, j) = _initial_plastic_strain[i * 3 + j]->value(_t, _q_point[_qp]);
+
   _eqv_plastic_strain[_qp] = 0.0;
+  // if (_initial_plastic_strain.size() == 3 * 3)
+  // {
+  //   RankTwoTensor plastic_strain = _plastic_strain[_qp];
+  //   RankTwoTensor mean_part = (plastic_strain.trace() / 3.0) * RankTwoTensor::identity();
+  //   RankTwoTensor dp = plastic_strain - mean_part;
+
+  //   _eqv_plastic_strain[_qp] = std::sqrt(2.0 / 3.0) * dp.L2norm();
+  // }
+
   _elasticity_tensor[_qp].zero();
   _Jacobian_mult[_qp].zero();
   _strain_rate[_qp].zero();
@@ -277,6 +320,7 @@ RedbackMechMaterial::initQpStatefulProperties()
   _damage_kernel[_qp] = 0;
   _damage_kernel_jac[_qp] = 0;
   _mass_removal_rate[_qp] = 0;
+
 }
 
 void
@@ -316,9 +360,10 @@ RedbackMechMaterial::computeStrain()
   for (_qp = 0; _qp < _qrule->n_points(); ++_qp)
   {
     // Deformation gradient
-    RankTwoTensor A(
+    auto A = RankTwoTensor ::initializeFromRows(
         _grad_disp_x[_qp], _grad_disp_y[_qp], _grad_disp_z[_qp]); // Deformation gradient
-    RankTwoTensor Fbar(_grad_disp_x_old[_qp],
+    auto Fbar = RankTwoTensor ::initializeFromRows(
+                       _grad_disp_x_old[_qp],
                        _grad_disp_y_old[_qp],
                        _grad_disp_z_old[_qp]); // Old Deformation gradient
 

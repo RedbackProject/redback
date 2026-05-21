@@ -60,7 +60,7 @@ RankTwoScalarPostprocessor::execute()
 }
 
 PostprocessorValue
-RankTwoScalarPostprocessor::getValue()
+RankTwoScalarPostprocessor::getValue() const
 {
   RankTwoTensor tensor = RankTwoTensor(
       _index00, _index01, _index02, _index10, _index11, _index12, _index20, _index21, _index22);

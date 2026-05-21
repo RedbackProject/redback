@@ -95,9 +95,8 @@
   [./Pressure]
     [./top_pressure]
       function = applied_load_fct
-      disp_y = disp_y
-      disp_x = disp_x
       boundary = top_pressure
+      displacements = 'disp_x disp_y'
     [../]
   [../]
 []

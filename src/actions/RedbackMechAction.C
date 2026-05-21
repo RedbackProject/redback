@@ -31,7 +31,7 @@ RedbackMechAction::validParams()
   params.addParam<std::string>(
       "appended_property_name", "", "Name appended to material properties to make them unique");
   params.addParam<std::vector<SubdomainName>>(
-      "block",
+      "block",{},
       "The list of ids of the blocks (subdomain) that the mechanics kernels will be applied to");
 
   // changed this from true to false
@@ -47,7 +47,8 @@ RedbackMechAction::RedbackMechAction(const InputParameters & params)
     _disp_r(getParam<NonlinearVariableName>("disp_r")),
     _temp(getParam<NonlinearVariableName>("temp")),
     _pore_pres(getParam<NonlinearVariableName>("pore_pres")),
-    _subdomain_names(getParam<std::vector<SubdomainName>>("block"))
+    _subdomain_names(getParam<std::vector<SubdomainName>>("block")),
+    _subdomain_names_set(isParamSetByUser("block"))
 {
 }
 
@@ -132,6 +133,22 @@ RedbackMechAction::act()
       name << short_name;
       name << i;
 
+      // // get subdomain IDs
+      // std::set<SubdomainID> _subdomain_ids;
+      // for (auto & name : _subdomain_names)
+      // {
+      //   auto id = _mesh->getSubdomainID(name);
+      //   if (id == Moose::INVALID_BLOCK_ID)
+      //     paramError("block", "Subdomain \"" + name + "\" not found in mesh.");
+      //   else
+      //     _subdomain_ids.insert(id);
+      // }
+      //
+      // // Make sure that all mesh subdomains have the same coordinate system
+      // const auto & all_subdomains =
+      //     _subdomain_names.empty() ? _problem->mesh().meshSubdomains() : _subdomain_ids;
+      //     if (_subdomain_names_set)
+      //       params.set<std::vector<SubdomainName>>("block") = _subdomain_names;
       params.set<std::vector<SubdomainName>>("block") = _subdomain_names;
       params.set<unsigned int>("component") = i;
       params.set<NonlinearVariableName>("variable") = vars[i];

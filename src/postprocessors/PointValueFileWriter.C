@@ -52,6 +52,7 @@ PointValueFileWriter::validParams()
 
 PointValueFileWriter::PointValueFileWriter(const InputParameters & parameters)
   : GeneralPostprocessor(parameters),
+    _value(0),
     _var_number(_subproblem.getVariable(_tid, parameters.get<VariableName>("variable")).number()),
     _system(_subproblem.getSystem(getParam<VariableName>("variable"))),
     _point(getParam<Point>("point")),
@@ -209,8 +210,8 @@ PointValueFileWriter::execute()
   }
 }
 
-Real
-PointValueFileWriter::getValue()
+void
+PointValueFileWriter::finalize()
 {
   // define precipitation
   bool precip = false;
@@ -229,7 +230,7 @@ PointValueFileWriter::getValue()
   {
     fputs(std::to_string(0).c_str(), output_file);
     fclose(output_file);
-    return _pore_volume;
+    _value = _pore_volume;
   }
   fputs(std::to_string(1).c_str(), output_file);
   fclose(output_file);
@@ -327,7 +328,13 @@ PointValueFileWriter::getValue()
 
   _console << "... erosion done" << std::endl;
 
-  return _pore_volume;
+  _value = _pore_volume;
+}
+
+Real
+PointValueFileWriter::getValue() const
+{
+  return _value;
 }
 
 void

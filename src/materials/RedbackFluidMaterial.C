@@ -133,9 +133,9 @@ RedbackFluidMaterial::computeRedbackTerms()
   _froude_number[_qp] = _froude_number_param;
   _viscosity_ratio[_qp] = _viscosity_ratio_param;
 
-  Real fluid_density;
-  fluid_density = (1 + _fluid_compressibility_param * _pore_pres[_qp] -
-                   _fluid_thermal_expansion_param * _T[_qp]);
+  // Real fluid_density;
+  // fluid_density = (1 + _fluid_compressibility_param * _pore_pres[_qp] -
+  //                  _fluid_thermal_expansion_param * _T[_qp]);
 
   // Gravity term in the momentum kernel
   _gravity_term[_qp] = _gravity_param / pow(_froude_number[_qp], 2);

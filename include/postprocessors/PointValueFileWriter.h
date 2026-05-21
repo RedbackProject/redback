@@ -27,10 +27,13 @@ public:
 
   virtual void initialize() override {}
   virtual void execute() override;
-  virtual void finalize() override {}
-  virtual Real getValue() override;
+  virtual void finalize() override;
+  virtual Real getValue() const override;
 
 protected:
+  /// The value of this post-processor
+  Real _value;
+
   /// The variable number of the variable we are operating on
   const unsigned int _var_number;
 
