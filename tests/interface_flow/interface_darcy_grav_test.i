@@ -8,7 +8,6 @@ gravity = '0.56 0.98 0'
   [break]
     type = BreakMeshByBlockGenerator
     input = file
-    split_interface = false
   []
 []
 
@@ -34,7 +33,7 @@ gravity = '0.56 0.98 0'
     type = InterfaceDarcy
     variable = p
     neighbor_var = p
-    boundary = interface
+    boundary = left_block_right_block
     fault_lewis_number = lewis_fault
     fault_thickness = 0.1
   []
@@ -75,7 +74,7 @@ gravity = '0.56 0.98 0'
   [p_left]
     type = SideAverageValue
     variable = p
-    boundary = interface
+    boundary = left_block_right_block
   []
 []
 

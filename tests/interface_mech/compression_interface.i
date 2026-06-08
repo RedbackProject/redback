@@ -16,7 +16,6 @@
   [break]
     type = BreakMeshByBlockGenerator
     input = file
-    split_interface = false
   []
 []
 
@@ -50,7 +49,7 @@
     variable = disp_x
     neighbor_var = disp_x
     penalty = 1e6
-    boundary = interface
+    boundary = Block0_Block1
     component = 0
   []
   [interfacey]
@@ -58,7 +57,7 @@
     variable = disp_y
     neighbor_var = disp_y
     penalty = 1e6
-    boundary = interface
+    boundary = Block0_Block1
     component = 1
   []
 []
@@ -96,7 +95,7 @@
 [Functions]
   [loading_vel]
     type = ParsedFunction
-    value = '0.0002*t'
+    expression = '0.0002*t'
   []
 []
 

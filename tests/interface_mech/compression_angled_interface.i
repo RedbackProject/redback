@@ -6,7 +6,6 @@
   [break]
     type = BreakMeshByBlockGenerator
     input = file
-    split_interface = false
   []
   [bottom_corner]
     type = ExtraNodesetGenerator
@@ -46,7 +45,7 @@
     variable = disp_x
     neighbor_var = disp_x
     penalty = 1e6
-    boundary = interface
+    boundary = top_block_bottom_block
     tangent_jump = 2e-5
     component = 0
   []
@@ -55,7 +54,7 @@
     variable = disp_y
     neighbor_var = disp_y
     penalty = 1e6
-    boundary = interface
+    boundary = top_block_bottom_block
     tangent_jump = 2e-5
     component = 1
   []
@@ -94,7 +93,7 @@
 [Functions]
   [loading_vel]
     type = ParsedFunction
-    value = '-0.0002*t'
+    expression = '-0.0002*t'
   []
 []
 
