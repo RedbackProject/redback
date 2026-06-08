@@ -15,9 +15,9 @@
   [./mesh]
     type = GeneratedMeshGenerator
     dim = 3
-    nx = 20
-    ny = 20
-    nz = 5
+    nx = 30
+    ny = 30
+    nz = 2
     zmax = 0.2
     elem_type = HEX
   [../]
@@ -59,7 +59,7 @@
     u = vel_x
     v = vel_y
     w = vel_z
-    p = p
+    pressure = p
   [../]
   [./x_momentum_space]
     type = INSMomentumLaplaceForm
@@ -67,7 +67,7 @@
     u = vel_x
     v = vel_y
     w = vel_z
-    p = p
+    pressure = p
     component = 0
   [../]
   [./y_momentum_space]
@@ -76,7 +76,7 @@
     u = vel_x
     v = vel_y
     w = vel_z
-    p = p
+    pressure = p
     component = 1
   [../]
   [./z_momentum_space]
@@ -85,7 +85,7 @@
     u = vel_x
     v = vel_y
     w = vel_z
-    p = p
+    pressure = p
     component = 2
   [../]
 []
@@ -144,7 +144,7 @@
 [Functions]
   [linear_p]
     type = ParsedFunction
-    value = '1-5*z'
+    expression = '1-5*z'
   []
 []
 
@@ -260,6 +260,5 @@
 
 [Outputs]
   file_base = poiseuille_tube3D_displaced
-  exodus = true
-  perf_graph = true
+  csv = true
 []

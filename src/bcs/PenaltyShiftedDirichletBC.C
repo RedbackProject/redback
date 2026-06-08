@@ -15,9 +15,9 @@ InputParameters
 PenaltyShiftedDirichletBC::validParams()
 {
   InputParameters params = IntegratedBC::validParams();
-  params.addClassDescription("Enforces a Dirichlet boundary condition "
-                             "in a weak sense by penalizing differences between the current "
-                             "solution and the Dirichlet data.");
+  params.addClassDescription("Applies the penalty term for Nitsche-type weak Dirichlet boundary condition"
+                             "for the velocity variable of Navier-Stokes equations"
+                             "used in the context of the shifted boundary method.");
   params.addParam<Real>("penalty", 1.0, "Penalty scalar");
   params.addParam<Real>("mesh_size", 1.0, "Mesh dimension in one direction");
   params.addParam<Real>("nb_elements", 1.0, "Number of elements in one direction");

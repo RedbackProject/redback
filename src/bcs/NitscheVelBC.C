@@ -15,9 +15,9 @@ InputParameters
 NitscheVelBC::validParams()
 {
   InputParameters params = IntegratedBC::validParams();
-  params.addClassDescription("Enforces a Dirichlet boundary condition "
-                             "in a weak sense by penalizing differences between the current "
-                             "solution and the Dirichlet data.");
+  params.addClassDescription("Applies a Nitsche-type weak Dirichlet boundary condition"
+                             "for the velocity variable of Navier-Stokes equations"
+                             "used in the context of the shifted boundary method.");
   params.addParam<Real>("value", 0.0, "Boundary value of the variable");
   params.addCoupledVar("distance", 0.0, "distance to interface");
   params.declareControllable("value");

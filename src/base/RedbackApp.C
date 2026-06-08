@@ -67,6 +67,36 @@ RedbackApp::associateSyntax(Syntax & syntax, ActionFactory & action_factory)
 void
 RedbackApp::registerApps()
 {
+  #ifdef NAVIER_STOKES_ENABLED
+    addBoolCapability("navier_stokes",
+                      true,
+                      "Navier-Stokes module enabled");
+  #else
+    addBoolCapability("navier_stokes",
+                      false,
+                      "Navier-Stokes module disabled");
+  #endif
+
+  #ifdef POROUS_FLOW_ENABLED
+    addBoolCapability("porous_flow",
+                      true,
+                      "PorousFlow module enabled");
+  #else
+    addBoolCapability("porous_flow",
+                      false,
+                      "PorousFlow module disabled");
+  #endif
+
+  #ifdef LIBIGL_ENABLED
+    addBoolCapability("libigl",
+                      true,
+                      "Redback built with libigl support");
+  #else
+    addBoolCapability("libigl",
+                      false,
+                      "Redback built without libigl support");
+  #endif
+
   registerApp(RedbackApp);
 }
 

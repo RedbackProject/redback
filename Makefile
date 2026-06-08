@@ -23,7 +23,16 @@ include $(FRAMEWORK_DIR)/moose.mk
 ################################## MODULES ####################################
 ALL_MODULES := no
 SOLID_MECHANICS  := yes
-NAVIER_STOKES    := yes
+ifeq ($(NavierStokes),1)
+  $(info >>> Compiling with NavierStokes module)
+  NAVIER_STOKES := yes
+  libmesh_CXXFLAGS += -DNAVIER_STOKES_ENABLED
+endif
+ifeq ($(PorousFlow),1)
+  $(info >>> Compiling with PorousFlow module)
+  POROUS_FLOW := yes
+  libmesh_CXXFLAGS += -DPOROUS_FLOW_ENABLED
+endif
 include $(MOOSE_DIR)/modules/modules.mk
 ###############################################################################
 
@@ -38,4 +47,13 @@ include            $(FRAMEWORK_DIR)/app.mk
 # Additional special case targets should be added here
 
 LIBIGL_DIR := $(HOME)/projects/libigl/include
-app_INCLUDES += -I$(LIBIGL_DIR)
+LIBIGL_CONTENT := $(shell ls $(LIBIGL_DIR) 2>/dev/null)
+
+ifneq ($(LIBIGL_CONTENT),)
+  $(info >>> LIBIGL detected, enabling LIBIGL flags)
+  app_INCLUDES += -I$(LIBIGL_DIR)
+  libmesh_CXXFLAGS += -DLIBIGL_ENABLED
+else
+  $(info >>> LIBIGL NOT found, excluding sources)
+  excluded_srcs += DistanceToInterfaceAux.C
+endif

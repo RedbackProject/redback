@@ -1,12 +1,16 @@
 [Tests]
   [./test_shifted_boundary]
-    type = 'Exodiff'
+    type = 'CSVDiff'
+    capabilities = 'navier_stokes & libigl'
+    rel_err = 1e-2 #error decreases with mesh refinement
     input = 'poiseuille_tube3D_shifted.i'
-    exodiff = 'poiseuille_tube3D_shifted.e'
+    csvdiff = 'poiseuille_tube3D_shifted.csv' #solution can be computed with analytical_poiseuille_flow.py
   [../]
   [./test_displaced_boundary]
-    type = 'Exodiff'
+    type = 'CSVDiff'
+    capabilities = 'navier_stokes & libigl'
+    rel_err = 1e-2 #error decreases with mesh refinement
     input = 'poiseuille_tube3D_displaced.i'
-    exodiff = 'poiseuille_tube3D_displaced.e'
+    csvdiff = 'poiseuille_tube3D_displaced.csv' #solution can be computed with analytical_poiseuille_flow.py
   [../]
 []

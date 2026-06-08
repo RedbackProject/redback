@@ -5,9 +5,9 @@
   pspg = true
   alpha = 1e-1
   convective_term = false
-  penalty = 4
-  nb_elements = 40
-  mesh_size = 0.8
+  penalty = 2 #optimised for this problem
+  nb_elements = 30
+  mesh_size = 0.03333
   distance = d
 []
 
@@ -18,9 +18,9 @@
   [./mesh]
     type = GeneratedMeshGenerator
     dim = 3
-    nx = 20
-    ny = 20
-    nz = 5
+    nx = 30
+    ny = 30
+    nz = 2
     zmax = 0.2
     elem_type = HEX
   [../]
@@ -62,7 +62,7 @@
     u = vel_x
     v = vel_y
     w = vel_z
-    p = p
+    pressure = p
   [../]
   [./x_momentum_space]
     type = INSMomentumLaplaceForm
@@ -70,7 +70,7 @@
     u = vel_x
     v = vel_y
     w = vel_z
-    p = p
+    pressure = p
     component = 0
   [../]
   [./y_momentum_space]
@@ -79,7 +79,7 @@
     u = vel_x
     v = vel_y
     w = vel_z
-    p = p
+    pressure = p
     component = 1
   [../]
   [./z_momentum_space]
@@ -88,7 +88,7 @@
     u = vel_x
     v = vel_y
     w = vel_z
-    p = p
+    pressure = p
     component = 2
   [../]
 []
@@ -204,7 +204,7 @@
     u = vel_x
     v = vel_y
     w = vel_z
-    p = p
+    pressure = p
   [../]
   [./y_nitsche_vel]
     type = NitscheVelBC
@@ -234,7 +234,7 @@
     u = vel_x
     v = vel_y
     w = vel_z
-    p = p
+    pressure = p
   [../]
   [./z_nitsche_vel]
     type = NitscheVelBC
@@ -346,6 +346,5 @@
 
 [Outputs]
   file_base = poiseuille_tube3D_shifted
-  exodus = true
-  perf_graph = true
+  csv = true
 []
