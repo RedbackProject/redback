@@ -69,7 +69,7 @@ ImageFunctionUserObject::execute()
 {
   std::cout << "reading ctscan file" << std::endl;
 
-  _gridded_data = libmesh_make_unique<GriddedData>(_file);
+  _gridded_data = std::make_unique<GriddedData>(_file);
   _dim = _gridded_data->getDim();
 
   _gridded_data->getAxes(_axes);

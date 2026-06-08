@@ -68,7 +68,7 @@ PointValueFile::execute()
 }
 
 Real
-PointValueFile::getValue()
+PointValueFile::getValue() const
 {
   // write text
   FILE * output_file = fopen(_file_name.c_str(), "w");

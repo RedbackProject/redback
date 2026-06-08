@@ -12,6 +12,7 @@
 
 #include "MooseMesh.h"
 #include "Poromechanics.h"
+#include "FEProblemBase.h"
 
 registerMooseObject("RedbackApp", Poromechanics);
 

@@ -7,31 +7,23 @@
 //* Licensed under LGPL 2.1, please see LICENSE for details
 //* https://www.gnu.org/licenses/lgpl-2.1.html
 
-#ifndef REDBACKFULLSOLVEMULTIAPP_H
-#define REDBACKFULLSOLVEMULTIAPP_H
+#pragma once
 
-#include "MultiApp.h"
+#include "FullSolveMultiApp.h"
 
-class Executioner;
-/**
- * This type of MultiApp will completely solve itself the first time it is asked to take a step.
- *
- * Each "step" after that it will do nothing.
- */
-class RedbackFullSolveMultiApp : public MultiApp
+class RedbackFullSolveMultiApp : public FullSolveMultiApp
 {
 public:
-  RedbackFullSolveMultiApp(const InputParameters & parameters);
   static InputParameters validParams();
+  RedbackFullSolveMultiApp(const InputParameters & parameters);
 
-  virtual bool solveStep(Real dt, Real target_time, bool auto_advance = true) override;
+  virtual bool solveStep(Real dt, Real target_time, bool auto_advance) override;
 
 private:
-  Real ReadFile(FileName file_name);
-  std::vector<Executioner *> _executioners;
+  Real readFile(const FileName & file_name);
+
   FileName _times_file;
+
   Real _porosity_change;
   Real _porosity_change_old;
 };
-
-#endif // REDBACKFULLSOLVEMULTIAPP_H

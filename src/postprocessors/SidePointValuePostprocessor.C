@@ -85,7 +85,7 @@ SidePointValuePostprocessor::threadJoin(const UserObject & y)
 }
 
 Real
-SidePointValuePostprocessor::getValue()
+SidePointValuePostprocessor::getValue() const
 {
   return _value;
 }
