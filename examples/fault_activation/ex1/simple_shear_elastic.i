@@ -1,0 +1,102 @@
+[Mesh]
+  [./mesh]
+    type = GeneratedMeshGenerator
+    dim = 3
+    nx = 10
+    ny = 8
+    xmax = 2
+    zmax = 0.1
+  [../]
+[]
+
+[Variables]
+  [./disp_x]
+  [../]
+  [./disp_y]
+  [../]
+  [./disp_z]
+  [../]
+[]
+
+[Functions]
+[]
+
+[BCs]
+  [./ux_bottom]
+    type = DirichletBC
+    variable = disp_x
+    boundary = bottom
+    value = 0
+  [../]
+  [./uy_top]
+    type = DirichletBC
+    variable = disp_y
+    boundary = top
+    value = 0
+  [../]
+  [./Periodic]
+    [./periodic_x]
+      auto_direction = x
+    [../]
+  [../]
+  [./uy_bottom]
+    type = DirichletBC
+    variable = disp_y
+    boundary = bottom
+    value = 0
+  [../]
+  [./uz_back]
+    type = DirichletBC
+    variable = disp_z
+    boundary = back
+    value = 0
+  [../]
+[]
+
+[Materials]
+  [./no_mech_material]
+    type = RedbackMaterial
+  [../]
+  [./mech_material]
+    type = RedbackMechMaterialElastic
+    disp_x = disp_x
+    disp_y = disp_y
+    disp_z = disp_z
+    outputs = all
+    youngs_modulus = 1
+    poisson_ratio = 0
+  [../]
+[]
+
+[Preconditioning]
+  [./SMP]
+    type = SMP
+    full = true
+    solve_type = PJFNK
+    petsc_options_iname = '-ksp_type -pc_type -sub_pc_type -ksp_gmres_restart'
+    petsc_options_value = 'gmres asm lu 201'
+  [../]
+[]
+
+[Executioner]
+  type = Transient
+  num_steps = 20
+  [./TimeStepper]
+    type = ConstantDT
+    dt = 1
+  [../]
+[]
+
+[Outputs]
+  exodus = true
+  file_base = simple_shear_elastic
+  perf_graph = true
+[]
+
+[RedbackMechAction]
+  [./my_action]
+    disp_x = disp_x
+    disp_y = disp_y
+    disp_z = disp_z
+  [../]
+[]

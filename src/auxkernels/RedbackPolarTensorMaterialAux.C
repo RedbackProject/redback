@@ -46,7 +46,7 @@ RedbackPolarTensorMaterialAux::computeValue()
   // Real y = (*_current_node)(1);
   // Real z = (*_current_node)(2);
 
-  RealVectorValue centroid = _current_elem->centroid();
+  RealVectorValue centroid = _current_elem->vertex_average();
   Real x = centroid(0);
   Real y = centroid(1);
   Real r = std::sqrt(x * x + y * y);

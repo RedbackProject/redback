@@ -16,7 +16,6 @@
   [./break]
     type = BreakMeshByBlockGenerator
     input = file
-    split_interface = false
   [../]
 []
 
@@ -42,7 +41,7 @@
     type = InterfaceDarcy
     variable = p
     neighbor_var = p
-    boundary = interface
+    boundary = Block0_Block1
     fault_lewis_number = lewis_fault
     fault_thickness = 0.1
   []

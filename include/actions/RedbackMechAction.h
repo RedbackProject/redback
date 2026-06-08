@@ -18,7 +18,7 @@
 class RedbackMechAction : public Action
 {
 public:
-  RedbackMechAction(InputParameters params);
+  RedbackMechAction(const InputParameters & params);
 
   static InputParameters validParams();
 
@@ -35,6 +35,8 @@ private:
 protected:
   /// if this vector is not empty the variables, kernels and materials are restricted to these subdomains
   std::vector<SubdomainName> _subdomain_names;
+  /// indicates, if the vector of subdomain names is set (dont set block restrictions, if not)
+  const bool _subdomain_names_set;
 };
 
 #endif // REDBACKMECHACTION_H

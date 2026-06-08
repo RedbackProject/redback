@@ -19,7 +19,7 @@ include $(FRAMEWORK_DIR)/moose.mk
 
 ################################## MODULES ####################################
 #HEAT_CONDUCTION   := yes
-TENSOR_MECHANICS  := yes
+SOLID_MECHANICS   := yes
 MISC              := yes
 include           $(MOOSE_DIR)/modules/modules.mk
 ###############################################################################

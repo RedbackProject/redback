@@ -18,17 +18,19 @@
 #include "MooseSyntax.h"
 
 // Modules
-#include "TensorMechanicsApp.h"
+#include "SolidMechanicsApp.h"
 
 // Actions
-//#include "RankTwoScalarAction.h"
-//#include "RedbackAction.h"
-//#include "RedbackMechAction.h"
+// #include "RankTwoScalarAction.h"
+// #include "RedbackAction.h"
+// #include "RedbackMechAction.h"
 
 InputParameters
 RedbackApp::validParams()
 {
   InputParameters params = MooseApp::validParams();
+  params.set<bool>("use_legacy_material_output") = false;
+  params.set<bool>("use_legacy_initial_residual_evaluation_behavior") = false;
   return params;
 }
 
@@ -42,10 +44,9 @@ RedbackApp::~RedbackApp() {}
 void
 RedbackApp::registerAll(Factory & f, ActionFactory & af, Syntax & s)
 {
+  ModulesApp::registerAllObjects<RedbackApp>(f, af, s);
   Registry::registerObjectsTo(f, {"RedbackApp"});
   Registry::registerActionsTo(af, {"RedbackApp"});
-
-  ModulesApp::registerAll(f, af, s);
 
   /* register custom execute flags, action syntax, etc. here */
   RedbackApp::associateSyntax(s, af);
@@ -56,7 +57,10 @@ RedbackApp::associateSyntax(Syntax & syntax, ActionFactory & action_factory)
 {
   Registry::registerActionsTo(action_factory, {"RedbackApp"});
 
+  registerSyntax("RankTwoContractionAction", "RankTwoContractionAction/*");
+  registerSyntax("RankTwoCstContractionAction", "RankTwoCstContractionAction/*");
   registerSyntax("RankTwoScalarAction", "RankTwoScalarAction/*");
+  registerSyntax("RankTwoScalarVoidAction", "RankTwoScalarVoidAction/*");
   registerSyntax("RedbackMechAction", "RedbackMechAction/*");
 }
 

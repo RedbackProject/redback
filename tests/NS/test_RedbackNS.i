@@ -35,7 +35,6 @@
     type = RedbackFluidStressDivergenceTensors
     variable = vel_x
     component = 0
-    pore_pres = p
   [../]
   [./stress_div_y]
     type = RedbackFluidStressDivergenceTensors

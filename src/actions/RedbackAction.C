@@ -47,7 +47,7 @@ RedbackAction::RedbackAction(InputParameters params)
 void
 RedbackAction::act()
 {
-  unsigned int dim = 1;
+  // unsigned int dim = 1;
   std::vector<std::string> keys;
   std::vector<VariableName> vars;
   std::string type("RedbackStressDivergenceTensors");
@@ -59,27 +59,27 @@ RedbackAction::act()
   vars.push_back(_disp_x);
   if (_disp_y != "")
   {
-    ++dim;
+    // ++dim;
     keys.push_back("disp_y");
     vars.push_back(_disp_y);
     if (_disp_z != "")
     {
-      ++dim;
+      // ++dim;
       keys.push_back("disp_z");
       vars.push_back(_disp_z);
     }
   }
 
-  unsigned int num_coupled(dim);
+  //unsigned int num_coupled(dim);
   if (_temp != "")
   {
-    ++num_coupled;
+    //++num_coupled;
     keys.push_back("temp");
     vars.push_back(_temp);
   }
   if (_pore_pres != "")
   {
-    ++num_coupled;
+    //++num_coupled;
     keys.push_back("pore_pres");
     vars.push_back(_pore_pres);
   }

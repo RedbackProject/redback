@@ -146,7 +146,6 @@
   num_steps = 10000
   petsc_options_iname = '-pc_type -pc_hypre_type'
   petsc_options_value = 'hypre boomeramg'
-  ss_check_tol = 1e-6
   end_time = 0.1
   dtmax = 0.1
   scheme = bdf2

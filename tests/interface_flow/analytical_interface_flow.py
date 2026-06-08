@@ -26,5 +26,5 @@ P_prime_2 = (k1*k3*D2*D3*P1 + k2*D3*(k1*D3+k3*D1)*P2) / ((k3*D2+k2*D3)*(k1*D3+k3
 P_prime_1 = (k1*D3*P1 + k3*D1*P_prime_2) / (k1*D3+k3*D1)
 
 
-print 'P_prime_1 = ', P_prime_1
-print 'P_prime_2 = ', P_prime_2
+print('P_prime_1 = ', P_prime_1)
+print('P_prime_2 = ', P_prime_2)
