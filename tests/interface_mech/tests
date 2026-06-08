@@ -16,8 +16,9 @@
     exodiff = 'compression_angled_interface.e'
   [../]
   [./test_traction_auxkernel]
-    type = 'Exodiff'
+    type = 'CSVDiff'
+    rel_err = 5e-5
     input = 'testTractionProjectionAux.i'
-    exodiff = 'testTractionProjectionAux.e'
+    csvdiff = 'testTractionProjectionAux.csv' #filled with analytical solution
   [../]
 []
