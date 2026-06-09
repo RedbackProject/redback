@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKMECHMATERIALELASTIC_H
-#define REDBACKMECHMATERIALELASTIC_H
+#pragma once
 
 #include "RedbackMechMaterial.h"
 
@@ -44,5 +43,3 @@ protected:
   virtual Real getFlowIncrement(Real, Real, Real, Real, Real) override;
   virtual void get_py_qy(Real, Real, Real &, Real &, Real, bool &) override;
 };
-
-#endif // REDBACKMECHMATERIALELASTIC_H

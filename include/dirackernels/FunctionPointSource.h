@@ -10,17 +10,13 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef FUNCTIONPOINTSOURCE_H
-#define FUNCTIONPOINTSOURCE_H
+#pragma once
 
 // Moose Includes
 #include "DiracKernel.h"
 
 class Function;
 
-/**
- * TOOD
- */
 class FunctionPointSource : public DiracKernel
 {
 public:
@@ -39,5 +35,3 @@ protected:
   std::vector<Real> _point_param;
   Point _p;
 };
-
-#endif // FUNCTIONPOINTSOURCE_H

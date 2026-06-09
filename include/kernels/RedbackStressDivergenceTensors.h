@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKSTRESSDIVERGENCETENSORS_H
-#define REDBACKSTRESSDIVERGENCETENSORS_H
+#pragma once
 
 #include "Kernel.h"
 #include "RankFourTensor.h"
@@ -62,5 +61,3 @@ private:
 
   const MaterialProperty<RealVectorValue> & _gravity_term;
 };
-
-#endif // REDBACKSTRESSDIVERGENCETENSORS_H

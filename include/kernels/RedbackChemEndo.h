@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKCHEMENDO_H
-#define REDBACKCHEMENDO_H
+#pragma once
 
 #include "Kernel.h"
 
@@ -33,5 +32,3 @@ protected:
 private:
   Real _time_factor;
 };
-
-#endif /* REDBACKCHEMENDO_H */

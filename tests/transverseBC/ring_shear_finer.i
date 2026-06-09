@@ -84,7 +84,7 @@
   [../]
   [./r_square_fct]
     type = ParsedFunction
-    value = '(0.3 + dx)*(0.3+dx) + dy*dy'
+    expression = '(0.3 + dx)*(0.3+dx) + dy*dy'
     vals = 'dx_point2 dy_point2'
     vars = 'dx dy'
   [../]

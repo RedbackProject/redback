@@ -47,7 +47,7 @@
 [Functions]
   [./temp_ic]
     type = ParsedFunction
-    value = 'sqrt(x*x+y*y)/0.9 - 1/9' # -sqrt(x*x+y*y)/0.9 + 10/9
+    expression = 'sqrt(x*x+y*y)/0.9 - 1/9' # -sqrt(x*x+y*y)/0.9 + 10/9
   [../]
   [./inner_pressure_fct]
     type = ParsedFunction

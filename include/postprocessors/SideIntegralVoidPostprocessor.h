@@ -12,8 +12,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef SIDEINTEGRALVOIDPOSTPROCESSOR_H
-#define SIDEINTEGRALVOIDPOSTPROCESSOR_H
+#pragma once
 
 #include "SideIntegralPostprocessor.h"
 #include "MooseVariableInterface.h"
@@ -48,5 +47,3 @@ protected:
 
   bool _vel;
 };
-
-#endif

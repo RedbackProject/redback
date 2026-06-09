@@ -11,8 +11,8 @@
 /*                                                              */
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
-#ifndef RANKTWOCONTRACTIONPOSTPROCESSOR_H
-#define RANKTWOCONTRACTIONPOSTPROCESSOR_H
+
+#pragma once
 
 #include "GeneralPostprocessor.h"
 #include "RankTwoTensor.h"
@@ -48,5 +48,3 @@ protected:
   const PostprocessorValue & _2_index21;
   const PostprocessorValue & _2_index22;
 };
-
-#endif /* RANKTWOCONTRACTIONPOSTPROCESSOR_H */

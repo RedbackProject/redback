@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKACTION_H
-#define REDBACKACTION_H
+#pragma once
 
 #include "Action.h"
 
@@ -31,5 +30,3 @@ private:
   const std::string _temp;
   const std::string _pore_pres;
 };
-
-#endif // REDBACKACTION_H

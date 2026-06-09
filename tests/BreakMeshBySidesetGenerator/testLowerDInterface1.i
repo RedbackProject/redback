@@ -116,7 +116,7 @@
   [timestep_fct]
     type = ParsedFunction
     vars = 'dt0 dt_max t_ramp' # start at dt0 and reach dt_max when t=t_ramp
-    value = 'min(dt_max,  dt0+(dt_max-dt0)*t/t_ramp)'
+    expression = 'min(dt_max,  dt0+(dt_max-dt0)*t/t_ramp)'
     vals = '1e-4 5e-3 0.1'
   []
 []

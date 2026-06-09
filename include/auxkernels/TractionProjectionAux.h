@@ -4,8 +4,8 @@
 /*          All contents are licensed under LGPL V2.1           */
 /*             See LICENSE for full restrictions                */
 /****************************************************************/
-#ifndef TRACTIONPROJECTIONAUX_H
-#define TRACTIONPROJECTIONAUX_H
+
+#pragma once
 
 #include "AuxKernel.h"
 #include "RankTwoTensor.h"
@@ -28,5 +28,3 @@ protected:
 private:
   Real _angle;
 };
-
-#endif // TRACTIONPROJECTIONAUX_H

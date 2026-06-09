@@ -12,8 +12,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef RANKTWOCONTRACTIONACTION_H
-#define RANKTWOCONTRACTIONACTION_H
+#pragma once
 
 #include "Action.h"
 
@@ -30,5 +29,3 @@ public:
 private:
   std::string _base_name;
 };
-
-#endif // RANKTWOCONTRACTIONACTION_H

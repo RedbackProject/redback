@@ -82,7 +82,7 @@
   [../]
   [./r_square]
     type = ParsedFunction
-    value = '(0.3+x2)*(0.3+x2) + y2*y2'
+    expression = '(0.3+x2)*(0.3+x2) + y2*y2'
     vals = 'x_point2 y_point2'
     vars = 'x2 y2'
   [../]

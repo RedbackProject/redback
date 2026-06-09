@@ -63,13 +63,13 @@
   [../]
   [./timestep_function]
     type = ParsedFunction
-    value = 'min(max(1e-15, dt*max(0.2, 1-0.05*(n_li-50))), (1e-2)*50.0/max(abs(v_max), abs(v_min)))'
+    expression = 'min(max(1e-15, dt*max(0.2, 1-0.05*(n_li-50))), (1e-2)*50.0/max(abs(v_max), abs(v_min)))'
     vals = 'num_li num_nli min_fluid_vel_y max_fluid_vel_y dt'
     vars = 'n_li n_nli v_min v_max dt'
   [../]
   [./ref_lewis_nb_fct]
     type = ParsedFunction
-    value = '1.8e-05 + amplitude*max(0, radius - sqrt((x-x0)*(x-x0) + (y-y0)*(y-y0))) + amplitude*max(0, radius - sqrt((x-x1)*(x-x1) + (y-y1)*(y-y1)))'
+    expression = '1.8e-05 + amplitude*max(0, radius - sqrt((x-x0)*(x-x0) + (y-y0)*(y-y0))) + amplitude*max(0, radius - sqrt((x-x1)*(x-x1) + (y-y1)*(y-y1)))'
     vals = '0.1 0.8 -0.1 0.8 -0.4 1e-02'
     vars = 'radius x0 y0 x1 y1 amplitude'
   [../]

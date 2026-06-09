@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKMASSCONVECTION_H
-#define REDBACKMASSCONVECTION_H
+#pragma once
 
 #include "Kernel.h"
 
@@ -42,5 +41,3 @@ protected:
 private:
   Real _time_factor;
 };
-
-#endif // REDBACKMASSCONVECTION_H

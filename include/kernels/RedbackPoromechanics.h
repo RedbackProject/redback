@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKPOROMECHANICS_H
-#define REDBACKPOROMECHANICS_H
+#pragma once
 
 #include "Kernel.h"
 
@@ -39,5 +38,3 @@ protected:
 private:
   Real _time_factor;
 };
-
-#endif /* REDBACKPOROMECHANICS_H */

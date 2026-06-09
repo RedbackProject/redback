@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKMASSDIFFUSION_H
-#define REDBACKMASSDIFFUSION_H
+#pragma once
 
 #include "Kernel.h"
 
@@ -35,5 +34,3 @@ protected:
 private:
   Real _time_factor;
 };
-
-#endif /* REDBACKMASSDIFFUSION_H */

@@ -147,7 +147,7 @@
 [Functions]
   [linear_p]
     type = ParsedFunction
-    value = '1-5*z'
+    expression = '1-5*z'
   []
 []
 

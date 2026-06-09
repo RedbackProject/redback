@@ -77,7 +77,7 @@
 [Functions]
   [loading_vel]
     type = ParsedFunction
-    value = '0.0002*t'
+    expression = '0.0002*t'
   []
 []
 

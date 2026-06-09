@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKAPP_H
-#define REDBACKAPP_H
+#pragma once
 
 #include "MooseApp.h"
 
@@ -27,5 +26,3 @@ public:
   static void registerAll(Factory & f, ActionFactory & af, Syntax & s);
   static void associateSyntax(Syntax & syntax, ActionFactory & action_factory);
 };
-
-#endif /* REDBACKAPP_H */

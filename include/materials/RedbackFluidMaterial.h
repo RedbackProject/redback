@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKFLUIDMATERIAL_H
-#define REDBACKFLUIDMATERIAL_H
+#pragma once
 
 //#include "FiniteStrainPlasticMaterial.h"
 #include "Material.h"
@@ -71,5 +70,3 @@ protected:
 
   // MaterialProperty<Real> & _Re;
 };
-
-#endif // REDBACKFLUIDMATERIAL_H

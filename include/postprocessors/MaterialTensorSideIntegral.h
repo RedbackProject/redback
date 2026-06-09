@@ -5,8 +5,7 @@
 /*             See LICENSE for full restrictions                */
 /****************************************************************/
 
-#ifndef MATERIALTENSORSIDEINTEGRAL_H
-#define MATERIALTENSORSIDEINTEGRAL_H
+#pragma once
 
 #include "RankTwoTensor.h"
 #include "SideIntegralPostprocessor.h"
@@ -29,4 +28,3 @@ private:
   const unsigned int _i;
   const unsigned int _j;
 };
-#endif // MATERIALTENSORSIDEINTEGRAL_H

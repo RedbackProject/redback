@@ -10,14 +10,10 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKCONTINUATIONTANGENTAUX_H
-#define REDBACKCONTINUATIONTANGENTAUX_H
+#pragma once
 
 #include "AuxNodalScalarKernel.h"
 
-/**
- *
- */
 class RedbackContinuationTangentAux : public AuxNodalScalarKernel
 {
 public:
@@ -37,5 +33,3 @@ protected:
   std::vector<const VariableValue *> _sum_vars_older;              // older coupled variables to sum
   bool _are_nodal_vars_involved, _are_elemental_vars_involved;
 };
-
-#endif /* REDBACKCONTINUATIONTANGENTAUX_H */

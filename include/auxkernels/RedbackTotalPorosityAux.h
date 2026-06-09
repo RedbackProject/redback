@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKTOTALPOROSITYAUX_H
-#define REDBACKTOTALPOROSITYAUX_H
+#pragma once
 
 #include "AuxKernel.h"
 #include "RankTwoTensor.h"
@@ -37,5 +36,3 @@ private:
 
   const MaterialProperty<Real> & _mass_removal_rate;
 };
-
-#endif // REDBACKTOTALPOROSITYAUX_H

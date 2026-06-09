@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKMECHMATERIAL_H
-#define REDBACKMECHMATERIAL_H
+#pragma once
 
 #include "Material.h"
 #include "RankFourTensor.h"
@@ -204,5 +203,3 @@ protected:
   std::vector<const Function *> _initial_elastic_strain;
   std::vector<const Function *> _initial_plastic_strain;
 };
-
-#endif // REDBACKMECHMATERIAL_H

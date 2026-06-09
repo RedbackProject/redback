@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef INTERFACEDARCY_H
-#define INTERFACEDARCY_H
+#pragma once
 
 #include "InterfaceKernel.h"
 
@@ -33,5 +32,3 @@ protected:
   const MaterialProperty<RealVectorValue> & _gravity_term;
   Real _thickness;
 };
-
-#endif
