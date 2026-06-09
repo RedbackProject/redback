@@ -53,7 +53,4 @@ ifneq ($(LIBIGL_CONTENT),)
   $(info >>> LIBIGL detected, enabling LIBIGL flags)
   app_INCLUDES += -I$(LIBIGL_DIR)
   libmesh_CXXFLAGS += -DLIBIGL_ENABLED
-else
-  $(info >>> LIBIGL NOT found, excluding sources)
-  excluded_srcs += DistanceToInterfaceAux.C
 endif

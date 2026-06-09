@@ -1,11 +1,15 @@
-/****************************************************************/
-/* MOOSE - Multiphysics Object Oriented Simulation Environment  */
-/*                                                              */
-/*          All contents are licensed under LGPL V2.1           */
-/*             See LICENSE for full restrictions                */
-/****************************************************************/
-#ifndef DISTANCETOINTERFACEAUX_H
-#define DISTANCETOINTERFACEAUX_H
+//* This file is part of the MOOSE framework
+//* https://mooseframework.inl.gov
+//*
+//* All rights reserved, see COPYRIGHT for full restrictions
+//* https://github.com/idaholab/moose/blob/master/COPYRIGHT
+//*
+//* Licensed under LGPL 2.1, please see LICENSE for details
+//* https://www.gnu.org/licenses/lgpl-2.1.html
+
+#pragma once
+
+#ifdef LIBIGL_ENABLED
 
 #include "AuxKernel.h"
 #include <igl/readSTL.h>
@@ -29,4 +33,4 @@ protected:
   Eigen::MatrixXd _N;
 };
 
-#endif // DISTANCETOINTERFACEAUX_H
+#endif

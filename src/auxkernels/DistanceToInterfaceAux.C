@@ -4,6 +4,7 @@
 /*          All contents are licensed under LGPL V2.1           */
 /*             See LICENSE for full restrictions                */
 /****************************************************************/
+#ifdef LIBIGL_ENABLED
 
 #include "DistanceToInterfaceAux.h"
 #include <igl/point_mesh_squared_distance.h>
@@ -43,3 +44,5 @@ DistanceToInterfaceAux::computeValue()
   // std::cout<<sqrD(0)<<std::endl;
   return RealVectorValue(D(0,0),D(0,1),D(0,2));
 }
+
+#endif
