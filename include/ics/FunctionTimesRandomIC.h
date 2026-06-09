@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef FUNCTIONTIMESRANDOMIC_H
-#define FUNCTIONTIMESRANDOMIC_H
+#pragma once
 
 #include "InitialCondition.h"
 #include "InputParameters.h"
@@ -58,5 +57,3 @@ protected:
   Real _range;
   const Function & _func;
 };
-
-#endif // FUNCTIONTIMESRANDOMIC_H

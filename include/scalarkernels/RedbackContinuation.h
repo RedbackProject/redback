@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKCONTINUATION_H
-#define REDBACKCONTINUATION_H
+#pragma once
 
 #include "ODEKernel.h"
 
@@ -36,5 +35,3 @@ protected:
   virtual Real computeQpJacobian();
   // virtual Real computeQpOffDiagJacobian(unsigned int jvar);
 };
-
-#endif /* REDBACKCONTINUATION_H */

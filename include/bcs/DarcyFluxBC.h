@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef DARCYFLUXBC_H
-#define DARCYFLUXBC_H
+#pragma once
 
 #include "FluxBC.h"
 
@@ -40,5 +39,3 @@ protected:
 
   const MaterialProperty<Real> & _Le;
 };
-
-#endif /* DARCYFLUXBC_H */

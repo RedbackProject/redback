@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef RETURNMAPITERDT_H
-#define RETURNMAPITERDT_H
+#pragma once
 
 #include "PostprocessorInterface.h"
 #include "TimeStepper.h"
@@ -42,5 +41,3 @@ protected:
   Real _dt_min;
   Real _dt_max;
 };
-
-#endif /* RETURNMAPITERDT_H */

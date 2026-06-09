@@ -7,8 +7,7 @@
  * File Version: 1.0.0 (2014/08/11)
  */
 
-#ifndef ELLIPSE_H
-#define ELLIPSE_H
+#pragma once
 
 #include "GeneralUserObject.h"
 
@@ -189,5 +188,3 @@ public:
                                               Real & center_p,
                                               Real & center_q);
 };
-
-#endif // ELLIPSE_H

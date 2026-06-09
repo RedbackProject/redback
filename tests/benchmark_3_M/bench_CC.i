@@ -64,11 +64,11 @@
   inactive = 'upfunc spline_IC'
   [./upfunc]
     type = ParsedFunction
-    value = 't'
+    expression = 't'
   [../]
   [./downfunc]
     type = ParsedFunction
-    value = '-1*t'
+    expression = '-1*t'
   [../]
   [./spline_IC]
     type = ConstantFunction

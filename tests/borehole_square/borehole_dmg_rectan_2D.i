@@ -174,7 +174,7 @@
   [../]
   [./timestep_fct]
     type = ParsedFunction
-    value = 'min( 1e-4 , max( 1e-7,    dt*max(1.5 - 100*(dmg - dmg_old), 0.1)) )'
+    expression = 'min( 1e-4 , max( 1e-7,    dt*max(1.5 - 100*(dmg - dmg_old), 0.1)) )'
     vals = 'max_damage max_damage_old dt_old'
     vars = 'dmg dmg_old dt'
   [../]

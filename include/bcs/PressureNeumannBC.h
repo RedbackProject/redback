@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef PRESSURENEUMANNBC_H
-#define PRESSURENEUMANNBC_H
+#pragma once
 
 #include "IntegratedBC.h"
 
@@ -44,5 +43,3 @@ protected:
 private:
   Real _scale_factor;
 };
-
-#endif // PRESSURENEUMANNBC_H

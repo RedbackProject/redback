@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKMECHMATERIALJ2_H
-#define REDBACKMECHMATERIALJ2_H
+#pragma once
 
 #include "RedbackMechMaterial.h"
 
@@ -38,5 +37,3 @@ protected:
   virtual void get_py_qy(Real, Real, Real &, Real &, Real, bool &) override;
   Real getDerivativeFlowIncrement(const RankTwoTensor &, Real);
 };
-
-#endif // REDBACKMECHMATERIAL_H

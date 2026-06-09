@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKMECHACTION_H
-#define REDBACKMECHACTION_H
+#pragma once
 
 #include "Action.h"
 
@@ -38,5 +37,3 @@ protected:
   /// indicates, if the vector of subdomain names is set (dont set block restrictions, if not)
   const bool _subdomain_names_set;
 };
-
-#endif // REDBACKMECHACTION_H

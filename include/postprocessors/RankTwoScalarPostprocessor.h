@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef RANKTWOSCALARPOSTPROCESSOR_H
-#define RANKTWOSCALARPOSTPROCESSOR_H
+#pragma once
 
 #include "GeneralPostprocessor.h"
 #include "RankTwoTensor.h"
@@ -39,5 +38,3 @@ protected:
   const PostprocessorValue & _index22;
   MooseEnum _scalar_type;
 };
-
-#endif /* RANKTWOSCALARPOSTPROCESSOR_H */

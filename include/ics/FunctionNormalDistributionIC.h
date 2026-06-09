@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef FUNCTIONNORMALDISTRIBUTIONIC_H
-#define FUNCTIONNORMALDISTRIBUTIONIC_H
+#pragma once
 
 #include "InitialCondition.h"
 #include "InputParameters.h"
@@ -54,5 +53,3 @@ protected:
   Real _min;
   Real _max;
 };
-
-#endif // FUNCTIONNORMALDISTRIBUTIONIC_H

@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef RANKTWOSCALARACTION_H
-#define RANKTWOSCALARACTION_H
+#pragma once
 
 #include "Action.h"
 
@@ -25,5 +24,3 @@ public:
   MultiMooseEnum scalarOptions();
   virtual void act() override;
 };
-
-#endif // RANKTWOSCALARACTION_H

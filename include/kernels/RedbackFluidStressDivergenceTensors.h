@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKFLUIDSTRESSDIVERGENCETENSORS_H
-#define REDBACKFLUIDSTRESSDIVERGENCETENSORS_H
+#pragma once
 
 #include "Kernel.h"
 #include "RankTwoTensor.h"
@@ -61,5 +60,3 @@ private:
   const MaterialProperty<RealVectorValue> & _gravity_term;
   bool _stokes;
 };
-
-#endif // REDBACKFLUIDSTRESSDIVERGENCETENSORS_H

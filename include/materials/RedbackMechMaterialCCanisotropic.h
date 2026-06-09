@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKMECHMATERIALCCANISOTROPIC_H
-#define REDBACKMECHMATERIALCCANISOTROPIC_H
+#pragma once
 
 #include "RedbackMechMaterialCC.h"
 
@@ -45,5 +44,3 @@ protected:
   virtual void get_py_qy(Real, Real, Real &, Real &, Real, bool &) override;
   Real getDerivativeFlowIncrement(const RankTwoTensor &, Real, Real, Real, Real, Real);
 };
-
-#endif // REDBACKMECHMATERIALCCANISOTROPIC_H

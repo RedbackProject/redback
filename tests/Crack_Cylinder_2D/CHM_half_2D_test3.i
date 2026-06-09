@@ -116,7 +116,7 @@
   [./time_step_func]
     # if(t<1e-3, 1e-4, 1e-3)
     type = ParsedFunction
-    value = 'if(t<1e-3, t, 1e-3)' # if(t<0.0002, 2e-5, 1e-4)
+    expression = 'if(t<1e-3, t, 1e-3)' # if(t<0.0002, 2e-5, 1e-4)
   [../]
 []
 

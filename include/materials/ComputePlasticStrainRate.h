@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef COMPUTEPLASTICSTRAINRATE_H
-#define COMPUTEPLASTICSTRAINRATE_H
+#pragma once
 
 #include "DerivativeMaterialInterface.h"
 #include "Material.h"
@@ -43,5 +42,3 @@ protected:
 
   MaterialProperty<RankTwoTensor> & _plastic_strain_rate;
 };
-
-#endif // COMPUTEPLASTICSTRAINRATE_H

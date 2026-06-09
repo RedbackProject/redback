@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKFLUIDDIVERGENCE_H
-#define REDBACKFLUIDDIVERGENCE_H
+#pragma once
 
 #include "Kernel.h"
 
@@ -38,5 +37,3 @@ private:
   unsigned _y_vel_var_number;
   unsigned _z_vel_var_number;
 };
-
-#endif /* REDBACKFLUIDDIVERGENCE_H */

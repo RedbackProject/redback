@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef IMAGEPROCESSING_H
-#define IMAGEPROCESSING_H
+#pragma once
 
 #include "Material.h"
 
@@ -47,5 +46,3 @@ private:
    */
   void computeQpFunctions();
 };
-
-#endif // IMAGEPROCESSING_H

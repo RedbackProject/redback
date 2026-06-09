@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKMECHMATERIALEXPCC_H
-#define REDBACKMECHMATERIALEXPCC_H
+#pragma once
 
 #include "RedbackMechMaterial.h"
 
@@ -42,5 +41,3 @@ protected:
   void
   getDerivativeFlowIncrement(Real &, Real &, const RankTwoTensor &, Real, Real, Real, Real, Real);
 };
-
-#endif // REDBACKMECHMATERIALEXPCC_H

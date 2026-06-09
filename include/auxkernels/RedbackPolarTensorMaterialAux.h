@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKPOLARTENSORMATERIALAUX_H
-#define REDBACKPOLARTENSORMATERIALAUX_H
+#pragma once
 
 #include "AuxKernel.h"
 #include "RankTwoTensor.h"
@@ -32,5 +31,3 @@ private:
   const unsigned int _i;
   const unsigned int _j;
 };
-
-#endif // REDBACKPOLARTENSORMATERIALAUX_H

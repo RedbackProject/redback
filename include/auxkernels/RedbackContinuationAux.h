@@ -1,5 +1,4 @@
-#ifndef REDBACKCONTINUATIONAUX_H
-#define REDBACKCONTINUATIONAUX_H
+#pragma once
 
 #include "AuxKernel.h"
 #include "RankTwoTensor.h"
@@ -21,5 +20,3 @@ protected:
   std::vector<const VariableValue *> _sum_vars_older;              // older coupled variables to sum
   bool _are_nodal_vars_involved, _are_elemental_vars_involved;
 };
-
-#endif // REDBACKCONTINUATIONAUX_H

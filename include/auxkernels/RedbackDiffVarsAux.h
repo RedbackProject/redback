@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKDIFFVARSAUX_H
-#define REDBACKDIFFVARSAUX_H
+#pragma once
 
 #include "AuxKernel.h"
 #include "RankTwoTensor.h"
@@ -29,5 +28,3 @@ protected:
   const VariableValue & _variable_1;
   const VariableValue & _variable_2;
 };
-
-#endif // REDBACKDIFFVARSAUX_H

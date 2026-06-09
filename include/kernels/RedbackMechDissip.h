@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKMECHDISSIP_H
-#define REDBACKMECHDISSIP_H
+#pragma once
 
 #include "Kernel.h"
 #include "RankTwoTensor.h"
@@ -35,5 +34,3 @@ protected:
 private:
   Real _time_factor;
 };
-
-#endif /* REDBACKMECHDISSIP_H */

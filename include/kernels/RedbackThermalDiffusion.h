@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKTHERMALDIFFUSION_H
-#define REDBACKTHERMALDIFFUSION_H
+#pragma once
 
 #include "Kernel.h"
 
@@ -32,5 +31,3 @@ protected:
 private:
   Real _time_factor;
 };
-
-#endif /* REDBACKTHERMALDIFFUSION_H */

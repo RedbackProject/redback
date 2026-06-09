@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKTHERMALPRESSURIZATION_H
-#define REDBACKTHERMALPRESSURIZATION_H
+#pragma once
 
 #include "Kernel.h"
 
@@ -40,5 +39,3 @@ protected:
 private:
   Real _time_factor;
 };
-
-#endif /* REDBACKTHERMALPRESSURIZATION_H */

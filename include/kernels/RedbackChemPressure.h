@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKCHEMPRESSURE_H
-#define REDBACKCHEMPRESSURE_H
+#pragma once
 
 #include "Kernel.h"
 
@@ -37,5 +36,3 @@ protected:
 private:
   Real _time_factor;
 };
-
-#endif /* REDBACKCHEMPRESSURE_H */

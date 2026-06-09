@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKMECHMATERIALDP_H
-#define REDBACKMECHMATERIALDP_H
+#pragma once
 
 #include "RedbackMechMaterial.h"
 
@@ -46,5 +45,3 @@ protected:
   // virtual void formBrittleDamage();
   // virtual void formCreepDamage(Real);
 };
-
-#endif // REDBACKMECHMATERIALDP_H

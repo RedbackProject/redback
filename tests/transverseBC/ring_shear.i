@@ -82,13 +82,13 @@
   [../]
   [./r_square_fct]
     type = ParsedFunction
-    value = 'sqrt((0.3+dx - 0)^2 + (dy - 0)^2)' # no spaces
+    expression = 'sqrt((0.3+dx - 0)^2 + (dy - 0)^2)' # no spaces
     vals = 'dx_point2 dy_point2'
     vars = 'dx dy'
   [../]
   [./observed_rotation]
     type = ParsedFunction
-    value = 'atan(dy/(0.3+dx)) * 180/pi'
+    expression = 'atan(dy/(0.3+dx)) * 180/pi'
     vals = 'dx_point2 dy_point2'
     vars = 'dx dy'
   [../]

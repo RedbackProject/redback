@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef REDBACKVARIABLEEQUALSFUNCTION_H
-#define REDBACKVARIABLEEQUALSFUNCTION_H
+#pragma once
 
 #include "TimeKernel.h"
 
@@ -27,5 +26,3 @@ protected:
   virtual Real computeQpJacobian();
   const Function & _func;
 };
-
-#endif // REDBACKVARIABLEEQUALSFUNCTION_H

@@ -10,8 +10,7 @@
 /*            See COPYRIGHT for full restrictions               */
 /****************************************************************/
 
-#ifndef MATCHEDVALUEJUMPBC_H
-#define MATCHEDVALUEJUMPBC_H
+#pragma once
 
 #include "NodalBC.h"
 
@@ -38,5 +37,3 @@ protected:
   Real _angle;
   const unsigned int _component;
 };
-
-#endif // MATCHEDVALUEJUMPBC_H

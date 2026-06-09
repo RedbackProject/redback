@@ -7,8 +7,7 @@
 //* Licensed under LGPL 2.1, please see LICENSE for details
 //* https://www.gnu.org/licenses/lgpl-2.1.html
 
-#ifndef INTERFACEDISP_H
-#define INTERFACEDISP_H
+#pragma once
 
 #include "InterfaceKernel.h"
 #include "Receiver.h"
@@ -31,5 +30,3 @@ protected:
   const VariableValue & _jump;
   const unsigned int _component;
 };
-
-#endif // INTERFACEDISP_H
