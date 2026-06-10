@@ -1,0 +1,36 @@
+site_name: Redback Documentation
+site_description: Rock mEchanics with Dissipative feedBACKs - A MOOSE module
+repo_url: https://github.com/RedbackProject/redback
+repo_name: RedbackProject/redback
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - content.code.copy
+    - toc.follow
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quickstart.md
+  - User Guide:
+    - Usage: user-guide/usage.md
+    - Examples: user-guide/examples.md
+  - Theory: theory.md
+  - API Reference: api.md
+  - Contributing: contributing.md
+  - FAQ: faq.md
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - admonition
+  - toc:
+      permalink: true
