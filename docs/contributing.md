@@ -1,6 +1,6 @@
-# Contributing to Redback
+# Contributing to REDBACK
 
-We welcome contributions to Redback! This guide explains how to contribute code, documentation, and examples.
+We welcome contributions to REDBACK! This guide explains how to contribute code, documentation, and examples.
 
 ## Getting Started
 
@@ -30,7 +30,7 @@ Always run tests before submitting a pull request:
 Ensure that:
 - All existing tests pass
 - New features include appropriate tests
-- Tests are added to `tests/` or `unit/` directories
+- Tests are added to `tests/` directory
 
 ## Documentation
 
@@ -40,21 +40,21 @@ When adding new features:
 2. Add docstrings to code (for Python files)
 3. Include examples if applicable
 
+### Build the documentation locally
+
+Install MkDocs and build locally:
+
+```bash
+mkdocs serve
+```
+
+Then open `http://localhost:8000` in your browser.
+
 ## Reporting Issues
 
 - Check existing [issues](https://github.com/RedbackProject/redback/issues) first
 - Provide a clear description and minimal reproducer
 - Include output files and error messages
-
-## Getting Help
-
-- 💬 Discussions in GitHub Issues
-- 📖 Check the [FAQ](faq.md)
-- 🤝 Reach out to the maintainers
-
-## Code of Conduct
-
-We are committed to providing a welcoming environment. Please be respectful and constructive in all interactions.
 
 ---
 

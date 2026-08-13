@@ -186,11 +186,11 @@ tests/*/*.trace
 theory.synctex.gz
 
 # Allow files in documentation directories
-!/doc/theory/theory.pdf
-!/doc/theory/figures/*/*.eps
-/doc/**/*-eps-converted-to.pdf
-!/doc/theory/figures/*/*.pdf
-!/doc/theory/data/succombe_files/*.xml
+!/docs/theory/theory.pdf
+!/docs/theory/figures/*/*.eps
+/docs/**/*-eps-converted-to.pdf
+!/docs/theory/figures/*/*.pdf
+!/docs/theory/data/succombe_files/*.xml
 
 RedbackRevision.h
 
