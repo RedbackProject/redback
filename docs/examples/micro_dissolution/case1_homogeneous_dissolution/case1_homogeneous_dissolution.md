@@ -254,7 +254,7 @@ Different types of output are generated at the initial condition and at the each
 
 The first result is the movie showing the dissolution of the solid phase.
 
-<video controls width="700" src="../Case1_Dissolution.mp4"></video>
+<video controls width="700" src="Case1_Dissolution.mp4"></video>
 
 Then, the `CSV` output generates the time evolution of the mean value of the variable `eta`, depicted in [Figure 3](#fig-time-eta) and available from the generated .csv file.
 As expected, the grain dissolves with time.
