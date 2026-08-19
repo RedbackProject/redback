@@ -63,6 +63,8 @@ Poulet, T., Paesold, M., & Veveakis, M. (2017). Multi-physics modelling of fault
 
 - Lesueur, M., Guével, A., & Poulet, T. (2022). Reconciling asymmetry observations in the permeability tensor of digital rocks with symmetry expectations. Advances in Water Resources, 170, 104334. [https://doi.org/10.1016/j.advwatres.2022.104334](https://doi.org/10.1016/j.advwatres.2022.104334)
 
+- Sac-Morane, A., Veveakis, M., & Rattez, H. (2024), A Phase-Field Discrete Element Method to study chemo-mechanical coupling in granular materials. Computer Methods in Applied Mechanics and Engineering, 424, 116900, [https://doi.org/10.1016/j.cma.2024.116900](https://doi.org/10.1016/j.cma.2024.116900)
+
 - Sac-Morane, A., Rattez, H., & Veveakis, M. (2025), Importance of the precipitation on the slowdown of the creep behavior due to pressure-solution. Journal of Engineering Mechanics, 151, 04025025, [https://doi.org/10.1061/jenmdt/emeng-8360](https://doi.org/10.1061/jenmdt/emeng-8360)
 
 - Zwarts, S., Lindqwister, W., & Lesueur, M. (2026). Database of Generated Rock Microstructures and their computed Geometrical and Hydraulic properties. Scientific Data. [https://doi.org/10.1038/s41597-026-07321-0](https://doi.org/10.1038/s41597-026-07321-0)
