@@ -49,9 +49,9 @@ Poulet, T., Paesold, M., & Veveakis, M. (2017). Multi-physics modelling of fault
 
 ### Applications
 
-- Peters M., M. Herwegh, M. K. Paesold, T. Poulet, K. Regenauer-Lieb and E. Veveakis, 2016. Boudinage and folding as the same energy attractor of ductile deformation, J. Geophys. Res., [https://doi.org/10.1002/2016JB012801](https://doi.org/10.1002/2016JB012801)
+- Peters, M., Herwegh, M., Paesold, M. K., Poulet, T., Regenauer-Lieb, K., & Veveakis, E., 2016. Boudinage and folding as the same energy attractor of ductile deformation, J. Geophys. Res., [https://doi.org/10.1002/2016JB012801](https://doi.org/10.1002/2016JB012801)
 
-- Paesold M., A. Bassom, K. Regenauer-Lieb and E. Veveakis, 2016. Conditions for the localization of plastic deformation in temperature sensitive visco-plastic materials, J. Mech. Mat. Structures, 11(2):113–136, [https://doi.org/10.2140/jomms.2016.11.113](https://doi.org/10.2140/jomms.2016.11.113)
+- Paesold, M., Bassom, A., Regenauer-Lieb, K., & Veveakis, E., 2016. Conditions for the localization of plastic deformation in temperature sensitive visco-plastic materials, J. Mech. Mat. Structures, 11(2):113–136, [https://doi.org/10.2140/jomms.2016.11.113](https://doi.org/10.2140/jomms.2016.11.113)
 
 - Lesueur, M., Poulet, T., & Veveakis, M. (2020). Permeability hysteresis from microchannels opening during dissolution/reprecipitation cycle. Geophysical Research Letters, 47(18), e2020GL088674. [https://doi.org/10.1029/2020GL088674](https://doi.org/10.1029/2020GL088674)
 
@@ -63,9 +63,14 @@ Poulet, T., Paesold, M., & Veveakis, M. (2017). Multi-physics modelling of fault
 
 - Lesueur, M., Guével, A., & Poulet, T. (2022). Reconciling asymmetry observations in the permeability tensor of digital rocks with symmetry expectations. Advances in Water Resources, 170, 104334. [https://doi.org/10.1016/j.advwatres.2022.104334](https://doi.org/10.1016/j.advwatres.2022.104334)
 
+- Sac-Morane, A., Rattez, H., & Veveakis, M. (2025), Importance of the precipitation on the slowdown of the creep behavior due to pressure-solution. Journal of Engineering Mechanics, 151, 04025025, [https://doi.org/10.1061/jenmdt/emeng-8360](https://doi.org/10.1061/jenmdt/emeng-8360)
+
 - Zwarts, S., Lindqwister, W., & Lesueur, M. (2026). Database of Generated Rock Microstructures and their computed Geometrical and Hydraulic properties. Scientific Data. [https://doi.org/10.1038/s41597-026-07321-0](https://doi.org/10.1038/s41597-026-07321-0)
 
+- Sac-Morane, A., Ioannidou, K., Veveakis, M. & Rattez, H. (2026), Predicting microstructure and mechanical properties during alite (C3S) hydration using a Phase-Field model. Construction and Building Materials, 521, 145946, [https://doi.org/10.1016/j.conbuildmat.2026.145946](https://doi.org/10.1016/j.conbuildmat.2026.145946)
+
 - Lindqwister, W. F., Chaudhury, M., Schyck, S. N., Rocha, I., Masania, K., & Lesueur, M. (2026). Topology Optimization of 3D-Printed Mycelium Hydrogels. Biofabrication. []()
+
 
 ## Getting Help
 
