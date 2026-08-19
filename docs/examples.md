@@ -23,7 +23,7 @@ Redback includes several examples of geomechanics simulations located in the `ex
 
 ## Micro-scale chemical alteration
 
-1. [Modelling a homogeneous shape evolution of a solid with a Phase-Field approach](examples/micro_dissolution/case1_dissolution/case1_dissolution.md)
+1. [Modelling a homogeneous shape evolution of a solid with a Phase-Field approach](examples/micro_dissolution/case1_homogeneous_dissolution/case1_homogeneous_dissolution.md)
 2. Modelling a heterogeneous shape evolution of a solid with a Phase-Field approach
 3. Modelling dissolution, diffusion, precipitation with a Phase-Field approach
 
