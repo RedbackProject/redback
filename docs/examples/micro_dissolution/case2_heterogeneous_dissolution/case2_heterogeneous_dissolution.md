@@ -47,7 +47,7 @@ The additional parameters $L$ and $\kappa$ from Eq. 1 affect the interface width
 
 ***Figure 2:** Destabilization of the free energy $f_{loc}$ by the tilting energy $E_d$.*
 
-In the context of this model, the propagation of thissoluted is described by Eq. 3,
+In the context of this model, the propagation of this solute is described by Eq. 3,
 
 \[
     \frac{\partial c}{\partial t} = -\alpha_\eta \frac{\partial \eta}{\partial t} + \kappa_c \nabla^2 c
