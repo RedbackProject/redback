@@ -159,6 +159,7 @@ An additional variable $c$ is generated in the domain to represent the concentra
 
 Even if the concentration of the reactive specimen is null at the initial condition (see block `Variables`), it increases through the boundary conditions defined in the block `BCs`.
 In particular, two conditions are available for the variable $c$:
+
 * `NeumannBC`, imposing a flux on the reactive specimen through a boundary
 * `DirichletBC`, imposing a constant value for the reactive specimen at a boundary
 The selection of the condition is made with the input `active`. 
@@ -190,12 +191,14 @@ In this case, the system is divided into two equations: Eq. 1 applied on the var
 
 As described in Eq. 1, an Allen-Cahn equation, applied to the variable `eta`, is solved to predict the dissolution of the solid phase. 
 This equation can be divided into three kernels:
+
 * `TimeDerivative`: $\frac{\partial\eta}{\partial t}$
 * `AllenCahn`: $-L\frac{\partial(f_{loc}+E_d)}{\partial\eta}$
 * `ACInterface`: $L\kappa\nabla^2\eta$
 
 In the same note, the diffusive equation applied to the variable `c`, described in Eq. 3, is solved to predict the propagation of the concentration of the reactive specimen. 
 This equation can be divided into three kernels:
+
 * `TimeDerivative`: $\frac{\partial c}{\partial t}$
 * `CoefCoupledTimeDerivative`: $\alpha_\eta\;\frac{\partial\eta}{\partial t}$. It is worth noting that this kernel uses the variable `eta` with the input `v` even if it is applied to the equation applied to the variable `c`
 * `ACInterface`: $L_c\cdot \kappa_c \; \nabla^2 c$
