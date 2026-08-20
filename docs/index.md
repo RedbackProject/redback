@@ -49,9 +49,9 @@ Poulet, T., Paesold, M., & Veveakis, M. (2017). Multi-physics modelling of fault
 
 ### Applications
 
-- Peters, M., Herwegh, M., Paesold, M. K., Poulet, T., Regenauer-Lieb, K., & Veveakis, E., 2016. Boudinage and folding as the same energy attractor of ductile deformation, J. Geophys. Res., [https://doi.org/10.1002/2016JB012801](https://doi.org/10.1002/2016JB012801)
+- Peters, M., Herwegh, M., Paesold, M. K., Poulet, T., Regenauer-Lieb, K., & Veveakis, E. (2016). Boudinage and folding as the same energy attractor of ductile deformation, J. Geophys. Res., [https://doi.org/10.1002/2016JB012801](https://doi.org/10.1002/2016JB012801)
 
-- Paesold, M., Bassom, A., Regenauer-Lieb, K., & Veveakis, E., 2016. Conditions for the localization of plastic deformation in temperature sensitive visco-plastic materials, J. Mech. Mat. Structures, 11(2):113–136, [https://doi.org/10.2140/jomms.2016.11.113](https://doi.org/10.2140/jomms.2016.11.113)
+- Paesold, M., Bassom, A., Regenauer-Lieb, K., & Veveakis, E. (2016). Conditions for the localization of plastic deformation in temperature sensitive visco-plastic materials, J. Mech. Mat. Structures, 11(2):113–136, [https://doi.org/10.2140/jomms.2016.11.113](https://doi.org/10.2140/jomms.2016.11.113)
 
 - Lesueur, M., Poulet, T., & Veveakis, M. (2020). Permeability hysteresis from microchannels opening during dissolution/reprecipitation cycle. Geophysical Research Letters, 47(18), e2020GL088674. [https://doi.org/10.1029/2020GL088674](https://doi.org/10.1029/2020GL088674)
 
