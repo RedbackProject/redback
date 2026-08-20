@@ -122,6 +122,8 @@ traceout*.txt
 !/*/*/*/*/*/*/gold/*.txt
 !/*/*/*/*/*/*/*/gold/*.txt
 
+# Allow .csv files in examples folders
+!/docs/examples/micro_alteration/*/*.csv
 
 peacock_run_tmp.i
 yaml_dump*
