@@ -37,7 +37,7 @@ As depicted in [Figure 2](#fig_floc_ed) and formulated in Eq. 2,
 \]
 
 where $W$ is the barrier energy, preventing the phase transition, and $ed$ the tilting amplitude, inducing the phase transition. 
-Compared to the [homogeneous dissolution](examples/micro_dissolution/case1_homogeneous_dissolution/case1_homogeneous_dissolution.md), this configuration considers a heterogeneous dissolution.
+Compared to the [homogeneous dissolution](../case1_homogeneous_dissolution/case1_homogeneous_dissolution.md), this configuration considers a heterogeneous dissolution.
 In particular, the amplitude of the tilting is dictated by the value of a new variable $c$ that described the concentration of a reactive speciment in the pore fluid.
 The additional parameters $L$ and $\kappa$ from Eq. 1 affect the interface width and the kinetics of the phenomenon.
 
