@@ -274,7 +274,7 @@ It is worth noting that the diffusion coefficient depends on the variable $\eta$
         type = GenericConstantMaterial
         prop_names  = 'L_eta kappa_eta L_c'
         prop_values = '1 0.00037 1'
-            block = '0 1'
+        block = '0 1'
     [../]
     [./var]
         type = ParsedMaterial
@@ -287,7 +287,6 @@ It is worth noting that the diffusion coefficient depends on the variable $\eta$
     [../]
     [./energy_eta]
         type = DerivativeParsedMaterial
-        block = 0
         property_name = g_eta
         coupled_variables = 'eta c'
         constant_names = 'W x_c'
