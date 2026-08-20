@@ -25,7 +25,7 @@ Redback includes several examples of geomechanics simulations located in the `ex
 
 1. [Modelling a homogeneous shape evolution of a solid with a Phase-Field approach](examples/micro_dissolution/case1_homogeneous_dissolution/case1_homogeneous_dissolution.md)
 2. [Modelling a heterogeneous shape evolution of a solid with a Phase-Field approach](examples/micro_dissolution/case2_heterogeneous_dissolution/case2_heterogeneous_dissolution.md)
-3. Modelling dissolution, diffusion, precipitation with a Phase-Field approach
+3. [Modelling a dissolution, diffusion, precipitation phenomenon with a Phase-Field approach](examples/micro_dissolution/case3_dissolution_diffusion_precipitation/case3_dissolution_diffusion_precipitation.md)
 
 ## Digital Rock Physics
 
