@@ -1,5 +1,7 @@
 # Modelling a dissolution, diffusion, precipitation phenomenon with a Phase-Field approach
 
+[Download the input file](./case3_dissolution_diffusion_precipitation.i)
+
 ## Problem description
 
 Even if most of the materials appear homogeneous, they are heterogeneous at smaller scales.
@@ -414,6 +416,8 @@ As expected, the grain dissolves with time, generating dilute specimens that are
 ![Time evolution of the mean variables](fig_time_mVariables.png){ width="80%" }
 
 ***Figure 3.** Time evolution of the mean variables.*
+
+[Download the csv file](./case3_dissolution_diffusion_precipitation_csv.csv)
 
 # References
 

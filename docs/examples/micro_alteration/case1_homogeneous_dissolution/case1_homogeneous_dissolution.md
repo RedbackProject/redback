@@ -1,5 +1,7 @@
 # Modelling a homogeneous shape evolution of a solid with a Phase-Field approach
 
+[Download the input file](./case1_homogeneous_dissolution.i)
+
 ## Problem description
 
 Even if most of the materials appear homogeneous, they are heterogeneous at smaller scales.
@@ -264,6 +266,8 @@ As expected, the grain dissolves with time.
 ![Time evolution of the mean variable eta](fig_time_mEta.png){ width="80%" }
 
 ***Figure 3.** Time evolution of the mean variable eta.*
+
+[Download the csv file](./case1_homogeneous_dissolution_csv.csv)
 
 # References
 
