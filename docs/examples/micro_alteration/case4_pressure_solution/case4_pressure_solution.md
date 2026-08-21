@@ -1,4 +1,4 @@
-# Modelling the pressure-solution with a Phase-Field Discrete Element Method
+# Coupling the Phase-Field approach with a Discrete Element Model to investigate Pressure-Solution
 
 ## Problem description
 
