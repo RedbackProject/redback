@@ -55,6 +55,8 @@ Poulet, T., Paesold, M., & Veveakis, M. (2017). Multi-physics modelling of fault
 
 - Lesueur, M., Poulet, T., & Veveakis, M. (2020). Permeability hysteresis from microchannels opening during dissolution/reprecipitation cycle. Geophysical Research Letters, 47(18), e2020GL088674. [https://doi.org/10.1029/2020GL088674](https://doi.org/10.1029/2020GL088674)
 
+- Guével, A., Rattez, H., & Veveakis, E. (2020). Viscous phase-field modeling for chemo-mechanical microstructural evolution: application to geomaterials and pressure solution. International Journal of Solids and Structures, 207, 230-249. [https://doi.org/10.1016/j.ijsolstr.2020.09.026](https://doi.org/10.1016/j.ijsolstr.2020.09.026) 
+
 - Lesueur, M., Poulet, T., & Veveakis, M. (2021). Predicting the yield strength of a 3D printed porous material from its internal geometry. Additive Manufacturing, 44, 102061. [https://doi.org/10.1016/j.addma.2021.102061](https://doi.org/10.1016/j.addma.2021.102061)
 
 - Lesueur, M., Veveakis, M., & Rattez, H. (2022). Influence of cementation on the yield surface of rocks numerically determined from digital microstructures. International Journal of Plasticity, 156, 103338. [https://doi.org/10.1016/j.ijplas.2022.103338](https://doi.org/10.1016/j.ijplas.2022.103338)
